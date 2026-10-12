@@ -1,0 +1,86 @@
+---
+{
+  "path": "/contato/",
+  "title": "Contato | KS Advocacia Empresarial",
+  "description": "Fale com a KS Advocacia Empresarial por WhatsApp, telefone ou e-mail. Atendimento presencial em Ponta Grossa, Curitiba e Campos Gerais, e on-line para todo o Brasil."
+}
+---
+<section class="page-hero page-hero--photo">
+  <div class="page-hero__bg" aria-hidden="true"><img src="/assets/img/sala-reuniao-2400.webp" srcset="/assets/img/sala-reuniao-1200.webp 1200w, /assets/img/sala-reuniao-2400.webp 2400w" sizes="100vw" width="2400" height="1018" alt="" fetchpriority="high" style="object-position: 70% 50%"></div>
+  <div class="wrap">
+    <nav class="crumbs" aria-label="Você está em"><ol role="list"><li><a href="/">Início</a></li><li aria-current="page">Contato</li></ol></nav>
+    <h1 class="h1" data-split>Vamos <em>conversar</em></h1>
+    <p class="lead" data-reveal>Atendimento presencial em Ponta Grossa, Curitiba e região dos Campos Gerais, e on-line para todo o Paraná, o Maranhão e os demais estados.</p>
+  </div>
+</section>
+
+<section class="section" aria-labelledby="canais-h">
+  <div class="wrap contact">
+    <div>
+      <h2 class="sr-only" id="canais-h">Canais de atendimento</h2>
+      <dl class="channels">
+        <div class="card channel" data-reveal>
+          <span class="icon-box"><svg class="icon" aria-hidden="true"><use href="#i-whatsapp"/></svg></span>
+          <div><dt>WhatsApp</dt><dd><a href="{{wa:Olá, vim pelo site da KS Advocacia Empresarial e gostaria de conversar.}}" target="_blank" rel="noopener">{{phone}}</a></dd></div>
+        </div>
+        <div class="card channel" data-reveal>
+          <span class="icon-box"><svg class="icon" aria-hidden="true"><use href="#i-phone"/></svg></span>
+          <div><dt>Telefone</dt><dd><a href="{{tel}}">{{phone}}</a></dd></div>
+        </div>
+        <div class="card channel" data-reveal>
+          <span class="icon-box"><svg class="icon" aria-hidden="true"><use href="#i-mail"/></svg></span>
+          <div><dt>E-mail</dt><dd><a href="{{mail}}">{{email}}</a></dd></div>
+        </div>
+        <div class="card channel" data-reveal>
+          <span class="icon-box"><svg class="icon" aria-hidden="true"><use href="#i-pin"/></svg></span>
+          <div><dt>Endereço</dt><dd><a href="{{maps}}" target="_blank" rel="noopener">Rua Nestor Guimarães, 111</a><p>Bairro Estrela, Ponta Grossa, PR. Abre no Google Maps.</p></dd></div>
+        </div>
+      </dl>
+    </div>
+
+    <form class="card form" id="contact-form" novalidate data-wa="{{waNumber}}" data-email="{{email}}" aria-labelledby="form-h" data-hide-fab data-reveal>
+      <p class="eyebrow">Mensagem</p>
+      <h2 class="h3" id="form-h">Conte o momento da sua empresa</h2>
+      <div class="field">
+        <label for="nome">Nome</label>
+        <input id="nome" name="nome" type="text" autocomplete="name" required maxlength="120" aria-describedby="nome-erro" data-msg-required="Informe o seu nome.">
+        <p class="field__error" id="nome-erro"></p>
+      </div>
+      <div class="field">
+        <label for="empresa">Empresa <span class="opt">(opcional)</span></label>
+        <input id="empresa" name="empresa" type="text" autocomplete="organization" maxlength="120">
+      </div>
+      <div class="field">
+        <label for="assunto">Assunto</label>
+        <select id="assunto" name="assunto" required aria-describedby="assunto-erro" data-msg-required="Escolha um assunto.">
+          <option value="">Selecione</option>
+          <option>Assessoria continuada</option>
+          <option>Compliance trabalhista e NR-01</option>
+          <option>Contratos empresariais</option>
+          <option>Societário e proteção patrimonial</option>
+          <option>Operações imobiliárias</option>
+          <option>Marcas e propriedade intelectual</option>
+          <option>Treinamentos e educação corporativa</option>
+          <option>Processo ou fiscalização em andamento</option>
+          <option>Tributário ou reestruturação financeira</option>
+          <option>Canal de denúncias, compliance e LGPD</option>
+          <option>Outro assunto</option>
+        </select>
+        <p class="field__error" id="assunto-erro"></p>
+      </div>
+      <div class="field">
+        <label for="mensagem">Mensagem</label>
+        <textarea id="mensagem" name="mensagem" required minlength="10" maxlength="1500" aria-describedby="mensagem-erro" data-msg-required="Escreva a sua mensagem." data-msg-short="Conte um pouco mais (mínimo de 10 caracteres)."></textarea>
+        <p class="field__error" id="mensagem-erro"></p>
+      </div>
+      <fieldset class="field choice">
+        <legend>Como prefere enviar?</legend>
+        <label><input type="radio" name="canal" value="whatsapp" checked> WhatsApp</label>
+        <label><input type="radio" name="canal" value="email"> E-mail</label>
+      </fieldset>
+      <p class="form__note">Os dados preenchidos não são enviados nem armazenados por este site: eles apenas montam a mensagem no WhatsApp ou no seu aplicativo de e-mail. Saiba mais na <a href="/privacidade/">Política de Privacidade</a>.</p>
+      <button class="btn btn--gold" type="submit"><span data-submit-label>Enviar pelo WhatsApp</span> <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></button>
+      <p class="form__status" id="form-status" role="status" aria-live="polite"></p>
+    </form>
+  </div>
+</section>

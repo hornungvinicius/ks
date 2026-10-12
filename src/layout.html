@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>%TITLE%</title>
+  <meta name="description" content="%DESC%">
+  <meta name="theme-color" content="#0B1728">
+  <meta name="color-scheme" content="dark">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="pt_BR">
+  <meta property="og:site_name" content="KS Advocacia Empresarial">
+  <meta property="og:title" content="%TITLE%">
+  <meta property="og:description" content="%DESC%">
+  <meta name="twitter:card" content="summary_large_image">
+  %HEAD%
+  <link rel="icon" type="image/png" href="/assets/favicon.png">
+  <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+  <link rel="preload" href="/assets/fonts/cormorant-600.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/assets/fonts/satoshi.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/assets/css/site.css">
+  <script>
+    // Animações só com movimento permitido; se o JS principal não rodar em 2,5s, o conteúdo volta a aparecer.
+    if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      document.documentElement.classList.add('motion');
+      setTimeout(function () { if (!window.__ksMotion) document.documentElement.classList.remove('motion'); }, 2500);
+    }
+  </script>
+  <script src="/assets/js/vendor/gsap.min.js" defer></script>
+  <script src="/assets/js/vendor/ScrollTrigger.min.js" defer></script>
+  <script src="/assets/js/vendor/SplitText.min.js" defer></script>
+  <script src="/assets/js/vendor/lenis.min.js" defer></script>
+  <script src="/assets/js/main.js" defer></script>
+  %JSONLD%
+</head>
+<body>
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">%ICONS%</svg>
+
+  <a class="skip" href="#conteudo">Pular para o conteúdo</a>
+  <span id="top-sentinel" aria-hidden="true"></span>
+
+  <header class="site-header">
+    <div class="wrap site-header__in">
+      <a class="brand" href="/" aria-label="KS Advocacia Empresarial, página inicial">
+        <img src="/assets/img/ks-monograma.webp" width="456" height="470" alt="" class="brand__mark">
+        <span class="brand__text" aria-hidden="true"><span>Advocacia Empresarial</span><span>Dra. Karolem Silva</span></span>
+      </a>
+      <nav class="nav" aria-label="Principal">
+        <a data-nav href="/areas-de-atuacao/">Áreas de atuação</a>
+        <a data-nav href="/#assessoria">Assessoria</a>
+        <a data-nav href="/#advogada">A advogada</a>
+        <a data-nav href="/#faq">Dúvidas</a>
+        <a data-nav href="/contato/">Contato</a>
+      </nav>
+      <a class="btn btn--ghost header-cta" href="{{wa:Olá, vim pelo site da KS Advocacia Empresarial e gostaria de conversar.}}" target="_blank" rel="noopener">
+        WhatsApp <svg class="icon" aria-hidden="true"><use href="#i-whatsapp"/></svg>
+      </a>
+      <button class="menu-btn" type="button" data-menu-open aria-haspopup="dialog" aria-expanded="false" aria-controls="menu">
+        <svg class="icon" aria-hidden="true"><use href="#i-menu"/></svg><span class="sr-only">Abrir menu</span>
+      </button>
+    </div>
+  </header>
+
+  <dialog class="menu" id="menu" aria-label="Menu">
+    <div class="menu__top">
+      <img src="/assets/img/ks-monograma.webp" width="456" height="470" alt="" class="brand__mark">
+      <button class="menu-btn" type="button" data-menu-close>
+        <svg class="icon" aria-hidden="true"><use href="#i-close"/></svg><span class="sr-only">Fechar menu</span>
+      </button>
+    </div>
+    <nav class="menu__nav" aria-label="Menu principal">
+      <a href="/">Início</a>
+      <a href="/areas-de-atuacao/">Áreas de atuação</a>
+      <a href="/#assessoria">Assessoria continuada</a>
+      <a href="/#advogada">A advogada</a>
+      <a href="/#faq">Perguntas frequentes</a>
+      <a href="/contato/">Contato</a>
+    </nav>
+    <div class="menu__foot">
+      <a class="btn btn--gold" href="{{wa:Olá, vim pelo site da KS Advocacia Empresarial e gostaria de conversar.}}" target="_blank" rel="noopener">
+        <svg class="icon" aria-hidden="true"><use href="#i-whatsapp"/></svg>Conversar no WhatsApp
+      </a>
+      <a class="menu__contact" href="{{tel}}">{{phone}}</a>
+      <a class="menu__contact" href="{{mail}}">{{email}}</a>
+    </div>
+  </dialog>
+
+  <main id="conteudo">
+%CONTENT%
+  </main>
+
+  <footer class="site-footer" data-hide-fab>
+    <div class="wrap">
+      <div class="footer__grid">
+        <div>
+          <img src="/assets/img/ks-logo.webp" width="954" height="628" alt="KS Advocacia Empresarial, Dra. Karolem Silva" class="footer__logo" loading="lazy">
+          <p class="footer__oab">Karolem Sousa Silva<br>OAB/PR 132.409 · OAB/MA 27.961</p>
+        </div>
+        <nav class="footer__col" aria-label="Rodapé">
+          <h2 class="footer__h">Navegação</h2>
+          <a href="/">Início</a>
+          <a href="/areas-de-atuacao/">Áreas de atuação</a>
+          <a href="/#assessoria">Assessoria continuada</a>
+          <a href="/#advogada">A advogada</a>
+          <a href="/#faq">Perguntas frequentes</a>
+          <a href="/contato/">Contato</a>
+        </nav>
+        <div class="footer__col">
+          <h2 class="footer__h">Atendimento</h2>
+          <a href="{{wa}}" target="_blank" rel="noopener">WhatsApp {{phone}}</a>
+          <a href="{{tel}}">Telefone {{phone}}</a>
+          <a href="{{mail}}">{{email}}</a>
+          <a href="{{maps}}" target="_blank" rel="noopener">Rua Nestor Guimarães, 111<br>Bairro Estrela, Ponta Grossa, PR</a>
+        </div>
+        <div class="footer__col">
+          <h2 class="footer__h">Institucional</h2>
+          <a href="/privacidade/">Política de Privacidade</a>
+          <a href="/privacidade/#cookies">Cookies</a>
+          <a href="/termos/">Termos de Uso</a>
+        </div>
+      </div>
+      <div class="footer__base">
+        <p>© {{year}} KS Advocacia Empresarial. Conteúdo informativo, que não substitui a análise jurídica de cada caso.</p>
+        <div class="footer__tools">
+          <a class="link" href="#conteudo">Voltar ao topo <svg class="icon" aria-hidden="true"><use href="#i-arrow-up"/></svg></a>
+          <a class="icon-btn" href="{{wa}}" target="_blank" rel="noopener" aria-label="WhatsApp"><svg class="icon" aria-hidden="true"><use href="#i-whatsapp"/></svg></a>
+          <a class="icon-btn" href="{{tel}}" aria-label="Telefone"><svg class="icon" aria-hidden="true"><use href="#i-phone"/></svg></a>
+          <a class="icon-btn" href="{{mail}}" aria-label="E-mail"><svg class="icon" aria-hidden="true"><use href="#i-mail"/></svg></a>
+        </div>
+      </div>
+    </div>
+    <p class="footer__mark" aria-hidden="true" data-watermark>KS Advocacia</p>
+  </footer>
+
+  <a class="wa-fab" href="{{wa:Olá, vim pelo site da KS Advocacia Empresarial e gostaria de conversar.}}" target="_blank" rel="noopener" aria-label="Conversar no WhatsApp">
+    <svg class="icon" aria-hidden="true"><use href="#i-whatsapp"/></svg>
+  </a>
+</body>
+</html>

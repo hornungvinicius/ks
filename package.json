@@ -1,0 +1,11 @@
+{
+  "name": "ks-advocacia-site",
+  "private": true,
+  "type": "module",
+  "engines": { "node": ">=20" },
+  "scripts": {
+    "build": "node build.mjs",
+    "start": "python -m http.server 4321 -d dist",
+    "test": "node tests/check.cjs"
+  }
+}
