@@ -76,6 +76,7 @@ Escala 4/8 (`--s-1`…`--s-9`), seção `clamp(5rem, 3.5rem + 6vw, 8.5rem)`, gut
 - **Cards empilhados** (`.stack`): `position: sticky` com deslocamento por índice; o card anterior recua (escala) e escurece (`--shade`) quando o próximo chega.
 - **Áreas** (`.areas`): `<details name="areas">` nativo (um aberto por vez); painel de imagem fixo à direita no desktop, imagem dentro do card no celular.
 - **Avaliações** (`.reviews`): trilho com rolagem nativa e scroll-snap; avanço automático a cada 4,5s, pausa com hover, foco, fora da tela, aba oculta ou pelo botão de pausa; sem autoplay com movimento reduzido.
+- **Abas** (`.tabs`, página de áreas): lista de abas à esquerda no desktop e faixa fixa com rolagem lateral no celular; painel com foto da área, descrição, áreas do briefing, serviços em cards e CTA. Padrão WAI-ARIA (setas, Home/End), `#id` no endereço abre a aba, troca com fade suave. Sem JS, todos os painéis aparecem em sequência.
 - **FAQ**: `<details>` numerado com abertura animada por CSS.
 - **Cabeçalho**: fixo, transparente no topo e com fundo após rolar; menu mobile em `<dialog>`.
 

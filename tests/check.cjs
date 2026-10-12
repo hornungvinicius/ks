@@ -120,6 +120,18 @@ const server = http.createServer((req, res) => {
     await page.close();
   }
 
+  // 4b. Abas das áreas: clique, teclado e abertura pelo #id
+  {
+    const page = await open('/areas-de-atuacao/#contratos', { viewport: { width: 390, height: 844 } });
+    const visible = () => page.$$eval('[role=tabpanel]', (ps) => ps.filter((p) => !p.hidden).map((p) => p.id));
+    if ((await visible()).join() !== 'contratos') fail('aba do #contratos não abriu');
+    await page.click('#tab-marcas');
+    if ((await visible()).join() !== 'marcas') fail('clique na aba não trocou o painel');
+    await page.keyboard.press('ArrowRight');
+    if ((await visible()).join() !== 'treinamentos' || (await page.evaluate(() => document.activeElement.id)) !== 'tab-treinamentos') fail('seta não moveu para a próxima aba');
+    await page.close();
+  }
+
   // 5. Movimento reduzido: conteúdo visível sem animação
   {
     const page = await open('/', { viewport: { width: 390, height: 844 }, reducedMotion: 'reduce' });

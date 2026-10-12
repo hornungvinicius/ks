@@ -83,6 +83,50 @@ if (areas) {
   }));
 }
 
+// Abas das áreas de atuação (padrão WAI-ARIA): clique, setas, Home/End e #id no endereço.
+const tabsEl = $('[data-tabs]');
+if (tabsEl) {
+  const tabs = $$('[role="tab"]', tabsEl);
+  const panels = tabs.map((t) => document.getElementById(t.getAttribute('aria-controls')));
+  const select = (i, { focus = false, hash = false } = {}) => {
+    tabs.forEach((t, k) => {
+      const on = k === i;
+      t.setAttribute('aria-selected', String(on));
+      t.tabIndex = on ? 0 : -1;
+      panels[k].hidden = !on;
+    });
+    if (focus) tabs[i].focus();
+    if (hash) history.replaceState(null, '', `#${panels[i].id}`);
+    // No celular a lista rola na horizontal: centraliza a aba ativa sem mexer na rolagem da página.
+    const list = tabs[i].parentElement;
+    if (list.scrollWidth > list.clientWidth) {
+      const lb = list.getBoundingClientRect(), tb = tabs[i].getBoundingClientRect();
+      list.scrollTo({ left: list.scrollLeft + tb.left - lb.left - (lb.width - tb.width) / 2, behavior: 'smooth' });
+    }
+    if (window.gsap && root.classList.contains('motion')) window.gsap.fromTo(panels[i], { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out' });
+  };
+  tabsEl.addEventListener('click', (e) => {
+    const t = e.target.closest('[role="tab"]');
+    if (t) select(tabs.indexOf(t), { hash: true });
+  });
+  tabsEl.addEventListener('keydown', (e) => {
+    const i = tabs.indexOf(document.activeElement);
+    if (i < 0) return;
+    const keys = { ArrowDown: i + 1, ArrowRight: i + 1, ArrowUp: i - 1, ArrowLeft: i - 1, Home: 0, End: tabs.length - 1 };
+    if (!(e.key in keys)) return;
+    e.preventDefault();
+    select((keys[e.key] + tabs.length) % tabs.length, { focus: true, hash: true });
+  });
+  // Abre a aba indicada no endereço (links da home apontam para /areas-de-atuacao/#area).
+  const fromHash = () => {
+    const i = panels.findIndex((p) => `#${p.id}` === location.hash);
+    select(Math.max(i, 0));
+    if (i >= 0) tabsEl.scrollIntoView({ block: 'start' });
+  };
+  fromHash();
+  window.addEventListener('hashchange', fromHash);
+}
+
 // Avaliações: rolagem nativa (swipe/teclado) + avanço automático que pausa com mouse, foco, fora da tela ou aba oculta.
 const reviews = $('[data-reviews]');
 if (reviews && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
