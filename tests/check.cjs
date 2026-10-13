@@ -24,6 +24,10 @@ const server = http.createServer((req, res) => {
 });
 
 (async () => {
+  // CSS com chaves desbalanceadas faz o navegador descartar regras em silêncio.
+  const css = fs.readFileSync(path.join(DIST, 'assets/css/site.css'), 'utf8').replace(/\/\*[\s\S]*?\*\//g, '');
+  if ((css.match(/{/g) || []).length !== (css.match(/}/g) || []).length) fail('site.css com chaves desbalanceadas');
+
   await new Promise((r) => server.listen(0, '127.0.0.1', r));
   const base = `http://127.0.0.1:${server.address().port}`;
   const browser = await chromium.launch();

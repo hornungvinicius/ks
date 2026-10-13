@@ -1,13 +1,12 @@
 ---
 name: KS Advocacia Empresarial
 version: 2.0 (dark premium)
-description: Experiência escura e cinematográfica em azul-marinho profundo, com o dourado do monograma KS como única cor de acento. Fotografia em tela cheia, cards de cantos suaves, títulos em Cormorant Garamond e rótulos espaçados em Satoshi.
+description: Experiência escura em azul quase preto (#0B1119) com seções off-white intercaladas, dourado do monograma KS como acento, cards de vidro discretos, H1 em Robelia, títulos em Cormorant Garamond e texto em Satoshi.
 colors:
-  bg:       "#0B1728"   # base da página
-  bg-2:     "#0F2139"   # seção alternada
-  card:     "#132B47"   # cards
-  card-2:   "#183653"   # card ativo / elevado
-  line:     "#24425F"   # bordas e filetes
+  bg:       "#0B1119"   # base da página
+  bg-2:     "#0F1722"   # seção alternada
+  light:    "#F3F3EF"   # seção clara (off-white), com tokens próprios
+  glass:    "linear-gradient(150deg, rgba(255,255,255,.075), rgba(255,255,255,.025)) + borda rgba(255,255,255,.09) + blur 18px (>= 48rem)"
   gold:     "#D6AA59"   # acento (rampa do monograma: #C8933F → #D6AA59 → #E8C27C)
   gold-hi:  "#E8C27C"
   gold-lo:  "#C8933F"
@@ -17,7 +16,8 @@ colors:
   error:    "#F08A8A"
   success:  "#7FC8A0"
 typography:
-  display: "Cormorant Garamond 600 (normal e itálico), títulos e cards, nunca abaixo de 18px"
+  title: "Robelia (regular, sem itálico) nos H1; ã/õ refeitos com o til da própria fonte para leitura em português"
+  display: "Cormorant Garamond 600 (normal e itálico), H2/H3 e cards, nunca abaixo de 18px"
   sans: "Satoshi variável (Fontshare, licença ITF FFL), corpo, interface, rótulos e numerais grandes"
 radius: { card: 16px, button: 6px, small: 10px, pill: 999px }
 ---
@@ -93,7 +93,7 @@ Escala 4/8 (`--s-1`…`--s-9`), seção `clamp(5rem, 3.5rem + 6vw, 8.5rem)`, gut
 | Faixa de segmentos | loop que acelera e inverte com a velocidade da rolagem |
 | Rodapé | marca d'água sobe com a rolagem |
 
-Regras: imagens nunca abrem por recorte, só fade; textos decorativos ("Antes", "Depois", marca d'água do rodapé) usam preenchimento, nunca contorno; ícones apenas na variante preenchida do Phosphor. Lenis só com ponteiro fino (mouse/trackpad), parado quando o menu abre; `prefers-reduced-motion` desliga tudo e deixa o conteúdo visível; estados iniciais usam `opacity` (não `visibility`) para manter a ordem de foco; foco num bloco ainda oculto o revela; `gsap.matchMedia()` separa efeitos de desktop e mobile; nenhum listener de `scroll`.
+Regras: no celular a linha do tempo global do GSAP roda a 60% da velocidade; imagens nunca abrem por recorte, só fade; textos decorativos ("Antes", "Depois", marca d'água do rodapé) usam preenchimento, nunca contorno; ícones apenas na variante preenchida do Phosphor. Lenis só com ponteiro fino (mouse/trackpad), parado quando o menu abre; `prefers-reduced-motion` desliga tudo e deixa o conteúdo visível; estados iniciais usam `opacity` (não `visibility`) para manter a ordem de foco; foco num bloco ainda oculto o revela; `gsap.matchMedia()` separa efeitos de desktop e mobile; nenhum listener de `scroll`.
 
 ## 7. Imagens
 

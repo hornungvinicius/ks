@@ -153,6 +153,8 @@ if (!root.classList.contains('motion') || !gsap || !ScrollTrigger || !SplitText)
 
 function initMotion() {
   gsap.registerPlugin(ScrollTrigger, SplitText);
+  // No celular tudo anda mais devagar: entradas e trocas ficam suaves em telas pequenas.
+  if (matchMedia('(max-width: 47.99rem)').matches) gsap.globalTimeline.timeScale(0.6);
   const ease = 'expo.out';
   const visible = { opacity: 1, y: 0, x: 0 };
   const once = (trigger, start = 'top 85%') => ({ trigger, start, once: true });
@@ -207,7 +209,7 @@ function initMotion() {
   // ---- Etapas empilhadas: cada card fica preso no topo e recua quando o próximo chega ----
   const stack = $$('[data-stack]');
   stack.forEach((card, i) => {
-    gsap.from(card, { y: 90, opacity: 0, duration: 1.2, ease, scrollTrigger: once(card, 'top 95%') });
+    gsap.from(card, { y: 28, opacity: 0, duration: 1.2, ease: 'power2.out', scrollTrigger: once(card, 'top 92%') });
     const next = stack[i + 1];
     // Recuo só onde os cards ficam presos (tablet e desktop).
     if (next) gsap.matchMedia().add('(min-width: 48rem)', () => gsap.to(card, { scale: 0.92 + i * 0.015, '--shade': 0.55, ease: 'none', scrollTrigger: { trigger: next, start: 'top 85%', end: 'top 30%', scrub: true } }));
