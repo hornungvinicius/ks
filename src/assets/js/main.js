@@ -211,8 +211,8 @@ function initMotion() {
   stack.forEach((card, i) => {
     gsap.from(card, { y: 28, opacity: 0, duration: 1.2, ease: 'power2.out', scrollTrigger: once(card, 'top 92%') });
     const next = stack[i + 1];
-    // Recuo só onde os cards ficam presos (tablet e desktop).
-    if (next) gsap.matchMedia().add('(min-width: 48rem)', () => gsap.to(card, { scale: 0.92 + i * 0.015, '--shade': 0.55, ease: 'none', scrollTrigger: { trigger: next, start: 'top 85%', end: 'top 30%', scrub: true } }));
+    // O card de baixo chega e o de cima recua e escurece (cards opacos, sem transparência entre eles).
+    if (next) (() => gsap.to(card, { scale: 0.92 + i * 0.015, '--shade': 0.55, ease: 'none', scrollTrigger: { trigger: next, start: 'top 85%', end: 'top 30%', scrub: true } }))();
   });
 
   // ---- Faixa de segmentos: loop contínuo que acelera e inverte com a rolagem ----
@@ -278,13 +278,10 @@ function initMotion() {
     });
     mm.add('(max-width: 63.99rem)', () => {
       gsap.fromTo($('img', ed), { yPercent: -8, scale: 1.12 }, { yPercent: 8, scale: 1.12, ease: 'none', scrollTrigger: { trigger: ed, start: 'top bottom', end: 'bottom top', scrub: true } });
-      gsap.from($$('[data-diff]', ed), { opacity: 0, y: 30, duration: 1, ease, stagger: 0.12, scrollTrigger: once(ed, 'top 60%') });
     });
   }
 
-  // ---- Chamada final e rodapé ----
-  const fin = $('[data-final]');
-  if (fin) gsap.fromTo($('.final__grid', fin), { scale: 1.25, opacity: 0 }, { scale: 1, opacity: 1, ease: 'none', scrollTrigger: { trigger: fin, start: 'top bottom', end: 'center center', scrub: true } });
+  // ---- Rodapé ----
   const wm = $('[data-watermark]');
   if (wm) gsap.fromTo(wm, { yPercent: 60, opacity: 0 }, { yPercent: 0, opacity: 1, ease: 'none', scrollTrigger: { trigger: wm.parentElement, start: 'top bottom', end: 'bottom bottom', scrub: true } });
 
