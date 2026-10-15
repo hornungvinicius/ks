@@ -50,13 +50,13 @@ O script verifica:
 ## Pendências da cliente
 
 1. **Retrato**: a versão atual veio de uma arte de divulgação (tratada com IA para remover textos). Se houver o arquivo original do ensaio, ele deve substituir `src/assets/img/karolem-*.webp`.
-2. **Biografia** (formação, trajetória). O texto atual só usa dados do briefing.
+2. **Biografia**: formação, comissões da OAB e texto de apresentação entraram com o material de 15/10/2026. Ainda faltam o capítulo do BNI e outras referências que a cliente disse que enviará.
 3. **Domínio** de produção (`SITE_URL`).
 4. **Link oficial do perfil no Google** (`GOOGLE_PROFILE_URL`). Hoje o botão abre a busca do Google Maps pelo escritório.
 5. **Avaliações**:
    - autor da primeira ("Ótima profissional!…"), que não aparece no PDF e foi exibido como "Cliente no Google";
    - confirmar que todas são de 5 estrelas.
-6. **Etapas da assessoria** (Primeira conversa → Diagnóstico → Orientação → Acompanhamento): validar se descrevem o fluxo real.
+6. **Consultoria mensal**: a cliente substituiu o fluxo em quatro etapas pela explicação e pela lista de serviços enviadas em 15/10/2026. O nome público deixou de ser "assessoria continuada".
 7. **Canal de denúncias**: o briefing só tem o título; o texto atual descreve a solução de forma genérica.
 
 ## Revisão jurídica antes de publicar
