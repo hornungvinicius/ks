@@ -41,6 +41,13 @@
   --dur: .5s;
 }
 
+/* Versão 2 (/v2/): títulos em sans serif. A fonte só é baixada quando a classe .v2 está na página. */
+@font-face { font-family: "General Sans"; src: url("../fonts/general-sans.woff2") format("woff2"); font-weight: 200 700; font-style: normal; font-display: swap; }
+html.v2 { --f-display: "General Sans", "Satoshi", system-ui, sans-serif; }
+.v2 .h-hero, .v2 .h1, .v2 .h2, .v2 .h3 { font-weight: 600; letter-spacing: -.025em; }
+.v2 .h-hero { line-height: 1.04; }
+.v2 .h2 { font-size: clamp(1.9rem, 1.45rem + 1.9vw, 2.9rem); line-height: 1.08; }
+
 /* ---------- Base ---------- */
 *, *::before, *::after { box-sizing: border-box; }
 html { -webkit-text-size-adjust: 100%; scroll-padding-top: calc(var(--header-h) + 1rem); background: var(--bg); }

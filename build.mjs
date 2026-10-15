@@ -61,6 +61,13 @@ for (const file of (await readdir(join(SRC, 'pages'))).filter((f) => f.endsWith(
   await mkdir(join(dest, '..'), { recursive: true });
   await writeFile(dest, html);
   pages.push(meta);
+  // /v2/: a mesma home com títulos em sans serif (classe .v2 no CSS). Fica fora do índice e aponta o canonical para a home.
+  if (meta.path === '/') {
+    await mkdir(join(OUT, 'v2'), { recursive: true });
+    await writeFile(join(OUT, 'v2', 'index.html'), html
+      .replace('<html lang="pt-BR">', '<html lang="pt-BR" class="v2">')
+      .replace('<meta name="description"', '<meta name="robots" content="noindex">\n  <link rel="preload" href="/assets/fonts/general-sans.woff2" as="font" type="font/woff2" crossorigin>\n  <meta name="description"'));
+  }
 }
 
 // Dados estruturados apenas com informações confirmadas no briefing; o FAQ é lido do próprio HTML da página.
