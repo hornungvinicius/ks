@@ -1,7 +1,7 @@
 ---
 name: KS Advocacia Empresarial
 version: 2.0 (dark premium)
-description: Experiência escura em azul quase preto (#0B1119) com seções off-white intercaladas, dourado do monograma KS como acento, cards de vidro discretos, Robelia em todos os títulos e destaques e Satoshi no texto.
+description: Experiência escura em azul quase preto (#0B1119) com seções off-white intercaladas, dourado do monograma KS como acento, cards de vidro discretos, Source Serif 4 em todos os títulos e destaques e Satoshi no texto.
 colors:
   bg:       "#0B1119"   # base da página
   bg-2:     "#0F1722"   # seção alternada
@@ -16,7 +16,7 @@ colors:
   error:    "#F08A8A"
   success:  "#7FC8A0"
 typography:
-  display: "Robelia (regular, sem itálico): H1, H2, H3, títulos de card, FAQ, listas de destaque, marca d'água; ã/õ refeitos com o til da própria fonte"
+  display: "Source Serif 4 variável: 600 em H1/H2/H3, 500 em títulos de card, FAQ, listas e destaques (escolhida após a cliente pedir fontes menos finas)"
   sans: "Satoshi variável (Fontshare, licença ITF FFL), corpo, interface, rótulos e numerais grandes"
 radius: { card: 16px, button: 6px, small: 10px, pill: 999px }
 ---
