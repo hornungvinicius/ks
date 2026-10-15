@@ -78,7 +78,7 @@ function jsonld(body) {
   const firm = {
     '@type': 'LegalService',
     name: 'KS Advocacia Empresarial',
-    description: 'Advocacia empresarial preventiva e estratégica.',
+    description: 'Consultoria jurídica empresarial mensal, preventiva e estratégica.',
     telephone: '+' + C.phone,
     email: C.email,
     address: { '@type': 'PostalAddress', streetAddress: 'Rua Nestor Guimarães, 111, Bairro Estrela', addressLocality: 'Ponta Grossa', addressRegion: 'PR', addressCountry: 'BR' },
