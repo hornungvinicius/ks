@@ -57,7 +57,8 @@ O script verifica:
    - autor da primeira ("Ótima profissional!…"), que não aparece no PDF e foi exibido como "Cliente no Google";
    - confirmar que todas são de 5 estrelas.
 6. **Consultoria mensal**: a cliente substituiu o fluxo em quatro etapas pela explicação e pela lista de serviços enviadas em 15/10/2026. O nome público deixou de ser "assessoria continuada".
-7. **Canal de denúncias**: o briefing só tem o título; o texto atual descreve a solução de forma genérica.
+7. **Fotos do escritório**: as fotos enviadas em 15/10/2026 ficam de fora. O site usa só as imagens já produzidas para o projeto.
+8. **Canal de denúncias**: o briefing só tem o título; o texto atual descreve a solução de forma genérica.
 
 ## Revisão jurídica antes de publicar
 
