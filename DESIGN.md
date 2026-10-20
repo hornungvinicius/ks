@@ -1,7 +1,7 @@
 ---
 name: KS Advocacia Empresarial
 version: 2.0 (dark premium)
-description: Experiência escura em azul quase preto (#0B1119) com seções off-white intercaladas, dourado do monograma KS como acento, cards de vidro discretos, Cormorant Garamond nos títulos e Montserrat no texto, nos menus e nos botões.
+description: Experiência escura em azul quase preto (#0B1119) com seções off-white intercaladas, dourado do monograma KS como acento, cards de vidro discretos, Univers Next Pro nos títulos e Montserrat no texto, nos menus e nos botões.
 colors:
   bg:       "#0B1119"   # base da página
   bg-2:     "#0F1722"   # seção alternada
@@ -16,7 +16,7 @@ colors:
   error:    "#F08A8A"
   success:  "#7FC8A0"
 typography:
-  display: "Cormorant Garamond variável (latin, peso 300–700), 600 nos títulos. Escolha da cliente em 15/10/2026."
+  display: "Univers Next Pro variável (latin, peso 300–700), 600 nos títulos. Escolha da cliente em 15/10/2026."
   sans: "Montserrat variável (latin, peso 100–900), textos, menus e botões. Escolha da cliente em 15/10/2026."
 radius: { card: 16px, button: 6px, small: 10px, pill: 999px }
 ---

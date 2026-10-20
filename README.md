@@ -23,6 +23,10 @@ SITE_URL=https://dominio-da-ks.com.br GOOGLE_PROFILE_URL=https://g.page/... node
 
 A página 404 (`404.html`) é servida automaticamente.
 
+## Fonte dos títulos
+
+Univers Next Pro vem do kit Adobe Fonts `cec7ccc` (`src/layout.html`). O kit só entrega a fonte nos domínios cadastrados nele: ao ligar o domínio próprio, adicione-o em fonts.adobe.com → Web Projects.
+
 ## Estrutura
 
 - `src/pages/*.html`: páginas (bloco JSON com título, descrição e caminho no topo).
