@@ -103,10 +103,11 @@ Fotos reais do banco de imagens Freepik (licença Premium da conta, sem exigênc
 | `hero-martelo-*` | Judge gavel on a black background (386766013) |
 | `antes-*` | View of messy office workspace with laptop (40166565) |
 | `depois-*` | Empty modern corporate high end office space (413435157) |
-| `passo-1-*` | Cup of coffee, notebook and smartphone on dark background (289911193) |
-| `passo-2-*` | Businessman reviewing documents at office desk (295523992) |
-| `passo-3-*` | Closeup of hands of business meeting (21071249) |
-| `passo-4-*` | Manager discussing financial graph with remote colleagues (143378648) |
+| `servico-contratos-*` | Female and male business partners signing contract (4013234) |
+| `servico-notificacao-*` | Notary document and fountain pen on wooden table (425424959) |
+| `passo-3-*` (gestão de pessoas) | Closeup of hands of business meeting (21071249) |
+| `servico-cobranca-*`, `area-cobrancas-*` | Man hand holding bill and pen with calculator (48058386) |
+| `servico-defesa-*` | Prosecution and defense sides with juridical documents (83668336) |
 | `sala-reuniao-*` | Empty office with analytics on screen, late at night (52544938) |
 | `biblioteca-*` | Classic law office interior with desk and bookshelves (431732291) |
 | `industria-operacao-*` | Modern industrial factory production hall (51393098) |
