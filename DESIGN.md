@@ -39,7 +39,7 @@ Princípios:
 2. **Dourado com função.** Eyebrows, palavra em itálico no título, CTA principal, ícones e estados ativos. Nunca em parágrafos.
 3. **Cards para ler sem esforço.** Cada informação agrupada num card com borda `line`; hover destaca a borda em dourado.
 4. **Quebra de linha controlada.** Títulos com `text-wrap: balance` e largura máxima em `ch`; parágrafos com `text-wrap: pretty` e no máximo ~52ch.
-5. **Fotografia é protagonista**, sempre com máscara de leitura (gradiente funcional) e sem pessoas identificáveis enquanto não houver o ensaio real da advogada.
+5. **Fotografia é protagonista**, sempre com máscara de leitura (gradiente funcional). Só fotos reais, nunca imagens geradas por IA.
 
 ## 2. Contraste (WCAG 2.2, medido)
 
@@ -96,4 +96,26 @@ Regras: no celular a linha do tempo global do GSAP roda a 60% da velocidade; ima
 
 ## 7. Imagens
 
-Geradas com Magnific (Nano Banana 2, 2K) e convertidas para WebP em duas larguras. Paleta azul-marinho com luz dourada pontual; sem pessoas identificáveis, sem martelos, balanças ou colunas. O retrato da advogada é a foto enviada pela cliente, tratada com Nano Banana 2.1 apenas para remover textos e logos e aumentar a resolução, sem alterar a pessoa. O hero usa um close de martelo a pedido da cliente.
+Fotos reais do banco de imagens Freepik (licença Premium da conta, sem exigência de atribuição), escolhidas com o filtro que exclui imagens geradas por IA. Cada uma foi recortada na proporção do arquivo que substitui e convertida para WebP em duas larguras, mantendo os nomes de arquivo. O retrato da advogada é a foto enviada pela cliente, tratada com Nano Banana 2.1 apenas para remover textos e logos e aumentar a resolução, sem alterar a pessoa. O hero usa um close de martelo a pedido da cliente.
+
+| Arquivo | Foto no Freepik (ID) |
+|---|---|
+| `hero-martelo-*` | Judge gavel on a black background (386766013) |
+| `antes-*` | View of messy office workspace with laptop (40166565) |
+| `depois-*` | Empty modern corporate high end office space (413435157) |
+| `passo-1-*` | Cup of coffee, notebook and smartphone on dark background (289911193) |
+| `passo-2-*` | Businessman reviewing documents at office desk (295523992) |
+| `passo-3-*` | Closeup of hands of business meeting (21071249) |
+| `passo-4-*` | Manager discussing financial graph with remote colleagues (143378648) |
+| `sala-reuniao-*` | Empty office with analytics on screen, late at night (52544938) |
+| `biblioteca-*` | Classic law office interior with desk and bookshelves (431732291) |
+| `industria-operacao-*` | Modern industrial factory production hall (51393098) |
+| `area-assessoria-*` | Business colleagues working together at meeting, top view (3954469) |
+| `area-trabalhista-*` | Factory workers walking through production hall (11035649) |
+| `area-canal-*` | Golden padlock on black laptop keyboard (90995969) |
+| `area-contencioso-*` | Still life of documents stack (95018700) |
+| `area-contratos-*` | Businessman with fountain pen ready to sign document (28452729) |
+| `area-imobiliario-*` | Beautiful business building in the evening (148443596) |
+| `area-marcas-*` | Blank business card mockup in blue and tan (18835894) |
+| `area-societario-*` | Business partners shaking hands after signing contract (16094857) |
+| `area-treinamentos-*` | Presentation or seminar in the conference room (219522280) |
