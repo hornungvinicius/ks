@@ -1,6 +1,8 @@
 // Build estático sem dependências: `node build.mjs` gera ./dist.
 // Páginas em src/pages/*.html começam com um bloco JSON entre linhas `---`.
 import { readFile, writeFile, mkdir, cp, readdir, rm } from 'node:fs/promises';
+import { readFileSync } from 'node:fs';
+import { createHash } from 'node:crypto';
 import { join } from 'node:path';
 
 // Domínio: SITE_URL explícito ou, na Vercel, o domínio de produção do projeto. Sem nenhum, canonical/og:url/sitemap são omitidos.
@@ -34,6 +36,13 @@ const fill = (s) => s.replace(/\{\{(\w+)(?::([^}]*))?\}\}/g, (m, k, arg) => {
   return TOKENS[k](arg);
 });
 
+// As imagens têm cache de 30 dias (vercel.json): o ?v= com o hash do arquivo faz o navegador baixar de novo quando a imagem muda.
+const hashes = new Map();
+const bust = (html) => html.replace(/\/assets\/img\/[\w.-]+/g, (url) => {
+  if (!hashes.has(url)) hashes.set(url, createHash('sha1').update(readFileSync(join('src', url))).digest('hex').slice(0, 8));
+  return `${url}?v=${hashes.get(url)}`;
+});
+
 const SRC = 'src', OUT = 'dist';
 await rm(OUT, { recursive: true, force: true });
 await cp(join(SRC, 'assets'), join(OUT, 'assets'), { recursive: true, filter: (p) => !p.endsWith('desktop.ini') });
@@ -56,7 +65,7 @@ for (const file of (await readdir(join(SRC, 'pages'))).filter((f) => f.endsWith(
     .replace('%JSONLD%', meta.jsonld ? `<script type="application/ld+json">${JSON.stringify(jsonld(body))}</script>` : '')
     .replace('%CONTENT%', body)
     .replaceAll(`data-nav href="${meta.path}"`, `aria-current="page" href="${meta.path}"`);
-  html = fill(html);
+  html = bust(fill(html));
   const dest = meta.path.endsWith('/') ? join(OUT, meta.path, 'index.html') : join(OUT, meta.path);
   await mkdir(join(dest, '..'), { recursive: true });
   await writeFile(dest, html);
