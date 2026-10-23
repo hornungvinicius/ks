@@ -127,6 +127,26 @@ if (tabsEl) {
   window.addEventListener('hashchange', fromHash);
 }
 
+// Consultoria no desktop: os cinco cards andam na horizontal, um de cada vez.
+const stackCarousel = $('[data-stack-carousel]');
+if (stackCarousel) {
+  const track = $('[data-stack-track]', stackCarousel);
+  const step = () => {
+    const card = track.firstElementChild;
+    const gap = parseFloat(getComputedStyle(track).columnGap) || parseFloat(getComputedStyle(track).gap) || 24;
+    return card.getBoundingClientRect().width + gap;
+  };
+  const go = (dir) => {
+    const max = track.scrollWidth - track.clientWidth;
+    let left = track.scrollLeft + dir * step();
+    if (left > max + 8) left = 0;
+    if (left < -8) left = max;
+    track.scrollTo({ left, behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
+  };
+  $('[data-stack-prev]', stackCarousel).addEventListener('click', () => go(-1));
+  $('[data-stack-next]', stackCarousel).addEventListener('click', () => go(1));
+}
+
 // Avaliações: rolagem nativa (swipe/teclado) + avanço automático que pausa com mouse, foco, fora da tela ou aba oculta.
 const reviews = $('[data-reviews]');
 if (reviews && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
@@ -206,7 +226,7 @@ function initMotion() {
       .to(edge, { opacity: 0, duration: 0.05 }, 0.95);
   }
 
-  // ---- Consultoria: no celular os cards empilham; no desktop ficam na horizontal, um depois do outro ----
+  // ---- Consultoria: no celular os cards empilham; no desktop o carrossel é rolagem nativa ----
   const mm = gsap.matchMedia();
   const stack = $$('[data-stack]');
   stack.forEach((card) => {
