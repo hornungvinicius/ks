@@ -206,13 +206,18 @@ function initMotion() {
       .to(edge, { opacity: 0, duration: 0.05 }, 0.95);
   }
 
-  // ---- Etapas empilhadas: cada card fica preso no topo e recua quando o próximo chega ----
+  // ---- Consultoria: no celular os cards empilham; no desktop ficam na horizontal, um depois do outro ----
+  const mm = gsap.matchMedia();
   const stack = $$('[data-stack]');
-  stack.forEach((card, i) => {
+  stack.forEach((card) => {
     gsap.from(card, { y: 28, opacity: 0, duration: 1.2, ease: 'power2.out', scrollTrigger: once(card, 'top 92%') });
-    const next = stack[i + 1];
-    // O card de baixo chega e o de cima recua e escurece (cards opacos, sem transparência entre eles).
-    if (next) (() => gsap.to(card, { scale: 0.92 + i * 0.015, '--shade': 0.55, ease: 'none', scrollTrigger: { trigger: next, start: 'top 85%', end: 'top 30%', scrub: true } }))();
+  });
+  mm.add('(max-width: 47.99rem)', () => {
+    stack.forEach((card, i) => {
+      const next = stack[i + 1];
+      if (!next) return;
+      gsap.to(card, { scale: 0.94 + i * 0.01, '--shade': 0.45, ease: 'none', scrollTrigger: { trigger: next, start: 'top 78%', end: 'top 28%', scrub: true } });
+    });
   });
 
   // ---- Faixa de segmentos: loop contínuo que acelera e inverte com a rolagem ----
@@ -269,7 +274,6 @@ function initMotion() {
 
   // ---- Faixa editorial: fixada no desktop enquanto a foto assenta e os diferenciais entram ----
   const ed = $('[data-editorial]');
-  const mm = gsap.matchMedia();
   if (ed) {
     mm.add('(min-width: 64rem)', () => {
       gsap.timeline({ scrollTrigger: { trigger: ed, start: 'top top', end: '+=90%', pin: true, scrub: 1 } })
