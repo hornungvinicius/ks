@@ -31,9 +31,11 @@ Univers Next Pro vem do kit Adobe Fonts `cec7ccc` (`src/layout.html`). O kit só
 
 - `src/pages/*.html`: páginas (bloco JSON com título, descrição e caminho no topo).
 - `src/layout.html`: cabeçalho, menu, rodapé e metadados compartilhados.
+- `src/partials/*.html`: trechos repetidos entre páginas, incluídos com `{{partial:nome}}` (hoje, o mapa).
 - `src/icons.svg`: ícones Phosphor e WhatsApp (Simple Icons).
 - `src/assets/css/site.css`: tokens e componentes (ver `DESIGN.md`).
-- `src/assets/js/main.js`: menu, formulário, carrossel, áreas e motion.
+- `src/assets/js/main.js`: menu, formulário, mapa, vídeo do hero, avaliações, abas e motion.
+- `src/assets/video/`: vídeo do hero (desktop e celular).
 - Tokens nos HTMLs: `{{wa:mensagem}}`, `{{tel}}`, `{{mail}}`, `{{maps}}`, `{{google}}`, `{{phone}}`, `{{email}}`, `{{year}}`.
 
 ## Testes
@@ -53,7 +55,7 @@ O script verifica:
 
 ## Pendências da cliente
 
-1. **Retrato**: a versão atual veio de uma arte de divulgação (tratada com IA para remover textos). Se houver o arquivo original do ensaio, ele deve substituir `src/assets/img/karolem-*.webp`.
+1. **Retrato e vídeo**: desde 05/11/2026 a seção da advogada usa uma foto da captação no BNI (`karolem-palestra-*`) e o hero toca um vídeo da mesma captação (`src/assets/video/`). Se a cliente preferir outra foto ou outros trechos, as opções estão no Drive em "Karolem - KS Advocacia/Captações/BNI". O retrato antigo (`karolem-*.webp`) continua no repositório.
 2. **Biografia**: formação, comissões da OAB e texto de apresentação entraram com o material de 15/10/2026. Ainda faltam o capítulo do BNI e outras referências que a cliente disse que enviará.
 3. **Domínio** de produção (`SITE_URL`).
 4. **Link oficial do perfil no Google** (`GOOGLE_PROFILE_URL`). Hoje o botão abre a busca do Google Maps pelo escritório.

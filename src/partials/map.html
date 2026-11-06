@@ -1,0 +1,11 @@
+<!-- Mapa do escritório (home e contato). O Google Maps só carrega quando a pessoa clica: antes disso nenhum serviço de terceiro é acionado. -->
+<div class="card map" data-reveal>
+  <div class="map__frame" data-map data-map-src="https://www.google.com/maps?q=Rua+Nestor+Guimar%C3%A3es%2C+111%2C+Estrela%2C+Ponta+Grossa+-+PR&amp;output=embed">
+    <button class="map__load" type="button" data-map-load><svg class="icon" aria-hidden="true"><use href="#i-pin"/></svg><span>Ver o mapa aqui</span></button>
+  </div>
+  <div class="map__info">
+    <p class="eyebrow">Onde estamos</p>
+    <p class="map__addr">Rua Nestor Guimarães, 111<br>Bairro Estrela, Ponta Grossa, PR</p>
+    <a class="link" href="{{maps}}" target="_blank" rel="noopener">Como chegar <svg class="icon" aria-hidden="true"><use href="#i-arrow-out"/></svg></a>
+  </div>
+</div>

@@ -11,7 +11,7 @@ const DIST = path.join(__dirname, '..', 'dist');
 const SHOTS = process.argv[2];
 const PAGES = ['/', '/areas-de-atuacao/', '/contato/', '/privacidade/', '/termos/'];
 const WIDTHS = [320, 360, 375, 390, 430, 768, 1024, 1280, 1440];
-const TYPES = { '.html': 'text/html; charset=utf-8', '.css': 'text/css', '.js': 'text/javascript', '.webp': 'image/webp', '.png': 'image/png', '.jpg': 'image/jpeg', '.woff2': 'font/woff2', '.xml': 'application/xml', '.txt': 'text/plain' };
+const TYPES = { '.html': 'text/html; charset=utf-8', '.css': 'text/css', '.js': 'text/javascript', '.webp': 'image/webp', '.png': 'image/png', '.jpg': 'image/jpeg', '.woff2': 'font/woff2', '.xml': 'application/xml', '.txt': 'text/plain', '.mp4': 'video/mp4' };
 const failures = [];
 const fail = (msg) => { failures.push(msg); console.log('  FALHA', msg); };
 
@@ -61,7 +61,7 @@ const server = http.createServer((req, res) => {
         return [...document.querySelectorAll('body *')].filter((el) => el.getBoundingClientRect().right > W + 1).slice(0, 5).map((el) => el.tagName + '.' + el.className);
       });
       if (over) fail(`${url} @${width}px: overflow horizontal em ${over.join(', ')}`);
-      const hidden = await page.evaluate(() => [...document.querySelectorAll('[data-reveal],[data-split],[data-hero],.area,.review,[data-faq]')].filter((e) => { const s = getComputedStyle(e); return s.visibility === 'hidden' || s.opacity === '0'; }).length);
+      const hidden = await page.evaluate(() => [...document.querySelectorAll('[data-reveal],[data-split],[data-hero],.svc,.review,[data-faq]')].filter((e) => { const s = getComputedStyle(e); return s.visibility === 'hidden' || s.opacity === '0'; }).length);
       if (hidden) fail(`${url} @${width}px: ${hidden} elemento(s) continuam invisíveis após rolar a página`);
       if (width === WIDTHS[0]) (await page.$$eval('a[href]', (as) => as.map((a) => a.getAttribute('href')))).forEach((h) => links.add(`${url}|${h}`));
       if (SHOTS && (width === 390 || width === 1440)) await page.screenshot({ path: path.join(SHOTS, `${url.replace(/\//g, '_') || '_'}${width}.png`), fullPage: true });

@@ -12,6 +12,8 @@
       <source media="(max-width: 47.99rem)" srcset="/assets/img/hero-martelo-mobile-750.webp 750w, /assets/img/hero-martelo-mobile-1200.webp 1200w" sizes="100vw" width="1200" height="2150">
       <img src="/assets/img/hero-martelo-2400.webp" srcset="/assets/img/hero-martelo-1440.webp 1440w, /assets/img/hero-martelo-2400.webp 2400w" sizes="100vw" width="2400" height="1340" alt="" fetchpriority="high">
     </picture>
+    <!-- Vídeo da captação no BNI: só carrega com movimento permitido (main.js); a foto fica como reserva. -->
+    <video class="hero__video" muted loop playsinline preload="none" aria-hidden="true" data-hero-video data-src-desktop="/assets/video/hero-desktop.mp4" data-src-mobile="/assets/video/hero-mobile.mp4"></video>
   </div>
   <div class="wrap hero__wrap">
     <div class="hero__content" data-hero-content>
@@ -21,14 +23,131 @@
         <a class="btn btn--gold" href="{{wa:Olá, vim pelo site da KS Advocacia Empresarial e gostaria de conversar.}}" target="_blank" rel="noopener">
           <svg class="icon" aria-hidden="true"><use href="#i-whatsapp"/></svg>Conversar no WhatsApp
         </a>
-        <a class="btn btn--square" href="#por-que" aria-label="Ir para a próxima seção"><svg class="icon" aria-hidden="true"><use href="#i-arrow-down"/></svg></a>
+        <a class="btn btn--square" href="#consultoria" aria-label="Ir para a próxima seção"><svg class="icon" aria-hidden="true"><use href="#i-arrow-down"/></svg></a>
       </div>
     </div>
   </div>
 </section>
 
+<!-- Faixa de serviços: no desktop rola em loop; no celular (e sem motion) vira lista alinhada à esquerda, com o marcador em todos os itens -->
+<section class="segments" aria-label="Serviços">
+  <p class="segments__label" data-reveal>Soluções jurídicas para empresas</p>
+  <div class="segments__glass">
+  <div class="segments__viewport">
+    <div class="marquee" data-marquee>
+      <ul class="marquee__group" role="list"><li>Consultoria Jurídica Mensal</li><li>Contratos Empresariais</li><li>Gestão de Pessoas</li><li>Cobrança e Inadimplência</li><li>Direito Trabalhista</li><li>Recuperação Judicial</li><li>Direito do Consumidor</li><li>Contencioso e Arbitragem</li><li>Societário e Governança</li><li>Treinamentos</li><li>Proteção de Dados</li></ul>
+      <ul class="marquee__group" role="list" aria-hidden="true"><li>Consultoria Jurídica Mensal</li><li>Contratos Empresariais</li><li>Gestão de Pessoas</li><li>Cobrança e Inadimplência</li><li>Direito Trabalhista</li><li>Recuperação Judicial</li><li>Direito do Consumidor</li><li>Contencioso e Arbitragem</li><li>Societário e Governança</li><li>Treinamentos</li><li>Proteção de Dados</li></ul>
+    </div>
+  </div>
+  </div>
+</section>
+
+<section class="section" id="consultoria" aria-labelledby="consultoria-h">
+  <div class="wrap">
+    <header class="sec-head center">
+      <p class="eyebrow" data-reveal>Consultoria jurídica mensal</p>
+      <h2 class="h2" id="consultoria-h" data-split>Como funciona a consultoria jurídica empresarial</h2>
+      <p class="lead" data-reveal>Atuamos no dia a dia da empresa, com informações, explicações, clareza e previsibilidade. Isso dá suporte para decidir com o máximo de prevenção de riscos, e reduz exposições e problemas no futuro.</p>
+    </header>
+  </div>
+  <div class="wrap">
+    <ol class="stack" role="list" aria-label="Serviços da consultoria jurídica mensal">
+      <li class="stack__card" style="--i: 0" data-stack>
+        <div class="stack__media">
+          <img src="/assets/img/servico-contratos-1000.webp" srcset="/assets/img/servico-contratos-640.webp 640w, /assets/img/servico-contratos-1000.webp 1000w" sizes="(min-width: 64rem) 16vw, (min-width: 48rem) 30vw, 90vw" width="1000" height="747" alt="Mão assinando um contrato sobre a mesa, diante da outra parte." loading="lazy">
+          <span class="stack__n" aria-hidden="true">1</span>
+          <span class="stack__chip"><svg class="icon" aria-hidden="true"><use href="#i-file"/></svg>Contratos</span>
+        </div>
+        <div class="stack__body">
+          <h3 class="h3"><span class="sr-only">Serviço 1: </span>Elaboração e revisão de contratos</h3>
+          <p>Contratos com clientes, fornecedores e prestadores, escritos com clareza e revisados antes da assinatura.</p>
+        </div>
+      </li>
+      <li class="stack__card" style="--i: 1" data-stack>
+        <div class="stack__media">
+          <img src="/assets/img/servico-notificacao-1000.webp" srcset="/assets/img/servico-notificacao-640.webp 640w, /assets/img/servico-notificacao-1000.webp 1000w" sizes="(min-width: 64rem) 16vw, (min-width: 48rem) 30vw, 90vw" width="1000" height="747" alt="Documento com caneta-tinteiro e um martelo de juiz ao fundo." loading="lazy">
+          <span class="stack__n" aria-hidden="true">2</span>
+          <span class="stack__chip"><svg class="icon" aria-hidden="true"><use href="#i-chat"/></svg>Antes do processo</span>
+        </div>
+        <div class="stack__body">
+          <h3 class="h3"><span class="sr-only">Serviço 2: </span>Notificações extrajudiciais</h3>
+          <p>Avisos formais para cobrar, registrar uma posição ou tentar resolver um problema antes de ir à Justiça.</p>
+        </div>
+      </li>
+      <li class="stack__card" style="--i: 2" data-stack>
+        <div class="stack__media">
+          <img src="/assets/img/passo-3-1000.webp" srcset="/assets/img/passo-3-640.webp 640w, /assets/img/passo-3-1000.webp 1000w" sizes="(min-width: 64rem) 16vw, (min-width: 48rem) 30vw, 90vw" width="1000" height="747" alt="Mesa de reunião vista de cima, com documentos, relatórios e anotações." loading="lazy">
+          <span class="stack__n" aria-hidden="true">3</span>
+          <span class="stack__chip"><svg class="icon" aria-hidden="true"><use href="#i-users"/></svg>Equipes e RH</span>
+        </div>
+        <div class="stack__body">
+          <h3 class="h3"><span class="sr-only">Serviço 3: </span>Orientação na gestão de pessoas</h3>
+          <p>Apoio às decisões do dia a dia sobre contratação, rotina da equipe e relações de trabalho, para reduzir riscos.</p>
+        </div>
+      </li>
+      <li class="stack__card" style="--i: 3" data-stack>
+        <div class="stack__media">
+          <img src="/assets/img/servico-cobranca-1000.webp" srcset="/assets/img/servico-cobranca-640.webp 640w, /assets/img/servico-cobranca-1000.webp 1000w" sizes="(min-width: 64rem) 16vw, (min-width: 48rem) 30vw, 90vw" width="1000" height="747" alt="Mãos conferindo contas com uma calculadora." loading="lazy">
+          <span class="stack__n" aria-hidden="true">4</span>
+          <span class="stack__chip"><svg class="icon" aria-hidden="true"><use href="#i-coins"/></svg>Cobrança</span>
+        </div>
+        <div class="stack__body">
+          <h3 class="h3"><span class="sr-only">Serviço 4: </span>Cobrança e prevenção de inadimplência</h3>
+          <p>Cobrança antes da ação judicial e organização para diminuir atrasos de pagamento.</p>
+        </div>
+      </li>
+      <li class="stack__card" style="--i: 4" data-stack>
+        <div class="stack__media">
+          <img src="/assets/img/servico-defesa-1000.webp" srcset="/assets/img/servico-defesa-640.webp 640w, /assets/img/servico-defesa-1000.webp 1000w" sizes="(min-width: 64rem) 16vw, (min-width: 48rem) 30vw, 90vw" width="1000" height="747" alt="Advogados entregando documentos à juíza durante uma audiência." loading="lazy">
+          <span class="stack__n" aria-hidden="true">5</span>
+          <span class="stack__chip"><svg class="icon" aria-hidden="true"><use href="#i-shield"/></svg>Defesa</span>
+        </div>
+        <div class="stack__body">
+          <h3 class="h3"><span class="sr-only">Serviço 5: </span>Defesa em demandas judiciais</h3>
+          <p>Acompanhamento da empresa nas ações, com a defesa explicada em linguagem simples.</p>
+        </div>
+      </li>
+    </ol>
+  </div>
+  <div class="wrap">
+    <div class="stack__cta" data-reveal>
+      <a class="btn btn--gold" href="{{wa:Olá, gostaria de entender como funciona a consultoria jurídica mensal da KS Advocacia.}}" target="_blank" rel="noopener">
+        <svg class="icon" aria-hidden="true"><use href="#i-whatsapp"/></svg>Conversar no WhatsApp
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="section section--light" id="solucoes" aria-labelledby="solucoes-h">
+  <div class="wrap">
+    <header class="sec-head center">
+      <p class="eyebrow" data-reveal>Áreas de atuação</p>
+      <h2 class="h2" id="solucoes-h" data-split>Soluções para cada<br> frente da empresa</h2>
+      <p class="lead" data-reveal><span class="ln">Uma atuação integrada para tornar</span> <span class="ln">a gestão mais segura e previsível.</span></p>
+    </header>
+    <!-- Todas as áreas à vista, em cards; cada card abre a aba correspondente em /areas-de-atuacao/ -->
+    <ul class="svc-grid" role="list">
+      <li><a class="svc" href="/areas-de-atuacao/#consultoria"><span class="svc__media"><img src="/assets/img/area-assessoria-560.webp" width="560" height="700" alt="" loading="lazy"></span><span class="svc__body"><span class="svc__icon" aria-hidden="true"><svg class="icon"><use href="#i-briefcase"/></svg></span><span class="svc__t">Consultoria Jurídica Mensal</span><span class="svc__d">Acompanhamento do dia a dia da empresa: contratos, notificações, gestão de pessoas, cobrança e defesa em processos.</span><span class="svc__more" aria-hidden="true">Conheça <svg class="icon"><use href="#i-arrow"/></svg></span></span></a></li>
+      <li><a class="svc" href="/areas-de-atuacao/#trabalhista"><span class="svc__media"><img src="/assets/img/area-trabalhista-560.webp" width="560" height="700" alt="" loading="lazy"></span><span class="svc__body"><span class="svc__icon" aria-hidden="true"><svg class="icon"><use href="#i-hardhat"/></svg></span><span class="svc__t">Direito Trabalhista Empresarial</span><span class="svc__d">Atuação para evitar dívidas e riscos trabalhistas, com defesa em reclamações e apoio em negociações sindicais.</span><span class="svc__more" aria-hidden="true">Conheça <svg class="icon"><use href="#i-arrow"/></svg></span></span></a></li>
+      <li><a class="svc" href="/areas-de-atuacao/#contratos"><span class="svc__media"><img src="/assets/img/area-contratos-560.webp" width="560" height="695" alt="" loading="lazy"></span><span class="svc__body"><span class="svc__icon" aria-hidden="true"><svg class="icon"><use href="#i-file"/></svg></span><span class="svc__t">Contratos Empresariais</span><span class="svc__d">Elaboração e revisão de contratos com fornecedores, clientes e prestadores, com assinatura eletrônica.</span><span class="svc__more" aria-hidden="true">Conheça <svg class="icon"><use href="#i-arrow"/></svg></span></span></a></li>
+      <li><a class="svc" href="/areas-de-atuacao/#societario"><span class="svc__media"><img src="/assets/img/area-societario-560.webp" width="560" height="695" alt="" loading="lazy"></span><span class="svc__body"><span class="svc__icon" aria-hidden="true"><svg class="icon"><use href="#i-buildings"/></svg></span><span class="svc__t">Societário e Proteção Patrimonial</span><span class="svc__d">Acordo de sócios, governança, reestruturações e organização do patrimônio diante dos riscos da operação.</span><span class="svc__more" aria-hidden="true">Conheça <svg class="icon"><use href="#i-arrow"/></svg></span></span></a></li>
+      <li><a class="svc" href="/areas-de-atuacao/#imobiliario"><span class="svc__media"><img src="/assets/img/area-imobiliario-560.webp" width="560" height="695" alt="" loading="lazy"></span><span class="svc__body"><span class="svc__icon" aria-hidden="true"><svg class="icon"><use href="#i-warehouse"/></svg></span><span class="svc__t">Imobiliário Empresarial</span><span class="svc__d">Aluguel do ponto comercial, reajustes e renovação, e análise de riscos na compra, venda ou expansão.</span><span class="svc__more" aria-hidden="true">Conheça <svg class="icon"><use href="#i-arrow"/></svg></span></span></a></li>
+      <li><a class="svc" href="/areas-de-atuacao/#marcas"><span class="svc__media"><img src="/assets/img/area-marcas-560.webp" width="560" height="695" alt="" loading="lazy"></span><span class="svc__body"><span class="svc__icon" aria-hidden="true"><svg class="icon"><use href="#i-trademark"/></svg></span><span class="svc__t">Proteção de Marca</span><span class="svc__d">Registro no INPI, monitoramento e defesa da marca contra cópias, plágio e concorrência desleal.</span><span class="svc__more" aria-hidden="true">Conheça <svg class="icon"><use href="#i-arrow"/></svg></span></span></a></li>
+      <li><a class="svc" href="/areas-de-atuacao/#treinamentos"><span class="svc__media"><img src="/assets/img/area-treinamentos-560.webp" width="560" height="695" alt="" loading="lazy"></span><span class="svc__body"><span class="svc__icon" aria-hidden="true"><svg class="icon"><use href="#i-teacher"/></svg></span><span class="svc__t">Treinamentos de Liderança</span><span class="svc__d">Encontros para gerentes, supervisores e RH sobre conduta, prevenção de riscos e medidas disciplinares.</span><span class="svc__more" aria-hidden="true">Conheça <svg class="icon"><use href="#i-arrow"/></svg></span></span></a></li>
+      <li><a class="svc" href="/areas-de-atuacao/#contencioso"><span class="svc__media"><img src="/assets/img/area-contencioso-560.webp" width="560" height="695" alt="" loading="lazy"></span><span class="svc__body"><span class="svc__icon" aria-hidden="true"><svg class="icon"><use href="#i-shield"/></svg></span><span class="svc__t">Contencioso e Arbitragem</span><span class="svc__d">Representação da empresa em disputas na Justiça ou em câmaras de mediação e arbitragem.</span><span class="svc__more" aria-hidden="true">Conheça <svg class="icon"><use href="#i-arrow"/></svg></span></span></a></li>
+      <li><a class="svc" href="/areas-de-atuacao/#consumidor"><span class="svc__media"><img src="/assets/img/industria-operacao-900.webp" width="900" height="672" alt="" loading="lazy"></span><span class="svc__body"><span class="svc__icon" aria-hidden="true"><svg class="icon"><use href="#i-users"/></svg></span><span class="svc__t">Direito do Consumidor</span><span class="svc__d">Adequação de produtos e das regras de atendimento, e defesa da empresa em conflitos com clientes.</span><span class="svc__more" aria-hidden="true">Conheça <svg class="icon"><use href="#i-arrow"/></svg></span></span></a></li>
+      <li><a class="svc" href="/areas-de-atuacao/#cobrancas"><span class="svc__media"><img src="/assets/img/area-cobrancas-560.webp" width="560" height="695" alt="" loading="lazy"></span><span class="svc__body"><span class="svc__icon" aria-hidden="true"><svg class="icon"><use href="#i-coins"/></svg></span><span class="svc__t">Cobranças</span><span class="svc__d">Cobrança administrativa e judicial, e prevenção de atrasos de pagamento.</span><span class="svc__more" aria-hidden="true">Conheça <svg class="icon"><use href="#i-arrow"/></svg></span></span></a></li>
+      <li><a class="svc" href="/areas-de-atuacao/#recuperacao"><span class="svc__media"><img src="/assets/img/biblioteca-1000.webp" width="1000" height="558" alt="" loading="lazy"></span><span class="svc__body"><span class="svc__icon" aria-hidden="true"><svg class="icon"><use href="#i-scales"/></svg></span><span class="svc__t">Recuperação Judicial e Falências</span><span class="svc__d">Renegociação de dívidas, recuperação judicial ou extrajudicial e processos de falência.</span><span class="svc__more" aria-hidden="true">Conheça <svg class="icon"><use href="#i-arrow"/></svg></span></span></a></li>
+      <li><a class="svc" href="/areas-de-atuacao/#canal-de-denuncias"><span class="svc__media"><img src="/assets/img/area-canal-560.webp" width="560" height="695" alt="" loading="lazy"></span><span class="svc__body"><span class="svc__icon" aria-hidden="true"><svg class="icon"><use href="#i-chat"/></svg></span><span class="svc__t">Canal de Denúncias e Proteção de Dados</span><span class="svc__d">Canal para relatos internos, dentro da governança da empresa e da proteção de dados.</span><span class="svc__more" aria-hidden="true">Conheça <svg class="icon"><use href="#i-arrow"/></svg></span></span></a></li>
+    </ul>
+    <div class="services__more" data-reveal>
+      <a class="btn btn--ghost" href="/areas-de-atuacao/">Ver todas as áreas <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+    </div>
+  </div>
+</section>
+
 <!-- Antes e depois em card: a foto do "depois" cobre a do "antes" conforme a rolagem (sem motion: as duas metades lado a lado) -->
-<section class="section section--light" id="por-que" aria-labelledby="ba-h" data-ba>
+<section class="section" id="por-que" aria-labelledby="ba-h" data-ba>
   <div class="wrap">
     <header class="sec-head center">
       <p class="eyebrow" data-reveal>Evite os riscos</p>
@@ -54,230 +173,6 @@
         </ul>
         <a class="btn btn--gold" href="{{wa:Olá, gostaria de entender como funciona a consultoria preventiva para a minha empresa.}}" target="_blank" rel="noopener" data-ba-cta><svg class="icon" aria-hidden="true"><use href="#i-whatsapp"/></svg>Conversar no WhatsApp</a>
       </div>
-    </div>
-  </div>
-</section>
-
-<section class="segments" aria-label="Serviços">
-  <p class="segments__label" data-reveal>Soluções jurídicas para empresas</p>
-  <div class="segments__glass">
-  <div class="segments__viewport">
-    <div class="marquee" data-marquee>
-      <div class="marquee__group"><span>Consultoria jurídica mensal</span><i></i><span>Contratos empresariais</span><i></i><span>Gestão de pessoas</span><i></i><span>Cobrança e inadimplência</span><i></i><span>Direito trabalhista</span><i></i><span>Recuperação judicial</span><i></i><span>Direito do consumidor</span><i></i><span>Contencioso e arbitragem</span><i></i><span>Societário e governança</span><i></i><span>Treinamentos</span><i></i><span>Proteção de dados</span><i></i></div>
-      <div class="marquee__group" aria-hidden="true"><span>Consultoria jurídica mensal</span><i></i><span>Contratos empresariais</span><i></i><span>Gestão de pessoas</span><i></i><span>Cobrança e inadimplência</span><i></i><span>Direito trabalhista</span><i></i><span>Recuperação judicial</span><i></i><span>Direito do consumidor</span><i></i><span>Contencioso e arbitragem</span><i></i><span>Societário e governança</span><i></i><span>Treinamentos</span><i></i><span>Proteção de dados</span><i></i></div>
-    </div>
-  </div>
-  </div>
-</section>
-
-<section class="section" id="consultoria" aria-labelledby="consultoria-h">
-  <div class="wrap">
-    <header class="sec-head center">
-      <p class="eyebrow" data-reveal>Consultoria jurídica mensal</p>
-      <h2 class="h2" id="consultoria-h" data-split>Como funciona a consultoria jurídica empresarial</h2>
-      <p class="lead" data-reveal>Atuamos no dia a dia da empresa, com informações, explicações, clareza e previsibilidade. Isso dá suporte para decidir com o máximo de prevenção de riscos, e reduz exposições e problemas no futuro.</p>
-    </header>
-  </div>
-  <div class="stack-carousel" data-stack-carousel>
-    <ol class="stack" role="list" tabindex="0" aria-label="Serviços da consultoria jurídica mensal" data-stack-track>
-      <li class="stack__card" style="--i: 0" data-stack>
-        <div class="stack__media">
-          <img src="/assets/img/servico-contratos-1000.webp" srcset="/assets/img/servico-contratos-640.webp 640w, /assets/img/servico-contratos-1000.webp 1000w" sizes="(min-width: 48rem) 40vw, 90vw" width="1000" height="747" alt="Mão assinando um contrato sobre a mesa, diante da outra parte." loading="lazy">
-          <span class="stack__n" aria-hidden="true">1</span>
-          <span class="stack__chip"><svg class="icon" aria-hidden="true"><use href="#i-file"/></svg>Contratos</span>
-        </div>
-        <div class="stack__body">
-          <span class="icon-box"><svg class="icon" aria-hidden="true"><use href="#i-file"/></svg></span>
-          <h3 class="h3"><span class="sr-only">Serviço 1: </span>Elaboração e revisão de contratos</h3>
-          <p>Contratos com clientes, fornecedores e prestadores, escritos com clareza e revisados antes da assinatura.</p>
-        </div>
-      </li>
-      <li class="stack__card" style="--i: 1" data-stack>
-        <div class="stack__media">
-          <img src="/assets/img/servico-notificacao-1000.webp" srcset="/assets/img/servico-notificacao-640.webp 640w, /assets/img/servico-notificacao-1000.webp 1000w" sizes="(min-width: 48rem) 40vw, 90vw" width="1000" height="747" alt="Documento com caneta-tinteiro e um martelo de juiz ao fundo." loading="lazy">
-          <span class="stack__n" aria-hidden="true">2</span>
-          <span class="stack__chip"><svg class="icon" aria-hidden="true"><use href="#i-chat"/></svg>Antes do processo</span>
-        </div>
-        <div class="stack__body">
-          <span class="icon-box"><svg class="icon" aria-hidden="true"><use href="#i-chat"/></svg></span>
-          <h3 class="h3"><span class="sr-only">Serviço 2: </span>Notificações extrajudiciais</h3>
-          <p>Avisos formais para cobrar, registrar uma posição ou tentar resolver um problema antes de ir à Justiça.</p>
-        </div>
-      </li>
-      <li class="stack__card" style="--i: 2" data-stack>
-        <div class="stack__media">
-          <img src="/assets/img/passo-3-1000.webp" srcset="/assets/img/passo-3-640.webp 640w, /assets/img/passo-3-1000.webp 1000w" sizes="(min-width: 48rem) 40vw, 90vw" width="1000" height="747" alt="Mesa de reunião vista de cima, com documentos, relatórios e anotações." loading="lazy">
-          <span class="stack__n" aria-hidden="true">3</span>
-          <span class="stack__chip"><svg class="icon" aria-hidden="true"><use href="#i-users"/></svg>Equipes e RH</span>
-        </div>
-        <div class="stack__body">
-          <span class="icon-box"><svg class="icon" aria-hidden="true"><use href="#i-users"/></svg></span>
-          <h3 class="h3"><span class="sr-only">Serviço 3: </span>Orientação na gestão de pessoas</h3>
-          <p>Apoio às decisões do dia a dia sobre contratação, rotina da equipe e relações de trabalho, para reduzir riscos.</p>
-        </div>
-      </li>
-      <li class="stack__card" style="--i: 3" data-stack>
-        <div class="stack__media">
-          <img src="/assets/img/servico-cobranca-1000.webp" srcset="/assets/img/servico-cobranca-640.webp 640w, /assets/img/servico-cobranca-1000.webp 1000w" sizes="(min-width: 48rem) 40vw, 90vw" width="1000" height="747" alt="Mãos conferindo contas com uma calculadora." loading="lazy">
-          <span class="stack__n" aria-hidden="true">4</span>
-          <span class="stack__chip"><svg class="icon" aria-hidden="true"><use href="#i-coins"/></svg>Cobrança</span>
-        </div>
-        <div class="stack__body">
-          <span class="icon-box"><svg class="icon" aria-hidden="true"><use href="#i-coins"/></svg></span>
-          <h3 class="h3"><span class="sr-only">Serviço 4: </span>Cobrança e prevenção de inadimplência</h3>
-          <p>Cobrança antes da ação judicial e organização para diminuir atrasos de pagamento.</p>
-        </div>
-      </li>
-      <li class="stack__card" style="--i: 4" data-stack>
-        <div class="stack__media">
-          <img src="/assets/img/servico-defesa-1000.webp" srcset="/assets/img/servico-defesa-640.webp 640w, /assets/img/servico-defesa-1000.webp 1000w" sizes="(min-width: 48rem) 40vw, 90vw" width="1000" height="747" alt="Advogados entregando documentos à juíza durante uma audiência." loading="lazy">
-          <span class="stack__n" aria-hidden="true">5</span>
-          <span class="stack__chip"><svg class="icon" aria-hidden="true"><use href="#i-shield"/></svg>Defesa</span>
-        </div>
-        <div class="stack__body">
-          <span class="icon-box"><svg class="icon" aria-hidden="true"><use href="#i-shield"/></svg></span>
-          <h3 class="h3"><span class="sr-only">Serviço 5: </span>Defesa em demandas judiciais</h3>
-          <p>Acompanhamento da empresa nas ações, com a defesa explicada em linguagem simples.</p>
-        </div>
-      </li>
-    </ol>
-    <div class="wrap stack-carousel__nav">
-      <button class="stack-carousel__btn stack-carousel__btn--prev" type="button" data-stack-prev aria-label="Serviço anterior"><svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></button>
-      <button class="stack-carousel__btn" type="button" data-stack-next aria-label="Próximo serviço"><svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></button>
-    </div>
-  </div>
-  <div class="wrap">
-    <div class="stack__cta" data-reveal>
-      <a class="btn btn--gold" href="{{wa:Olá, gostaria de entender como funciona a consultoria jurídica mensal da KS Advocacia.}}" target="_blank" rel="noopener">
-        <svg class="icon" aria-hidden="true"><use href="#i-whatsapp"/></svg>Conversar no WhatsApp
-      </a>
-    </div>
-  </div>
-</section>
-
-<section class="section section--light" id="solucoes" aria-labelledby="solucoes-h">
-  <div class="wrap">
-    <header class="sec-head center">
-      <p class="eyebrow" data-reveal>Áreas de atuação</p>
-      <h2 class="h2" id="solucoes-h" data-split>Soluções para cada<br> frente da empresa</h2>
-      <p class="lead" data-reveal><span class="ln">Uma atuação integrada para tornar</span> <span class="ln">a gestão mais segura e previsível.</span></p>
-    </header>
-    <div class="areas" data-areas>
-      <div class="areas__list">
-        <details class="area" name="areas" open data-area="consultoria">
-          <summary><span class="area__t">Consultoria jurídica mensal</span><span class="area__btn" aria-hidden="true"><svg class="icon"><use href="#i-plus"/></svg></span></summary>
-          <div class="area__body">
-            <img class="area__img-m" src="/assets/img/area-assessoria-560.webp" width="560" height="700" alt="" loading="lazy">
-            <p>Acompanhamento do dia a dia da empresa: contratos, notificações, gestão de pessoas, cobrança e defesa em processos, com clareza para decidir.</p>
-            <a class="link" href="/areas-de-atuacao/#consultoria">Conheça o serviço <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
-          </div>
-        </details>
-        <details class="area" name="areas" data-area="trabalhista">
-          <summary><span class="area__t">Direito trabalhista empresarial</span><span class="area__btn" aria-hidden="true"><svg class="icon"><use href="#i-plus"/></svg></span></summary>
-          <div class="area__body">
-            <img class="area__img-m" src="/assets/img/area-trabalhista-560.webp" width="560" height="700" alt="" loading="lazy">
-            <p>Atuação para evitar dívidas e riscos trabalhistas, com defesa em reclamações e apoio em negociações sindicais.</p>
-            <a class="link" href="/areas-de-atuacao/#trabalhista">Conheça o serviço <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
-          </div>
-        </details>
-        <details class="area" name="areas" data-area="contratos">
-          <summary><span class="area__t">Contratos empresariais</span><span class="area__btn" aria-hidden="true"><svg class="icon"><use href="#i-plus"/></svg></span></summary>
-          <div class="area__body">
-            <img class="area__img-m" src="/assets/img/area-contratos-560.webp" width="560" height="695" alt="" loading="lazy">
-            <p>Elaboração e revisão de contratos com fornecedores, clientes e prestadores, com fluxo de assinatura eletrônica para agilizar vendas.</p>
-            <a class="link" href="/areas-de-atuacao/#contratos">Conheça o serviço <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
-          </div>
-        </details>
-        <details class="area" name="areas" data-area="societario">
-          <summary><span class="area__t">Societário e proteção patrimonial</span><span class="area__btn" aria-hidden="true"><svg class="icon"><use href="#i-plus"/></svg></span></summary>
-          <div class="area__body">
-            <img class="area__img-m" src="/assets/img/area-societario-560.webp" width="560" height="695" alt="" loading="lazy" style="object-position: 50% 85%">
-            <p>Contrato e acordo de sócios, governança, fusões e reestruturações, e organização do patrimônio diante dos riscos da operação.</p>
-            <a class="link" href="/areas-de-atuacao/#societario">Conheça o serviço <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
-          </div>
-        </details>
-        <details class="area" name="areas" data-area="imobiliario">
-          <summary><span class="area__t">Imobiliário empresarial</span><span class="area__btn" aria-hidden="true"><svg class="icon"><use href="#i-plus"/></svg></span></summary>
-          <div class="area__body">
-            <img class="area__img-m" src="/assets/img/area-imobiliario-560.webp" width="560" height="695" alt="" loading="lazy">
-            <p>Aluguel do ponto comercial, reajustes e renovação do contrato, e análise de riscos na compra, venda ou expansão.</p>
-            <a class="link" href="/areas-de-atuacao/#imobiliario">Conheça o serviço <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
-          </div>
-        </details>
-        <details class="area" name="areas" data-area="marcas">
-          <summary><span class="area__t">Proteção de marca</span><span class="area__btn" aria-hidden="true"><svg class="icon"><use href="#i-plus"/></svg></span></summary>
-          <div class="area__body">
-            <img class="area__img-m" src="/assets/img/area-marcas-560.webp" width="560" height="695" alt="" loading="lazy">
-            <p>Registro no INPI, monitoramento e defesa da marca contra cópias, plágio e concorrência desleal.</p>
-            <a class="link" href="/areas-de-atuacao/#marcas">Conheça o serviço <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
-          </div>
-        </details>
-        <details class="area" name="areas" data-area="treinamentos">
-          <summary><span class="area__t">Treinamentos de liderança</span><span class="area__btn" aria-hidden="true"><svg class="icon"><use href="#i-plus"/></svg></span></summary>
-          <div class="area__body">
-            <img class="area__img-m" src="/assets/img/area-treinamentos-560.webp" width="560" height="695" alt="" loading="lazy">
-            <p>Encontros na empresa para gerentes, supervisores e RH sobre conduta, prevenção de riscos e medidas disciplinares.</p>
-            <a class="link" href="/areas-de-atuacao/#treinamentos">Conheça o serviço <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
-          </div>
-        </details>
-        <details class="area" name="areas" data-area="contencioso">
-          <summary><span class="area__t">Contencioso e arbitragem</span><span class="area__btn" aria-hidden="true"><svg class="icon"><use href="#i-plus"/></svg></span></summary>
-          <div class="area__body">
-            <img class="area__img-m" src="/assets/img/area-contencioso-560.webp" width="560" height="695" alt="" loading="lazy">
-            <p>Representação da empresa em disputas na Justiça ou em câmaras de mediação e arbitragem.</p>
-            <a class="link" href="/areas-de-atuacao/#contencioso">Conheça o serviço <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
-          </div>
-        </details>
-        <details class="area" name="areas" data-area="consumidor">
-          <summary><span class="area__t">Direito do consumidor</span><span class="area__btn" aria-hidden="true"><svg class="icon"><use href="#i-plus"/></svg></span></summary>
-          <div class="area__body">
-            <img class="area__img-m" src="/assets/img/industria-operacao-900.webp" width="900" height="672" alt="" loading="lazy">
-            <p>Adequação de produtos e das regras de atendimento, além da defesa da empresa em conflitos com clientes.</p>
-            <a class="link" href="/areas-de-atuacao/#consumidor">Conheça o serviço <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
-          </div>
-        </details>
-        <details class="area" name="areas" data-area="cobrancas">
-          <summary><span class="area__t">Cobranças</span><span class="area__btn" aria-hidden="true"><svg class="icon"><use href="#i-plus"/></svg></span></summary>
-          <div class="area__body">
-            <img class="area__img-m" src="/assets/img/area-cobrancas-560.webp" width="560" height="695" alt="" loading="lazy">
-            <p>Cobrança administrativa e judicial, e prevenção de atrasos de pagamento.</p>
-            <a class="link" href="/areas-de-atuacao/#cobrancas">Conheça o serviço <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
-          </div>
-        </details>
-        <details class="area" name="areas" data-area="recuperacao">
-          <summary><span class="area__t">Recuperação judicial e falências</span><span class="area__btn" aria-hidden="true"><svg class="icon"><use href="#i-plus"/></svg></span></summary>
-          <div class="area__body">
-            <img class="area__img-m" src="/assets/img/biblioteca-1000.webp" width="1000" height="558" alt="" loading="lazy">
-            <p>Renegociação de dívidas, recuperação judicial ou extrajudicial e processos de falência.</p>
-            <a class="link" href="/areas-de-atuacao/#recuperacao">Conheça o serviço <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
-          </div>
-        </details>
-        <details class="area" name="areas" data-area="canal">
-          <summary><span class="area__t">Canal de denúncias e proteção de dados</span><span class="area__btn" aria-hidden="true"><svg class="icon"><use href="#i-plus"/></svg></span></summary>
-          <div class="area__body">
-            <img class="area__img-m" src="/assets/img/area-canal-560.webp" width="560" height="695" alt="" loading="lazy">
-            <p>Canal para relatos internos, dentro da governança da empresa e da proteção de dados.</p>
-            <a class="link" href="/areas-de-atuacao/#canal-de-denuncias">Conheça o serviço <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
-          </div>
-        </details>
-      </div>
-      <div class="areas__visual" aria-hidden="true">
-        <img class="is-active" data-area-img="consultoria" src="/assets/img/area-assessoria-900.webp" width="900" height="1125" alt="" loading="lazy">
-        <img data-area-img="trabalhista" src="/assets/img/area-trabalhista-900.webp" width="900" height="1125" alt="" loading="lazy">
-        <img data-area-img="contratos" src="/assets/img/area-contratos-900.webp" width="900" height="1117" alt="" loading="lazy">
-        <img data-area-img="societario" src="/assets/img/area-societario-900.webp" width="900" height="1117" alt="" loading="lazy">
-        <img data-area-img="imobiliario" src="/assets/img/area-imobiliario-900.webp" width="900" height="1117" alt="" loading="lazy">
-        <img data-area-img="marcas" src="/assets/img/area-marcas-900.webp" width="900" height="1117" alt="" loading="lazy">
-        <img data-area-img="treinamentos" src="/assets/img/area-treinamentos-900.webp" width="900" height="1117" alt="" loading="lazy">
-        <img data-area-img="contencioso" src="/assets/img/area-contencioso-900.webp" width="900" height="1117" alt="" loading="lazy">
-        <img data-area-img="consumidor" src="/assets/img/industria-operacao-1600.webp" width="1600" height="1195" alt="" loading="lazy">
-        <img data-area-img="cobrancas" src="/assets/img/area-cobrancas-900.webp" width="900" height="1117" alt="" loading="lazy">
-        <img data-area-img="recuperacao" src="/assets/img/biblioteca-2000.webp" width="2000" height="1116" alt="" loading="lazy">
-        <img data-area-img="canal" src="/assets/img/area-canal-900.webp" width="900" height="1117" alt="" loading="lazy">
-      </div>
-    </div>
-    <div class="services__more" data-reveal>
-      <a class="btn btn--ghost" href="/areas-de-atuacao/">Ver todas as áreas <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
     </div>
   </div>
 </section>
@@ -328,7 +223,7 @@
     </div>
     <div class="lawyer__visual" data-lawyer>
       <div class="lawyer__panel" data-fade>
-        <img src="/assets/img/karolem-900.webp" srcset="/assets/img/karolem-560.webp 560w, /assets/img/karolem-900.webp 900w" sizes="(min-width: 64rem) 32vw, 90vw" width="900" height="1117" alt="Retrato da advogada Karolem Sousa Silva, de blazer azul-marinho, sorrindo." loading="lazy">
+        <img src="/assets/img/karolem-palestra-900.webp" srcset="/assets/img/karolem-palestra-560.webp 560w, /assets/img/karolem-palestra-900.webp 900w" sizes="(min-width: 64rem) 32vw, 90vw" width="900" height="1125" alt="A advogada Karolem Sousa Silva, de blazer cinza, com o microfone durante uma apresentação para empresários." loading="lazy">
       </div>
       <span class="lawyer__bar" aria-hidden="true" data-bar></span>
     </div>
@@ -408,12 +303,15 @@
 <section class="section section--light" id="faq" aria-labelledby="faq-h">
   <div class="wrap faq">
     <div class="faq__head">
-      <p class="eyebrow" data-reveal>Dúvidas</p>
-      <h2 class="h2" id="faq-h" data-split>Ficou com alguma dúvida?</h2>
-      <p class="lead" data-reveal>Confira as perguntas mais frequentes ou fale direto com a advogada.</p>
-      <a class="link" href="{{wa:Olá, tenho uma dúvida sobre os serviços da KS Advocacia Empresarial.}}" target="_blank" rel="noopener" data-reveal>Conversar no WhatsApp <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+      <div>
+        <p class="eyebrow" data-reveal>Dúvidas</p>
+        <h2 class="h2" id="faq-h" data-split>Ficou com alguma dúvida?</h2>
+        <p class="lead" data-reveal>Confira as perguntas mais frequentes ou fale direto com a advogada.</p>
+      </div>
+      <a class="btn btn--gold" href="{{wa:Olá, tenho uma dúvida sobre os serviços da KS Advocacia Empresarial.}}" target="_blank" rel="noopener" data-reveal><svg class="icon" aria-hidden="true"><use href="#i-whatsapp"/></svg>Conversar no WhatsApp</a>
     </div>
     <div class="faq__list">
+      <div class="faq__col">
       <details class="faq__item" data-faq>
         <summary><span class="faq__n">01.</span><span>Como funciona a consultoria preventiva para empresas?</span><svg class="icon" aria-hidden="true"><use href="#i-caret"/></svg></summary>
         <div class="faq__a"><p>A advogada acompanha o dia a dia da empresa: explica, revisa contratos, orienta a gestão de pessoas e aponta riscos antes que virem problema. Quando o processo já existe, também acompanha a defesa.</p></div>
@@ -426,6 +324,8 @@
         <summary><span class="faq__n">03.</span><span>O atendimento pode ser feito inteiramente on-line?</span><svg class="icon" aria-hidden="true"><use href="#i-caret"/></svg></summary>
         <div class="faq__a"><p>Sim. Reuniões, análise de documentos e assinaturas podem ser feitas a distância, o que permite atender empresas de todo o Paraná, do Maranhão e dos demais estados. Em Ponta Grossa, Curitiba e na região dos Campos Gerais também há atendimento presencial.</p></div>
       </details>
+      </div>
+      <div class="faq__col">
       <details class="faq__item" data-faq>
         <summary><span class="faq__n">04.</span><span>Qual a diferença entre a consultoria mensal e chamar um advogado só quando surge um processo?</span><svg class="icon" aria-hidden="true"><use href="#i-caret"/></svg></summary>
         <div class="faq__a"><p>Na atuação pontual, o advogado entra quando o problema já existe. Na consultoria jurídica mensal, a advogada acompanha a rotina, conhece a operação e participa das decisões antes do conflito. O formato e o que está incluído são definidos conforme a necessidade de cada empresa.</p></div>
@@ -438,21 +338,25 @@
         <summary><span class="faq__n">06.</span><span>Quais tipos de empresa a KS atende?</span><svg class="icon" aria-hidden="true"><use href="#i-caret"/></svg></summary>
         <div class="faq__a"><p>Empresas comerciais, indústrias, prestadores de serviços, clínicas e negócios em expansão, de pequeno, médio e grande porte.</p></div>
       </details>
+      </div>
     </div>
   </div>
 </section>
 
 <section class="final" aria-labelledby="final-h" data-hide-fab data-final>
   <div class="final__glow" aria-hidden="true"></div>
-  <div class="wrap">
-    <img class="final__mark" src="/assets/img/ks-monograma.webp" width="456" height="470" alt="" loading="lazy" data-reveal>
-    <p class="eyebrow" data-reveal>Vamos conversar</p>
-    <h2 class="h2" id="final-h" data-split>Mais segurança para as decisões da sua empresa</h2>
-    <div class="actions" data-reveal>
-      <a class="btn btn--gold" href="{{wa:Olá, vim pelo site da KS Advocacia Empresarial e gostaria de conversar.}}" target="_blank" rel="noopener">
-        <svg class="icon" aria-hidden="true"><use href="#i-whatsapp"/></svg>Conversar no WhatsApp
-      </a>
-      <a class="btn btn--ghost" href="/contato/">Outros canais</a>
+  <div class="wrap final__grid">
+    <div class="final__cta">
+      <img class="final__mark" src="/assets/img/ks-monograma.webp" width="456" height="470" alt="" loading="lazy" data-reveal>
+      <p class="eyebrow" data-reveal>Vamos conversar</p>
+      <h2 class="h2" id="final-h" data-split>Mais segurança para as decisões da sua empresa</h2>
+      <div class="actions" data-reveal>
+        <a class="btn btn--gold" href="{{wa:Olá, vim pelo site da KS Advocacia Empresarial e gostaria de conversar.}}" target="_blank" rel="noopener">
+          <svg class="icon" aria-hidden="true"><use href="#i-whatsapp"/></svg>Conversar no WhatsApp
+        </a>
+        <a class="btn btn--ghost" href="/contato/">Outros canais</a>
+      </div>
     </div>
+    {{partial:map}}
   </div>
 </section>
