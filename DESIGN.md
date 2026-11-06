@@ -86,7 +86,7 @@ Escala 4/8 (`--s-1`…`--s-9`), seção `clamp(5rem, 3.5rem + 6vw, 8.5rem)`, gut
 
 | Momento | Técnica |
 |---|---|
-| Entrada | sem animação de abertura no hero (decisão da cliente); imagens entram sempre em fade. O hero toca um vídeo mudo em loop (captação BNI) por cima da foto do martelo, só com movimento permitido e sem economia de dados |
+| Entrada | sem animação de abertura no hero (decisão da cliente); imagens entram sempre em fade. |
 | Saída do hero | foto aprofunda (parallax + escala) e o texto se afasta |
 | Antes e depois | cortina dentro do card ligada à rolagem (scrub), filete dourado e troca das listas |
 | Etapas | cards presos no topo, recuo e sombreamento na rolagem |
@@ -103,8 +103,7 @@ Fotos reais do banco de imagens Freepik (licença Premium da conta, sem exigênc
 
 | Arquivo | Foto no Freepik (ID) |
 |---|---|
-| `hero-martelo-*` | Judge gavel on a black background (386766013); fica por baixo do vídeo e como reserva |
-| `video/hero-*.mp4` | Captação no BNI (Drive "Karolem - KS Advocacia/Captações/BNI/Vídeos", clipes C7145, C7131 e C7133), 11 s, mudo. Desktop 1920×1080 com o clipe vertical sobre ele mesmo desfocado; celular 720×1280 |
+| `hero-martelo-*` | Judge gavel on a black background (386766013) |
 | `karolem-palestra-*` | Captação no BNI, DSC09380 (recorte 4:5). Retrato da seção "Quem é a advogada?" desde 05/11/2026 |
 | `antes-*` | View of messy office workspace with laptop (40166565) |
 | `depois-*` | Empty modern corporate high end office space (413435157) |

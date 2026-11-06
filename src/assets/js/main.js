@@ -82,16 +82,6 @@ $$('[data-map]').forEach((box) => {
   });
 });
 
-// Vídeo do hero: só com movimento permitido e sem economia de dados; a foto do martelo fica por baixo até ele tocar.
-const heroVideo = $('[data-hero-video]');
-if (heroVideo && root.classList.contains('motion') && !navigator.connection?.saveData) {
-  const mobile = matchMedia('(max-width: 47.99rem)').matches;
-  heroVideo.src = mobile ? heroVideo.dataset.srcMobile : heroVideo.dataset.srcDesktop;
-  heroVideo.addEventListener('playing', () => heroVideo.classList.add('is-playing'), { once: true });
-  // Toca só enquanto o hero está na tela.
-  new IntersectionObserver(([e]) => (e.isIntersecting ? heroVideo.play().catch(() => {}) : heroVideo.pause())).observe(heroVideo);
-}
-
 // Abas das áreas de atuação (padrão WAI-ARIA): clique, setas, Home/End e #id no endereço.
 const tabsEl = $('[data-tabs]');
 if (tabsEl) {
@@ -188,7 +178,7 @@ function initMotion() {
   if (hero) {
     const bg = $('[data-hero-bg]', hero);
     // Saída: a foto ganha profundidade e o texto se afasta enquanto a página rola.
-    gsap.to(bg.children, { yPercent: 14, scale: 1.08, ease: 'none', scrollTrigger: { trigger: hero, start: 'top top', end: 'bottom top', scrub: true } });
+    gsap.to($('picture', bg), { yPercent: 14, scale: 1.08, ease: 'none', scrollTrigger: { trigger: hero, start: 'top top', end: 'bottom top', scrub: true } });
     gsap.to($('[data-hero-content]', hero), { y: -90, opacity: 0, ease: 'none', scrollTrigger: { trigger: hero, start: 'top top', end: 'bottom 25%', scrub: true } });
   }
 

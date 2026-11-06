@@ -11,7 +11,7 @@ const DIST = path.join(__dirname, '..', 'dist');
 const SHOTS = process.argv[2];
 const PAGES = ['/', '/areas-de-atuacao/', '/contato/', '/privacidade/', '/termos/'];
 const WIDTHS = [320, 360, 375, 390, 430, 768, 1024, 1280, 1440];
-const TYPES = { '.html': 'text/html; charset=utf-8', '.css': 'text/css', '.js': 'text/javascript', '.webp': 'image/webp', '.png': 'image/png', '.jpg': 'image/jpeg', '.woff2': 'font/woff2', '.xml': 'application/xml', '.txt': 'text/plain', '.mp4': 'video/mp4' };
+const TYPES = { '.html': 'text/html; charset=utf-8', '.css': 'text/css', '.js': 'text/javascript', '.webp': 'image/webp', '.png': 'image/png', '.jpg': 'image/jpeg', '.woff2': 'font/woff2', '.xml': 'application/xml', '.txt': 'text/plain' };
 const failures = [];
 const fail = (msg) => { failures.push(msg); console.log('  FALHA', msg); };
 
