@@ -74,14 +74,13 @@ if (form) {
   });
 }
 
-// Áreas de atuação: <details name="areas"> já é exclusivo; aqui só troca a imagem ao lado.
-const areas = $('[data-areas]');
-if (areas) {
-  $$('details[data-area]', areas).forEach((d) => d.addEventListener('toggle', () => {
-    if (!d.open) return;
-    $$('[data-area-img]', areas).forEach((img) => img.classList.toggle('is-active', img.dataset.areaImg === d.dataset.area));
-  }));
-}
+// Mapa: o iframe do Google Maps só entra quando a pessoa pede (nada de terceiros carrega antes do clique).
+$$('[data-map]').forEach((box) => {
+  $('[data-map-load]', box)?.addEventListener('click', () => {
+    const frame = Object.assign(document.createElement('iframe'), { src: box.dataset.mapSrc, title: 'Mapa do escritório no Google Maps', loading: 'lazy', referrerPolicy: 'no-referrer-when-downgrade' });
+    box.replaceChildren(frame);
+  });
+});
 
 // Abas das áreas de atuação (padrão WAI-ARIA): clique, setas, Home/End e #id no endereço.
 const tabsEl = $('[data-tabs]');
@@ -125,26 +124,6 @@ if (tabsEl) {
   };
   fromHash();
   window.addEventListener('hashchange', fromHash);
-}
-
-// Consultoria no desktop: os cinco cards andam na horizontal, um de cada vez.
-const stackCarousel = $('[data-stack-carousel]');
-if (stackCarousel) {
-  const track = $('[data-stack-track]', stackCarousel);
-  const step = () => {
-    const card = track.firstElementChild;
-    const gap = parseFloat(getComputedStyle(track).columnGap) || parseFloat(getComputedStyle(track).gap) || 24;
-    return card.getBoundingClientRect().width + gap;
-  };
-  const go = (dir) => {
-    const max = track.scrollWidth - track.clientWidth;
-    let left = track.scrollLeft + dir * step();
-    if (left > max + 8) left = 0;
-    if (left < -8) left = max;
-    track.scrollTo({ left, behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
-  };
-  $('[data-stack-prev]', stackCarousel).addEventListener('click', () => go(-1));
-  $('[data-stack-next]', stackCarousel).addEventListener('click', () => go(1));
 }
 
 // Avaliações: rolagem nativa (swipe/teclado) + avanço automático que pausa com mouse, foco, fora da tela ou aba oculta.
@@ -240,9 +219,9 @@ function initMotion() {
     });
   });
 
-  // ---- Faixa de segmentos: loop contínuo que acelera e inverte com a rolagem ----
+  // ---- Faixa de serviços: no desktop, loop contínuo que acelera e inverte com a rolagem (no celular é lista fixa) ----
   const mq = $('[data-marquee]');
-  if (mq) {
+  if (mq) mm.add('(min-width: 48rem)', () => {
     const loop = gsap.to(mq, { xPercent: -50, duration: 38, ease: 'none', repeat: -1 });
     loop.totalTime(loop.duration() * 50); // permite tocar ao contrário sem chegar ao início
     ScrollTrigger.create({
@@ -254,7 +233,7 @@ function initMotion() {
         gsap.to(loop, { timeScale: dir * boost, duration: 0.25, overwrite: true, onComplete: () => gsap.to(loop, { timeScale: dir, duration: 1.2 }) });
       },
     });
-  }
+  });
 
   // ---- Imagens com recorte: abrem de baixo para cima; a foto interna faz parallax ----
   $$('[data-fade]').forEach((m) => gsap.from(m, { opacity: 0, scale: 1.03, duration: 1.4, ease: 'power2.out', scrollTrigger: once(m, 'top 85%') }));
@@ -277,13 +256,10 @@ function initMotion() {
       extra?.(els);
     },
   });
-  gsap.set('.area, .review, [data-faq]', { opacity: 0 });
-  cardBatch('.area', (els) => gsap.from(els.map((el) => $('.area__btn', el)), { scale: 0, rotate: -90, duration: 0.9, ease: 'back.out(1.8)', stagger: 0.06, delay: 0.2 }));
+  gsap.set('.svc, .review, [data-faq]', { opacity: 0 });
+  cardBatch('.svc');
   cardBatch('.review');
   cardBatch('[data-faq]');
-  // Painel de imagem das áreas entra em fade.
-  const visual = $('.areas__visual');
-  if (visual) gsap.from(visual, { opacity: 0, duration: 1.4, ease: 'power2.out', scrollTrigger: once(visual, 'top 85%') });
 
   // ---- Card de chamada: abre do centro para as bordas ----
   $$('[data-cta-card]').forEach((c) => {
@@ -317,7 +293,7 @@ function initMotion() {
 
   // Foco pelo teclado num bloco ainda não revelado: mostra na hora.
   document.addEventListener('focusin', (e) => {
-    const el = e.target.closest('[data-reveal], [data-hero], [data-ba-cta], .area, .review, [data-faq]');
+    const el = e.target.closest('[data-reveal], [data-hero], [data-ba-cta], .svc, .review, [data-faq]');
     if (el && getComputedStyle(el).opacity === '0') gsap.set(el, visible);
   });
 

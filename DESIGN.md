@@ -5,7 +5,7 @@ description: Experiência escura em azul quase preto (#0B1119) com seções off-
 colors:
   bg:       "#0B1119"   # base da página
   bg-2:     "#0F1722"   # seção alternada
-  light:    "#F3F3EF"   # seção clara (off-white), com tokens próprios
+  light:    "#FFFFFF"   # seção clara (branca desde 05/11/2026; o off-white bege foi achado pouco moderno), com tokens próprios
   glass:    "linear-gradient(150deg, rgba(255,255,255,.075), rgba(255,255,255,.025)) + borda rgba(255,255,255,.09) + blur 18px (>= 48rem)"
   gold:     "#D6AA59"   # acento (rampa do monograma: #C8933F → #D6AA59 → #E8C27C)
   gold-hi:  "#E8C27C"
@@ -29,8 +29,8 @@ Referência principal: a página da Brenda Prinsk (pasta REFERENCIAS), com hero 
 
 - Hero com o texto à direita, como na referência da Moirū.
 - Antes e depois com cortina na rolagem, como na referência da Hocta.
-- Etapas em cards empilhados, como na referência da Sidesc.
-- Áreas de atuação em cards que se expandem e trocam a imagem ao lado.
+- Etapas em cards empilhados no celular, como na referência da Sidesc; no desktop os cinco ficam à vista numa linha (retorno de 05/11/2026).
+- Áreas de atuação em cards, todas à vista (retorno de 05/11/2026: "é o que o escritório oferece, precisa de mais visibilidade").
 - Avaliações reais do Google em carrossel automático.
 
 Princípios:
@@ -72,18 +72,21 @@ Escala 4/8 (`--s-1`…`--s-9`), seção `clamp(5rem, 3.5rem + 6vw, 8.5rem)`, gut
 - **Botões**: dourado com gradiente e brilho que atravessa no hover; ghost com borda clara; quadrado para ação secundária de ícone. Altura mínima 52px.
 - **Card** (`.card`): `card` + borda `line` + raio 16px; `icon-box` dourado que preenche no hover.
 - **Antes e depois** (`.ba`): card com a foto num quadro 4:3 e as listas ao lado (embaixo no celular). A foto do "depois" cobre a do "antes" acompanhando a rolagem do card, sem fixar a tela; a lista troca no meio da cortina. Sem motion, o quadro mostra metade antes e metade depois e as duas listas aparecem.
-- **Cards empilhados** (`.stack`): `position: sticky` com deslocamento por índice; o card anterior recua (escala) e escurece (`--shade`) quando o próximo chega.
-- **Áreas** (`.areas`): `<details name="areas">` nativo (um aberto por vez); painel de imagem fixo à direita no desktop, imagem dentro do card no celular.
+- **Consultoria** (`.stack`): no celular, `position: sticky` com deslocamento por índice; o card anterior recua (escala) e escurece (`--shade`) quando o próximo chega. No desktop, grade com os cinco cards à vista (3 + 2 no tablet).
+- **Áreas** (`.svc-grid`): 12 cards com foto, título com iniciais maiúsculas (preposições em minúsculas) e resumo; cada card abre a aba correspondente em `/areas-de-atuacao/`. Celular: linha compacta com miniatura; desktop: 4 colunas.
+- **Faixa de serviços** (`.segments`): desktop com motion, loop; celular ou sem motion, lista alinhada à esquerda com o marcador em todos os itens.
+- **Mapa** (`src/partials/map.html`): fachada com "Ver o mapa aqui"; o iframe do Google Maps só entra depois do clique (nada de terceiros antes disso). Na chamada final da home e no contato.
+- **WhatsApp flutuante** (`.wa-fab`): em todas as larguras; some quando já há um CTA na tela.
 - **Avaliações** (`.reviews`): trilho com rolagem nativa e scroll-snap; avanço automático a cada 4,5s, pausa com hover, foco, fora da tela, aba oculta ou pelo botão de pausa; sem autoplay com movimento reduzido.
 - **Abas** (`.tabs`, página de áreas): lista de abas à esquerda no desktop e faixa fixa com rolagem lateral no celular; painel com foto da área, descrição, áreas do briefing, serviços em cards e CTA. Padrão WAI-ARIA (setas, Home/End), `#id` no endereço abre a aba, troca com fade suave. Sem JS, todos os painéis aparecem em sequência.
-- **FAQ**: `<details>` numerado com abertura animada por CSS.
+- **FAQ**: `<details>` numerado com abertura animada por CSS; perguntas em duas colunas no desktop e botão de WhatsApp no cabeçalho.
 - **Cabeçalho**: fixo, transparente no topo e com fundo após rolar; menu mobile em `<dialog>`.
 
 ## 6. Movimento (GSAP 3.15 + ScrollTrigger + SplitText + Lenis, todos locais)
 
 | Momento | Técnica |
 |---|---|
-| Entrada | sem animação de abertura no hero (decisão da cliente); imagens entram sempre em fade |
+| Entrada | sem animação de abertura no hero (decisão da cliente); imagens entram sempre em fade. |
 | Saída do hero | foto aprofunda (parallax + escala) e o texto se afasta |
 | Antes e depois | cortina dentro do card ligada à rolagem (scrub), filete dourado e troca das listas |
 | Etapas | cards presos no topo, recuo e sombreamento na rolagem |
@@ -101,6 +104,7 @@ Fotos reais do banco de imagens Freepik (licença Premium da conta, sem exigênc
 | Arquivo | Foto no Freepik (ID) |
 |---|---|
 | `hero-martelo-*` | Judge gavel on a black background (386766013) |
+| `karolem-palestra-*` | Captação no BNI, DSC09407 (tratada pela equipe e recortada em 4:5, escolha de 06/11/2026). Retrato da seção "Quem é a advogada?" desde 05/11/2026 |
 | `antes-*` | View of messy office workspace with laptop (40166565) |
 | `depois-*` | Empty modern corporate high end office space (413435157) |
 | `servico-contratos-*` | Female and male business partners signing contract (4013234) |

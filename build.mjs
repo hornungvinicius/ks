@@ -51,9 +51,11 @@ const layout = (await readFile(join(SRC, 'layout.html'), 'utf8')).replace('%ICON
 const pages = [];
 for (const file of (await readdir(join(SRC, 'pages'))).filter((f) => f.endsWith('.html'))) {
   const raw = await readFile(join(SRC, 'pages', file), 'utf8');
-  const [, json, body] = raw.match(/^---\s*([\s\S]*?)\s*---\s*([\s\S]*)$/) || [];
+  let [, json, body] = raw.match(/^---\s*([\s\S]*?)\s*---\s*([\s\S]*)$/) || [];
   if (!json) throw new Error(`${file}: bloco --- {json} --- ausente`);
   const meta = JSON.parse(json);
+  // Trechos repetidos entre páginas ficam em src/partials: {{partial:map}} inclui src/partials/map.html.
+  body = body.replace(/\{\{partial:([\w-]+)\}\}/g, (m, name) => readFileSync(join(SRC, 'partials', `${name}.html`), 'utf8').trim());
   const url = SITE_URL && SITE_URL + meta.path;
   const head = url
     ? `<link rel="canonical" href="${url}">\n  <meta property="og:url" content="${url}">\n  <meta property="og:image" content="${SITE_URL}/assets/img/og-ks.jpg">`
