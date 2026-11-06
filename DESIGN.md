@@ -104,7 +104,7 @@ Fotos reais do banco de imagens Freepik (licença Premium da conta, sem exigênc
 | Arquivo | Foto no Freepik (ID) |
 |---|---|
 | `hero-martelo-*` | Judge gavel on a black background (386766013) |
-| `karolem-palestra-*` | Captação no BNI, DSC09380 (recorte 4:5). Retrato da seção "Quem é a advogada?" desde 05/11/2026 |
+| `karolem-palestra-*` | Captação no BNI, DSC09407 (tratada pela equipe e recortada em 4:5, escolha de 06/11/2026). Retrato da seção "Quem é a advogada?" desde 05/11/2026 |
 | `antes-*` | View of messy office workspace with laptop (40166565) |
 | `depois-*` | Empty modern corporate high end office space (413435157) |
 | `servico-contratos-*` | Female and male business partners signing contract (4013234) |
