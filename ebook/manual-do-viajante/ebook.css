@@ -1,0 +1,186 @@
+/* Guia do Viajante · A5 (148 × 210 mm), 16 páginas. Conceito: passaporte + revista de viagem.
+   Capa e contracapa em azul de passaporte com dourado; miolo em papel de página de visto, com guilloché.
+   Cada capítulo tem uma cor de tinta (carimbo e números); os quadros têm cor fixa por função. */
+
+@font-face { font-family: "Red Hat Mono"; src: url("fonts/RedHatMono-Regular.ttf") format("truetype"); font-weight: 400; }
+
+:root {
+  --navy: #172A4D;      /* capa do passaporte */
+  --navy-2: #213862;
+  --gold: #C9A15A;      /* dourado da KS, como hot stamping */
+  --gold-lt: #E4CB97;
+  --paper: #F1F4F0;     /* página de visto: cinza-esverdeado frio */
+  --paper-2: #E6ECE7;
+  --text: #17202E;
+  --muted: #4C5767;
+  --rule: #C3CFC8;
+
+  /* tintas de carimbo, uma por capítulo */
+  --c1: #33449B;  --c2: #0E777D;  --c3: #84305E;  --c4: #B0560E;
+  --c5: #172A4D;  --c6: #4F6B24;  --c7: #5C3E98;  --c8: #2D5C7C;
+
+  /* quadros */
+  --atencao: #B2392D; --atencao-bg: #F7E3DE;
+  --faca: #2B774C;    --faca-bg: #DFEFE4;
+  --guarde: #2E5DA4;  --guarde-bg: #E0E8F5;
+  --direitos: #8A6A2B; --direitos-bg: #F2EAD6;
+
+  --f: "univers-next-pro", "Helvetica Neue", Arial, sans-serif;
+  --mono: "Red Hat Mono", ui-monospace, monospace;
+  --m: 13mm;            /* margem lateral */
+  --ink: var(--navy);
+}
+
+* { box-sizing: border-box; }
+html { background: #8E9895; }
+body { margin: 0; font: 400 8.6pt/1.42 var(--f); color: var(--text); -webkit-font-smoothing: antialiased; font-synthesis: none; }
+h1, h2, p, ol, ul, dl, dd, figure { margin: 0; }
+ol, ul { padding: 0; list-style: none; }
+img { display: block; max-width: 100%; }
+.ic { width: 1em; height: 1em; fill: currentColor; flex: none; }
+
+/* ---------- Livro na tela: páginas empilhadas; na impressão, uma por folha ---------- */
+.book { display: grid; justify-content: center; gap: 10mm; padding: 12mm 0; }
+.page { position: relative; width: 148mm; height: 210mm; overflow: hidden; background: var(--paper); box-shadow: 0 2mm 8mm rgb(0 0 0 / .25); padding: 0 var(--m); }
+@page { size: 148mm 210mm; margin: 0; }
+@media print {
+  html, body { background: none; }
+  .book { display: block; padding: 0; }
+  .page { box-shadow: none; break-after: page; }
+  .page:last-child { break-after: auto; }
+  * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+}
+
+/* ---------- Papel de visto ---------- */
+.guil { position: absolute; inset: 0 0 auto; height: 15mm; background: %GUIL_PAPER% center / 100% 100% no-repeat; opacity: .9; }
+.guil::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: .5mm; background: var(--ink); opacity: .85; }
+
+/* Rodapé: linha de leitura do passaporte + fólio */
+.mrz { position: absolute; left: var(--m); right: var(--m); bottom: 7mm; display: flex; justify-content: space-between; align-items: baseline; gap: 4mm; padding-top: 2mm; border-top: .25mm solid var(--rule); font: 400 6.4pt/1 var(--mono); letter-spacing: .06em; color: #7E8A86; white-space: nowrap; }
+.mrz__folio { font: 700 8pt/1 var(--f); letter-spacing: 0; color: var(--ink); }
+
+/* ---------- Abertura de capítulo ---------- */
+.ch-head { display: grid; grid-template-columns: 27mm 1fr; gap: 5mm; align-items: center; margin-top: 19mm; }
+.stamp { width: 27mm; height: 27mm; color: var(--ink); rotate: -9deg; mix-blend-mode: multiply; opacity: .92; }
+.stamp__arc { font: 600 8px/1 var(--f); fill: currentColor; }
+.stamp__n { font: 300 44px/1 var(--f); fill: currentColor; }
+.ch-title { font: 700 21pt/1.02 var(--f); letter-spacing: -.012em; color: var(--text); text-wrap: balance; }
+.ch-title span { display: block; font-weight: 300; }
+.ch-lede { margin-top: 2mm; font: italic 300 10pt/1.35 var(--f); color: var(--muted); }
+
+.ch-photo { margin: 5mm calc(var(--m) * -1) 0; height: 34mm; overflow: hidden; background: var(--paper-2); }
+.ch-photo img { width: 100%; height: 100%; object-fit: cover; }
+.ch-photo--short { height: 27mm; }
+
+/* Temas numerados (a numeração é a do sumário) */
+.topics { display: grid; gap: 2mm; margin-top: 5mm; }
+.topics li { display: grid; grid-template-columns: 8mm 1fr; gap: 2mm; align-items: baseline; padding-bottom: 2mm; border-bottom: .25mm solid var(--rule); }
+.topics li:last-child { border-bottom: 0; padding-bottom: 0; }
+.topics__n { font: 700 8.4pt/1 var(--f); color: var(--ink); font-variant-numeric: tabular-nums; }
+.topics h2 { font: 700 9.4pt/1.25 var(--f); }
+.topics p { margin-top: .6mm; color: var(--muted); }
+.topics--two { grid-template-columns: 1fr 1fr; column-gap: 6mm; row-gap: 2mm; }
+.topics--two li { grid-template-columns: 7.5mm 1fr; }
+.topics--two li:nth-last-child(2):nth-child(odd) { border-bottom: 0; padding-bottom: 0; }
+.page--dense .topics h2 { font-size: 8.8pt; }
+.page--dense .topics p { font-size: 8pt; line-height: 1.36; }
+
+/* ---------- Quadros ---------- */
+.cards { display: grid; gap: 2.6mm; margin-top: 4mm; }
+.card { display: grid; grid-template-columns: 6mm 1fr; gap: 2.4mm; align-items: start; padding: 3mm 3.6mm; border-radius: 2.2mm; background: var(--c-bg); border-left: 1.2mm solid var(--c); }
+.card .ic { width: 5.2mm; height: 5.2mm; margin-top: .2mm; color: var(--c); }
+.card__label { font: 700 8.8pt/1.2 var(--f); color: var(--c); margin-bottom: .6mm; }
+.card p:not(.card__label) { color: var(--text); }
+.card--atencao { --c: var(--atencao); --c-bg: var(--atencao-bg); }
+.card--faca { --c: var(--faca); --c-bg: var(--faca-bg); }
+.card--guarde { --c: var(--guarde); --c-bg: var(--guarde-bg); }
+.card--direitos { --c: var(--direitos); --c-bg: var(--direitos-bg); }
+.page--chapter .cards:has(.card + .card) { grid-template-columns: 1fr 1fr; }
+
+/* ---------- Páginas de texto corrido ---------- */
+.plain__title { margin-top: 24mm; font: 700 21pt/1.05 var(--f); letter-spacing: -.012em; text-wrap: balance; }
+.plain__lede { margin-top: 3mm; max-width: 98mm; font: italic 300 10pt/1.4 var(--f); color: var(--muted); }
+.steps__kicker { margin-top: 22mm; font: 700 8.4pt/1.2 var(--f); color: var(--ink); }
+.steps__kicker + .plain__title { margin-top: 2mm; }
+
+/* Boas-vindas */
+.intro__quote { margin-top: 28mm; font: 300 25pt/1.08 var(--f); letter-spacing: -.015em; color: var(--navy); text-wrap: balance; max-width: 112mm; }
+.intro__body { display: grid; gap: 2.6mm; margin-top: 9mm; max-width: 104mm; font-size: 9.2pt; line-height: 1.5; }
+.intro__sign { margin-top: 8mm; font: italic 600 13pt/1 var(--f); color: var(--navy); }
+.intro__credits { position: absolute; left: var(--m); bottom: 18mm; font-size: 7.8pt; color: var(--muted); }
+
+/* Sumário */
+.toc { margin-top: 9mm; border-top: .3mm solid var(--text); }
+.toc li { display: grid; grid-template-columns: 12mm 1fr auto; align-items: baseline; gap: 3mm; padding: 3.6mm 0; border-bottom: .25mm solid var(--rule); }
+.toc__n { font: 300 20pt/1 var(--f); color: var(--ink); }
+.toc__t { font: 600 11pt/1.2 var(--f); }
+.toc__p { font: 400 9pt/1 var(--f); color: var(--muted); font-variant-numeric: tabular-nums; }
+
+/* Como usar */
+.howto { display: grid; gap: 3mm; margin-top: 9mm; }
+.howto .card { padding: 4mm; }
+.howto__note { margin-top: 7mm; max-width: 104mm; color: var(--muted); }
+
+/* Passo a passo (é uma sequência de verdade, por isso numerada) */
+.steps { counter-reset: s; display: grid; gap: 0; margin-top: 7mm; }
+.steps li { counter-increment: s; display: grid; grid-template-columns: 11mm 1fr; align-items: center; min-height: 11mm; border-bottom: .25mm solid var(--rule); font: 600 10.4pt/1.25 var(--f); }
+.steps li::before { content: counter(s); display: grid; place-items: center; width: 7.4mm; height: 7.4mm; border-radius: 50%; background: var(--ink); color: #FFF; font: 700 9pt/1 var(--f); }
+.page--steps .cards { grid-template-columns: 1fr 1fr; margin-top: 8mm; }
+
+/* Direitos */
+.page--rights .topics { margin-top: 9mm; }
+.lawyer { display: grid; grid-template-columns: 14mm 1fr; gap: 4mm; align-items: center; margin-top: 6mm; padding: 4.4mm; border-radius: 2.2mm; background: var(--navy); color: #E9EDF3; }
+.lawyer__mark { width: 14mm; }
+.lawyer__name { font: 700 9.4pt/1.2 var(--f); color: var(--gold-lt); margin-bottom: 1mm; }
+.lawyer__contact { display: flex; align-items: center; gap: 1.6mm; margin-top: 1.4mm; font-weight: 600; }
+.lawyer__contact .ic { color: var(--gold-lt); }
+
+/* Checklist */
+.checks { display: grid; gap: 5mm; margin-top: 8mm; }
+.page--checklist-cont .checks { margin-top: 6mm; }
+.check h2 { display: flex; gap: 2mm; align-items: baseline; font: 700 10.4pt/1.2 var(--f); padding-bottom: 1.8mm; border-bottom: .3mm solid var(--text); }
+.check ul { display: grid; }
+.check li { display: flex; align-items: center; gap: 3mm; min-height: 7.4mm; border-bottom: .25mm solid var(--rule); font-size: 9pt; }
+.box { width: 3.6mm; height: 3.6mm; border: .35mm solid var(--ink); border-radius: .6mm; flex: none; background: #FFF; }
+.check__foot { position: absolute; left: var(--m); right: var(--m); bottom: 17mm; color: var(--muted); font-style: italic; }
+
+/* Contatos */
+.contacts { display: grid; grid-template-columns: 1fr 1fr; gap: 0 6mm; margin-top: 7mm; }
+.contact { padding: 2.6mm 0 2.8mm; border-bottom: .25mm solid var(--rule); min-height: 15.5mm; }
+.contact dt { display: flex; gap: 2mm; align-items: baseline; font: 700 9pt/1.2 var(--f); }
+.contact dd { margin-top: 1mm; padding-left: 8mm; color: var(--muted); font-size: 8.2pt; line-height: 1.36; overflow-wrap: anywhere; }
+.contact:last-child { grid-column: 1 / -1; }
+.contact:last-child dd { color: var(--text); }
+.fill { display: block; height: 5mm; border-bottom: .25mm dashed #9AA6A2; }
+.todo { color: var(--atencao); font-style: italic; }
+
+/* Anotações */
+.notes__fields { display: grid; grid-template-columns: 1fr 1fr; gap: 3mm 6mm; margin-top: 8mm; }
+.notes__fields dt { font: 700 8.4pt/1.2 var(--f); color: var(--navy); }
+.notes__fields .fill { height: 7mm; border-bottom-style: solid; }
+.notes__lines { display: grid; margin-top: 7mm; }
+.notes__lines span { height: 7.6mm; border-bottom: .25mm solid var(--rule); }
+
+/* ---------- Capa: passaporte ---------- */
+.page--cover, .page--back { background: var(--navy) %GUIL_NAVY% center 92% / 100% 46mm no-repeat; color: var(--gold); }
+.cover__frame { position: absolute; inset: 6mm; border: .4mm solid rgb(201 161 90 / .55); border-radius: 3mm; pointer-events: none; }
+/* Janela do avião: retângulo de cantos muito arredondados, com aro dourado */
+.cover__window { position: absolute; left: 50%; top: 17mm; width: 76mm; height: 104mm; translate: -50% 0; border-radius: 38mm / 32mm; overflow: hidden; border: 1.4mm solid var(--gold); box-shadow: 0 0 0 1.6mm var(--navy), 0 0 0 1.9mm rgb(201 161 90 / .6), inset 0 0 6mm rgb(0 0 0 / .45); background: var(--navy-2); }
+.cover__window img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 60%; }
+.cover__text { position: absolute; left: 0; right: 0; top: 131mm; text-align: center; }
+.cover__title { font: 300 31pt/.98 var(--f); letter-spacing: -.01em; color: var(--gold); }
+.cover__lede { margin-top: 3.4mm; font: italic 300 10.6pt/1.3 var(--f); color: var(--gold-lt); }
+
+.logos { position: absolute; left: 14mm; right: 14mm; bottom: 13mm; display: flex; align-items: center; justify-content: center; gap: 6mm; }
+.logos__ks { height: 17mm; width: auto; }
+.logos__rule { width: .3mm; height: 10mm; background: rgb(201 161 90 / .6); }
+.logos__agency { font: 600 9.4pt/1.15 var(--f); color: var(--gold); }
+.logos__agency span { display: block; font: 300 7.6pt/1.3 var(--f); color: var(--gold-lt); }
+
+/* ---------- Contracapa ---------- */
+.back__photo { position: absolute; inset: 0 0 auto; height: 118mm; }
+.back__photo img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 70%; }
+.back__photo::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 45%, var(--navy) 100%); }
+.back__quote { position: absolute; left: var(--m); right: var(--m); top: 124mm; font: 300 19pt/1.12 var(--f); color: var(--gold); text-wrap: balance; }
+.back__credits { position: absolute; left: var(--m); top: 156mm; font-size: 8pt; color: var(--gold-lt); }
+.logos--back { justify-content: flex-start; left: var(--m); }
