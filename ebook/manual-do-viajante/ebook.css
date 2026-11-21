@@ -1,47 +1,36 @@
-/* Guia do Viajante · A5 (148 × 210 mm), 16 páginas. Conceito: passaporte + revista de viagem.
-   Capa e contracapa em azul de passaporte com dourado; miolo em papel de página de visto, com guilloché.
-   Cada capítulo tem uma cor de tinta (carimbo e números); os quadros têm cor fixa por função. */
+/* Guia do Viajante · A5 (148 × 210 mm), 16 páginas.
+   Mesma linguagem da landing page da KS (DESIGN.md na raiz): azul quase preto alternado com branco,
+   dourado só em eyebrows, números, ícones e palavra de destaque; cards com borda e caixa de ícone dourada;
+   fotos com máscara escura; Univers Next Pro nos títulos e Montserrat no texto. */
 
-@font-face { font-family: "Red Hat Mono"; src: url("fonts/RedHatMono-Regular.ttf") format("truetype"); font-weight: 400; }
+@font-face { font-family: "Montserrat"; src: url("fonts/montserrat.woff2") format("woff2"); font-weight: 100 900; font-style: normal; }
 
 :root {
-  --navy: #172A4D;      /* capa do passaporte */
-  --navy-2: #213862;
-  --gold: #C9A15A;      /* dourado da KS, como hot stamping */
-  --gold-lt: #E4CB97;
-  --paper: #F1F4F0;     /* página de visto: cinza-esverdeado frio */
-  --paper-2: #E6ECE7;
-  --text: #17202E;
-  --muted: #4C5767;
-  --rule: #C3CFC8;
+  --bg: #0B1119; --bg-2: #0F1722; --line-d: #1F2B3B;
+  --gold: #D6AA59; --gold-hi: #E8C27C; --gold-lo: #C8933F;
+  --text-d: #EEF2F7; --muted-d: #A3AFBF; --lede-d: #D3DBE6;
+  /* páginas claras (como as seções brancas do site) */
+  --paper: #FFFFFF; --card: #F7F8FA; --text: #0B1119; --muted: #424B59; --line: rgb(11 17 25 / .1);
+  --gold-ink: #8A5E22;  /* dourado legível sobre branco */
 
-  /* tintas de carimbo, uma por capítulo */
-  --c1: #33449B;  --c2: #0E777D;  --c3: #84305E;  --c4: #B0560E;
-  --c5: #172A4D;  --c6: #4F6B24;  --c7: #5C3E98;  --c8: #2D5C7C;
-
-  /* quadros */
-  --atencao: #B2392D; --atencao-bg: #F7E3DE;
-  --faca: #2B774C;    --faca-bg: #DFEFE4;
-  --guarde: #2E5DA4;  --guarde-bg: #E0E8F5;
-  --direitos: #8A6A2B; --direitos-bg: #F2EAD6;
-
-  --f: "univers-next-pro", "Helvetica Neue", Arial, sans-serif;
-  --mono: "Red Hat Mono", ui-monospace, monospace;
-  --m: 13mm;            /* margem lateral */
-  --ink: var(--navy);
+  --f-display: "univers-next-pro", "Helvetica Neue", Arial, sans-serif;
+  --f-sans: "Montserrat", "Helvetica Neue", Arial, sans-serif;
+  --m: 12mm;
+  --r: 3.2mm; --r-sm: 2mm;
 }
 
 * { box-sizing: border-box; }
-html { background: #8E9895; }
-body { margin: 0; font: 400 8.6pt/1.42 var(--f); color: var(--text); -webkit-font-smoothing: antialiased; font-synthesis: none; }
+html { background: #5B6470; }
+body { margin: 0; font: 400 7.9pt/1.55 var(--f-sans); color: var(--text); -webkit-font-smoothing: antialiased; font-synthesis: none; }
 h1, h2, p, ol, ul, dl, dd, figure { margin: 0; }
 ol, ul { padding: 0; list-style: none; }
 img { display: block; max-width: 100%; }
 .ic { width: 1em; height: 1em; fill: currentColor; flex: none; }
+em { font-style: normal; }
 
-/* ---------- Livro na tela: páginas empilhadas; na impressão, uma por folha ---------- */
+/* ---------- Livro na tela; na impressão, uma página por folha ---------- */
 .book { display: grid; justify-content: center; gap: 10mm; padding: 12mm 0; }
-.page { position: relative; width: 148mm; height: 210mm; overflow: hidden; background: var(--paper); box-shadow: 0 2mm 8mm rgb(0 0 0 / .25); padding: 0 var(--m); }
+.page { position: relative; width: 148mm; height: 210mm; overflow: hidden; background: var(--paper); box-shadow: 0 2mm 8mm rgb(0 0 0 / .3); }
 @page { size: 148mm 210mm; margin: 0; }
 @media print {
   html, body { background: none; }
@@ -51,136 +40,158 @@ img { display: block; max-width: 100%; }
   * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
 }
 
-/* ---------- Papel de visto ---------- */
-.guil { position: absolute; inset: 0 0 auto; height: 15mm; background: %GUIL_PAPER% center / 100% 100% no-repeat; opacity: .9; }
-.guil::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: .5mm; background: var(--ink); opacity: .85; }
+/* ---------- Tipografia da marca ---------- */
+.eyebrow { display: flex; align-items: center; gap: 2.6mm; font: 600 6.2pt/1.4 var(--f-sans); letter-spacing: .22em; text-transform: uppercase; color: var(--gold-ink); }
+.eyebrow::before { content: ""; width: 6.5mm; height: .25mm; background: currentColor; flex: none; }
+.eyebrow--center { justify-content: center; }
+.eyebrow--center::after { content: ""; width: 6.5mm; height: .25mm; background: currentColor; flex: none; }
+.h2 { margin-top: 3mm; font: 500 19pt/1.14 var(--f-display); color: var(--text); text-wrap: balance; }
+.h2 em { color: var(--gold-ink); }
+.lead { margin-top: 3.5mm; max-width: 104mm; font-size: 8.4pt; line-height: 1.6; color: var(--muted); }
 
-/* Rodapé: linha de leitura do passaporte + fólio */
-.mrz { position: absolute; left: var(--m); right: var(--m); bottom: 7mm; display: flex; justify-content: space-between; align-items: baseline; gap: 4mm; padding-top: 2mm; border-top: .25mm solid var(--rule); font: 400 6.4pt/1 var(--mono); letter-spacing: .06em; color: #7E8A86; white-space: nowrap; }
-.mrz__folio { font: 700 8pt/1 var(--f); letter-spacing: 0; color: var(--ink); }
+.page--dark { background: var(--bg); color: var(--text-d); }
+.page--dark .eyebrow { color: var(--gold); }
+.page--dark .h2 { color: var(--text-d); }
+.page--dark .h2 em { color: var(--gold); }
 
-/* ---------- Abertura de capítulo ---------- */
-.ch-head { display: grid; grid-template-columns: 27mm 1fr; gap: 5mm; align-items: center; margin-top: 19mm; }
-.stamp { width: 27mm; height: 27mm; color: var(--ink); rotate: -9deg; mix-blend-mode: multiply; opacity: .92; }
-.stamp__arc { font: 600 8px/1 var(--f); fill: currentColor; }
-.stamp__n { font: 300 44px/1 var(--f); fill: currentColor; }
-.ch-title { font: 700 21pt/1.02 var(--f); letter-spacing: -.012em; color: var(--text); text-wrap: balance; }
-.ch-title span { display: block; font-weight: 300; }
-.ch-lede { margin-top: 2mm; font: italic 300 10pt/1.35 var(--f); color: var(--muted); }
+/* Rodapé discreto */
+.foot { position: absolute; left: var(--m); right: var(--m); bottom: 7mm; display: flex; justify-content: space-between; align-items: center; padding-top: 2.4mm; border-top: .25mm solid var(--line); font: 600 5.8pt/1 var(--f-sans); letter-spacing: .22em; text-transform: uppercase; color: #8A93A0; }
+.foot__n { font: 500 8pt/1 var(--f-display); letter-spacing: 0; color: var(--gold-ink); }
+.page--dark .foot { border-color: var(--line-d); color: #6F7C8E; }
+.page--dark .foot__n { color: var(--gold); }
 
-.ch-photo { margin: 5mm calc(var(--m) * -1) 0; height: 34mm; overflow: hidden; background: var(--paper-2); }
-.ch-photo img { width: 100%; height: 100%; object-fit: cover; }
-.ch-photo--short { height: 27mm; }
+/* ---------- Corpo das páginas claras ---------- */
+.body { padding: 6mm var(--m) 0; }
+.body--top { padding-top: 16mm; }
 
-/* Temas numerados (a numeração é a do sumário) */
-.topics { display: grid; gap: 2mm; margin-top: 5mm; }
-.topics li { display: grid; grid-template-columns: 8mm 1fr; gap: 2mm; align-items: baseline; padding-bottom: 2mm; border-bottom: .25mm solid var(--rule); }
-.topics li:last-child { border-bottom: 0; padding-bottom: 0; }
-.topics__n { font: 700 8.4pt/1 var(--f); color: var(--ink); font-variant-numeric: tabular-nums; }
-.topics h2 { font: 700 9.4pt/1.25 var(--f); }
+/* Faixa escura de capítulo: foto + máscara, título branco, eyebrow dourado */
+.band { position: relative; isolation: isolate; height: 66mm; display: flex; align-items: flex-end; padding: 0 var(--m) 7mm; background: var(--bg); color: var(--text-d); }
+.band--short { height: 50mm; }
+.band__img { position: absolute; inset: 0; z-index: -2; width: 100%; height: 100%; object-fit: cover; }
+.band::before { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(180deg, rgb(11 17 25 / .35) 0%, rgb(11 17 25 / .5) 40%, rgb(11 17 25 / .92) 100%); }
+.band--plain::before { background: radial-gradient(60% 90% at 85% 10%, rgb(214 170 89 / .16), transparent 70%), radial-gradient(50% 80% at 10% 100%, rgb(62 94 140 / .22), transparent 70%); }
+.band__content { display: grid; gap: 2.2mm; }
+.band .eyebrow { color: var(--gold); }
+.band__title { font: 500 21pt/1.08 var(--f-display); color: var(--text-d); text-wrap: balance; }
+.band__title span { color: var(--gold); }
+.band__lede { font-size: 8.4pt; line-height: 1.5; color: var(--lede-d); max-width: 100mm; }
+
+/* Temas numerados (numeração do sumário), como as perguntas numeradas do site */
+.topics { border-top: .25mm solid var(--line); }
+.topics li { display: grid; grid-template-columns: 8mm 1fr; gap: 2mm; align-items: baseline; padding: 2.5mm 0; border-bottom: .25mm solid var(--line); }
+.topics__n { font: 500 8.6pt/1 var(--f-display); color: var(--gold-ink); font-variant-numeric: tabular-nums; }
+.topics h2 { font: 500 9.6pt/1.3 var(--f-display); color: var(--text); }
 .topics p { margin-top: .6mm; color: var(--muted); }
-.topics--two { grid-template-columns: 1fr 1fr; column-gap: 6mm; row-gap: 2mm; }
+.topics--two { display: grid; grid-template-columns: 1fr 1fr; column-gap: 6mm; border-top: 0; }
 .topics--two li { grid-template-columns: 7.5mm 1fr; }
-.topics--two li:nth-last-child(2):nth-child(odd) { border-bottom: 0; padding-bottom: 0; }
-.page--dense .topics h2 { font-size: 8.8pt; }
-.page--dense .topics p { font-size: 8pt; line-height: 1.36; }
+.topics--two li:nth-child(-n+2) { border-top: .25mm solid var(--line); }
+.page--dense .topics li { padding: 2mm 0; }
+.page--dense .topics h2 { font-size: 9pt; }
+.page--dense .topics p { font-size: 7.2pt; line-height: 1.45; }
 
-/* ---------- Quadros ---------- */
-.cards { display: grid; gap: 2.6mm; margin-top: 4mm; }
-.card { display: grid; grid-template-columns: 6mm 1fr; gap: 2.4mm; align-items: start; padding: 3mm 3.6mm; border-radius: 2.2mm; background: var(--c-bg); border-left: 1.2mm solid var(--c); }
-.card .ic { width: 5.2mm; height: 5.2mm; margin-top: .2mm; color: var(--c); }
-.card__label { font: 700 8.8pt/1.2 var(--f); color: var(--c); margin-bottom: .6mm; }
-.card p:not(.card__label) { color: var(--text); }
-.card--atencao { --c: var(--atencao); --c-bg: var(--atencao-bg); }
-.card--faca { --c: var(--faca); --c-bg: var(--faca-bg); }
-.card--guarde { --c: var(--guarde); --c-bg: var(--guarde-bg); }
-.card--direitos { --c: var(--direitos); --c-bg: var(--direitos-bg); }
-.page--chapter .cards:has(.card + .card) { grid-template-columns: 1fr 1fr; }
-
-/* ---------- Páginas de texto corrido ---------- */
-.plain__title { margin-top: 24mm; font: 700 21pt/1.05 var(--f); letter-spacing: -.012em; text-wrap: balance; }
-.plain__lede { margin-top: 3mm; max-width: 98mm; font: italic 300 10pt/1.4 var(--f); color: var(--muted); }
-.steps__kicker { margin-top: 22mm; font: 700 8.4pt/1.2 var(--f); color: var(--ink); }
-.steps__kicker + .plain__title { margin-top: 2mm; }
-
-/* Boas-vindas */
-.intro__quote { margin-top: 28mm; font: 300 25pt/1.08 var(--f); letter-spacing: -.015em; color: var(--navy); text-wrap: balance; max-width: 112mm; }
-.intro__body { display: grid; gap: 2.6mm; margin-top: 9mm; max-width: 104mm; font-size: 9.2pt; line-height: 1.5; }
-.intro__sign { margin-top: 8mm; font: italic 600 13pt/1 var(--f); color: var(--navy); }
-.intro__credits { position: absolute; left: var(--m); bottom: 18mm; font-size: 7.8pt; color: var(--muted); }
-
-/* Sumário */
-.toc { margin-top: 9mm; border-top: .3mm solid var(--text); }
-.toc li { display: grid; grid-template-columns: 12mm 1fr auto; align-items: baseline; gap: 3mm; padding: 3.6mm 0; border-bottom: .25mm solid var(--rule); }
-.toc__n { font: 300 20pt/1 var(--f); color: var(--ink); }
-.toc__t { font: 600 11pt/1.2 var(--f); }
-.toc__p { font: 400 9pt/1 var(--f); color: var(--muted); font-variant-numeric: tabular-nums; }
+/* ---------- Cards do site: borda, raio, caixa de ícone dourada ---------- */
+.cards { display: grid; gap: 2.6mm; margin-top: 4.5mm; }
+.cards--two { grid-template-columns: 1fr 1fr; }
+.card { display: grid; grid-template-columns: 8.5mm 1fr; gap: 3mm; align-items: start; padding: 3.4mm; border-radius: var(--r); background: var(--card); border: .25mm solid rgb(11 17 25 / .09); }
+.icon-box { display: grid; place-items: center; width: 8.5mm; height: 8.5mm; border-radius: var(--r-sm); border: .25mm solid rgb(214 170 89 / .45); background: rgb(214 170 89 / .08); color: var(--gold-ink); font-size: 4.4mm; }
+.card__label { font: 500 9.2pt/1.25 var(--f-display); color: var(--text); margin-bottom: .6mm; }
+.card p:not(.card__label) { color: var(--muted); }
+/* Atenção: o card escuro, como o card de chamada do site */
+.card--atencao { background: radial-gradient(120% 160% at 0% 0%, rgb(214 170 89 / .14) 0%, transparent 55%), var(--bg); border-color: rgb(214 170 89 / .35); }
+.card--atencao .card__label { color: var(--text-d); }
+.card--atencao p:not(.card__label) { color: var(--muted-d); }
+.card--atencao .icon-box { color: var(--gold); background: rgb(214 170 89 / .1); }
 
 /* Como usar */
-.howto { display: grid; gap: 3mm; margin-top: 9mm; }
+.howto { display: grid; gap: 3mm; margin-top: 8mm; }
 .howto .card { padding: 4mm; }
-.howto__note { margin-top: 7mm; max-width: 104mm; color: var(--muted); }
 
-/* Passo a passo (é uma sequência de verdade, por isso numerada) */
-.steps { counter-reset: s; display: grid; gap: 0; margin-top: 7mm; }
-.steps li { counter-increment: s; display: grid; grid-template-columns: 11mm 1fr; align-items: center; min-height: 11mm; border-bottom: .25mm solid var(--rule); font: 600 10.4pt/1.25 var(--f); }
-.steps li::before { content: counter(s); display: grid; place-items: center; width: 7.4mm; height: 7.4mm; border-radius: 50%; background: var(--ink); color: #FFF; font: 700 9pt/1 var(--f); }
-.page--steps .cards { grid-template-columns: 1fr 1fr; margin-top: 8mm; }
+/* Sumário: lista numerada como o FAQ do site */
+.toc { margin-top: 8mm; border-top: .25mm solid var(--line); }
+.toc li { display: grid; grid-template-columns: 10mm 1fr auto; align-items: baseline; gap: 2mm; padding: 4.1mm 0; border-bottom: .25mm solid var(--line); }
+.toc__n { font: 500 10.6pt/1 var(--f-display); color: var(--gold-ink); }
+.toc__t { font: 500 11pt/1.25 var(--f-display); color: var(--text); }
+.toc__p { font: 600 7pt/1 var(--f-sans); letter-spacing: .08em; color: var(--muted); font-variant-numeric: tabular-nums; }
 
-/* Direitos */
-.page--rights .topics { margin-top: 9mm; }
-.lawyer { display: grid; grid-template-columns: 14mm 1fr; gap: 4mm; align-items: center; margin-top: 6mm; padding: 4.4mm; border-radius: 2.2mm; background: var(--navy); color: #E9EDF3; }
-.lawyer__mark { width: 14mm; }
-.lawyer__name { font: 700 9.4pt/1.2 var(--f); color: var(--gold-lt); margin-bottom: 1mm; }
-.lawyer__contact { display: flex; align-items: center; gap: 1.6mm; margin-top: 1.4mm; font-weight: 600; }
-.lawyer__contact .ic { color: var(--gold-lt); }
+/* Passo a passo: círculos dourados como os botões das áreas no site */
+.steps { counter-reset: s; margin-top: 6mm; border-top: .25mm solid var(--line); }
+.steps li { counter-increment: s; display: grid; grid-template-columns: 10mm 1fr; align-items: center; min-height: 11mm; border-bottom: .25mm solid var(--line); font: 500 9.8pt/1.3 var(--f-display); }
+.steps li::before { content: counter(s); display: grid; place-items: center; width: 6.6mm; height: 6.6mm; border-radius: 50%; background: linear-gradient(135deg, var(--gold-hi), var(--gold-lo)); color: var(--bg); font: 600 8pt/1 var(--f-display); }
+.page--steps .cards { margin-top: 2.6mm; }
+.page--steps .steps + .cards { margin-top: 6mm; }
+
+/* Direitos: card de chamada escuro com o monograma */
+.page--rights .cards { margin-top: 5mm; }
+.cta-card { display: grid; grid-template-columns: 15mm 1fr; gap: 4mm; align-items: center; margin-top: 4mm; padding: 5mm; border-radius: var(--r); background: radial-gradient(120% 160% at 0% 0%, rgb(214 170 89 / .14) 0%, transparent 55%), var(--bg); border: .25mm solid rgb(214 170 89 / .35); color: var(--text-d); }
+.cta-card__mark { width: 15mm; padding: 2mm; border: .25mm solid rgb(214 170 89 / .35); border-radius: var(--r-sm); background: var(--bg); }
+.cta-card .eyebrow { color: var(--gold); }
+.cta-card__title { margin-top: 1.6mm; font: 500 11.4pt/1.25 var(--f-display); color: var(--text-d); }
+.cta-card__who { margin-top: 1.6mm; color: var(--muted-d); }
+.cta-card__contact { display: flex; align-items: center; gap: 1.6mm; margin-top: 1.4mm; font-weight: 600; color: var(--text-d); }
+.cta-card__contact .ic { color: var(--gold); width: 3.4mm; height: 3.4mm; }
 
 /* Checklist */
-.checks { display: grid; gap: 5mm; margin-top: 8mm; }
-.page--checklist-cont .checks { margin-top: 6mm; }
-.check h2 { display: flex; gap: 2mm; align-items: baseline; font: 700 10.4pt/1.2 var(--f); padding-bottom: 1.8mm; border-bottom: .3mm solid var(--text); }
-.check ul { display: grid; }
-.check li { display: flex; align-items: center; gap: 3mm; min-height: 7.4mm; border-bottom: .25mm solid var(--rule); font-size: 9pt; }
-.box { width: 3.6mm; height: 3.6mm; border: .35mm solid var(--ink); border-radius: .6mm; flex: none; background: #FFF; }
-.check__foot { position: absolute; left: var(--m); right: var(--m); bottom: 17mm; color: var(--muted); font-style: italic; }
+.checks { display: grid; gap: 4.4mm; }
+.page--checklist .body--top .checks { margin-top: 5mm; }
+.check h2 { display: flex; gap: 2mm; align-items: baseline; padding-bottom: 1.8mm; border-bottom: .3mm solid var(--text); font: 500 10.4pt/1.2 var(--f-display); }
+.check li { display: flex; align-items: center; gap: 3mm; min-height: 6.8mm; border-bottom: .25mm solid var(--line); font-size: 8pt; }
+.box { width: 3.4mm; height: 3.4mm; border: .3mm solid var(--gold-ink); border-radius: .7mm; flex: none; }
+.check__foot { margin-top: 7mm; color: var(--muted); max-width: 100mm; }
 
 /* Contatos */
-.contacts { display: grid; grid-template-columns: 1fr 1fr; gap: 0 6mm; margin-top: 7mm; }
-.contact { padding: 2.6mm 0 2.8mm; border-bottom: .25mm solid var(--rule); min-height: 15.5mm; }
-.contact dt { display: flex; gap: 2mm; align-items: baseline; font: 700 9pt/1.2 var(--f); }
-.contact dd { margin-top: 1mm; padding-left: 8mm; color: var(--muted); font-size: 8.2pt; line-height: 1.36; overflow-wrap: anywhere; }
-.contact:last-child { grid-column: 1 / -1; }
-.contact:last-child dd { color: var(--text); }
-.fill { display: block; height: 5mm; border-bottom: .25mm dashed #9AA6A2; }
-.todo { color: var(--atencao); font-style: italic; }
+.contacts { display: grid; grid-template-columns: 1fr 1fr; column-gap: 6mm; border-top: .25mm solid var(--line); }
+.contact { padding: 2.4mm 0 2.6mm; border-bottom: .25mm solid var(--line); min-height: 14mm; }
+.contact dt { display: flex; gap: 2mm; align-items: baseline; font: 500 9.2pt/1.25 var(--f-display); }
+.contact dd { margin-top: .8mm; padding-left: 7.6mm; color: var(--muted); }
+.fill { display: block; height: 4.6mm; border-bottom: .25mm dashed #A7AFBA; }
+.todo { color: var(--gold-ink); font-style: italic; }
+.contact-ks { display: grid; grid-template-columns: 8.5mm 1fr; gap: 3mm; align-items: start; margin-top: 4mm; padding: 3.4mm; border-radius: var(--r); background: var(--card); border: .25mm solid rgb(11 17 25 / .09); }
+.contact-ks__k { font: 500 9.2pt/1.25 var(--f-display); margin-bottom: .6mm; }
+.contact-ks p:not(.contact-ks__k) { color: var(--muted); }
 
 /* Anotações */
-.notes__fields { display: grid; grid-template-columns: 1fr 1fr; gap: 3mm 6mm; margin-top: 8mm; }
-.notes__fields dt { font: 700 8.4pt/1.2 var(--f); color: var(--navy); }
-.notes__fields .fill { height: 7mm; border-bottom-style: solid; }
-.notes__lines { display: grid; margin-top: 7mm; }
-.notes__lines span { height: 7.6mm; border-bottom: .25mm solid var(--rule); }
+.notes__fields { display: grid; grid-template-columns: 1fr 1fr; gap: 3mm 6mm; margin-top: 7mm; }
+.notes__fields dt { font: 600 6.2pt/1.4 var(--f-sans); letter-spacing: .16em; text-transform: uppercase; color: var(--gold-ink); }
+.notes__fields .fill { height: 7mm; border-bottom-style: solid; border-color: var(--line); }
+.notes__lines { display: grid; margin-top: 6mm; }
+.notes__lines span { height: 7.6mm; border-bottom: .25mm solid var(--line); }
 
-/* ---------- Capa: passaporte ---------- */
-.page--cover, .page--back { background: var(--navy) %GUIL_NAVY% center 92% / 100% 46mm no-repeat; color: var(--gold); }
-.cover__frame { position: absolute; inset: 6mm; border: .4mm solid rgb(201 161 90 / .55); border-radius: 3mm; pointer-events: none; }
-/* Janela do avião: retângulo de cantos muito arredondados, com aro dourado */
-.cover__window { position: absolute; left: 50%; top: 17mm; width: 76mm; height: 104mm; translate: -50% 0; border-radius: 38mm / 32mm; overflow: hidden; border: 1.4mm solid var(--gold); box-shadow: 0 0 0 1.6mm var(--navy), 0 0 0 1.9mm rgb(201 161 90 / .6), inset 0 0 6mm rgb(0 0 0 / .45); background: var(--navy-2); }
-.cover__window img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 60%; }
-.cover__text { position: absolute; left: 0; right: 0; top: 131mm; text-align: center; }
-.cover__title { font: 300 31pt/.98 var(--f); letter-spacing: -.01em; color: var(--gold); }
-.cover__lede { margin-top: 3.4mm; font: italic 300 10.6pt/1.3 var(--f); color: var(--gold-lt); }
+/* ---------- Capa: como o hero do site ---------- */
+.cover__bg, .back__bg { position: absolute; inset: 0; z-index: 0; }
+.cover__bg img, .back__bg img { width: 100%; height: 100%; object-fit: cover; }
+.cover__bg img { object-position: 50% 40%; }
+.cover__bg::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgb(11 17 25 / .7) 0%, rgb(11 17 25 / .15) 26%, rgb(11 17 25 / .55) 52%, rgb(11 17 25 / .94) 74%, var(--bg) 100%); }
+.brand { position: absolute; z-index: 1; left: var(--m); top: 10mm; display: flex; align-items: center; gap: 2.6mm; }
+.brand__mark { width: 9mm; }
+.brand__text { display: grid; gap: .3mm; font: 500 5.2pt/1.4 var(--f-sans); letter-spacing: .24em; text-transform: uppercase; color: var(--gold); }
+.brand__text span:last-child { color: var(--muted-d); }
+.cover__content { position: absolute; z-index: 1; left: var(--m); right: var(--m); bottom: 42mm; display: grid; gap: 3.6mm; }
+.cover__title { font: 500 34pt/1.04 var(--f-display); color: var(--text-d); }
+.cover__title em { color: var(--gold); }
+.cover__lede { font-size: 9.6pt; color: var(--lede-d); }
 
-.logos { position: absolute; left: 14mm; right: 14mm; bottom: 13mm; display: flex; align-items: center; justify-content: center; gap: 6mm; }
-.logos__ks { height: 17mm; width: auto; }
-.logos__rule { width: .3mm; height: 10mm; background: rgb(201 161 90 / .6); }
-.logos__agency { font: 600 9.4pt/1.15 var(--f); color: var(--gold); }
-.logos__agency span { display: block; font: 300 7.6pt/1.3 var(--f); color: var(--gold-lt); }
+.logos { position: absolute; z-index: 1; left: var(--m); right: var(--m); bottom: 11mm; display: flex; align-items: center; gap: 5mm; padding-top: 5mm; border-top: .25mm solid rgb(214 170 89 / .3); }
+.logos__ks { height: 15mm; width: auto; }
+.logos__rule { width: .25mm; height: 10mm; background: rgb(214 170 89 / .45); }
+.logos__agency { font: 500 9pt/1.2 var(--f-display); color: var(--text-d); }
+.logos__agency span { display: block; margin-top: .6mm; font: 600 5.6pt/1.3 var(--f-sans); letter-spacing: .2em; text-transform: uppercase; color: var(--gold); }
 
-/* ---------- Contracapa ---------- */
-.back__photo { position: absolute; inset: 0 0 auto; height: 118mm; }
-.back__photo img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 70%; }
-.back__photo::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 45%, var(--navy) 100%); }
-.back__quote { position: absolute; left: var(--m); right: var(--m); top: 124mm; font: 300 19pt/1.12 var(--f); color: var(--gold); text-wrap: balance; }
-.back__credits { position: absolute; left: var(--m); top: 156mm; font-size: 8pt; color: var(--gold-lt); }
-.logos--back { justify-content: flex-start; left: var(--m); }
+/* ---------- Boas-vindas: faixa editorial ---------- */
+.page--intro { padding: 22mm var(--m) 0; }
+.glow { position: absolute; inset: -20% -30% auto auto; width: 120mm; height: 120mm; background: radial-gradient(50% 50% at 50% 50%, rgb(214 170 89 / .13), transparent); pointer-events: none; }
+.glow--bottom { inset: auto -20mm -50mm -20mm; width: auto; height: 120mm; z-index: 0; }
+.page--intro .h2 { max-width: 112mm; font-size: 22pt; }
+.intro__body { display: grid; gap: 3mm; margin-top: 9mm; max-width: 108mm; font-size: 8.4pt; line-height: 1.65; color: #DCE3EC; }
+.intro__sign { margin-top: 9mm; font: 500 14pt/1 var(--f-display); color: var(--gold); }
+.intro__credits { margin-top: 2.4mm; font: 600 6pt/1.4 var(--f-sans); letter-spacing: .22em; text-transform: uppercase; color: var(--muted-d); }
+
+/* ---------- Contracapa: como a chamada final do site ---------- */
+.back__bg { bottom: 50%; }
+.back__bg img { object-position: 50% 75%; }
+.back__bg::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgb(11 17 25 / .2) 0%, rgb(11 17 25 / .55) 55%, var(--bg) 100%); }
+.back__content { position: absolute; z-index: 1; left: var(--m); right: var(--m); top: 86mm; display: grid; justify-items: center; text-align: center; gap: 3.6mm; }
+.back__mark { width: 15mm; padding: 2.2mm; border: .25mm solid rgb(214 170 89 / .4); border-radius: var(--r-sm); background: var(--bg); margin-bottom: 2mm; }
+.back__title { font: 500 19pt/1.15 var(--f-display); color: var(--text-d); max-width: 110mm; text-wrap: balance; }
+.back__title em { color: var(--gold); }
+.back__credits { color: var(--muted-d); font-size: 8pt; }
+.page--back .logos { justify-content: center; }

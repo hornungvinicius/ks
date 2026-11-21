@@ -14,16 +14,15 @@ Gera `index.html`. Para ver no navegador, sirva a pasta (`python3 -m http.server
 
 Os textos ficam no início de `build.mjs` e o visual em `ebook.css`.
 
-## Conceito
+## Visual
 
-"Passaporte + revista de viagem", como pede o briefing:
+Segue a landing page da KS (`DESIGN.md` na raiz do repositório). A primeira versão, com textura de passaporte e carimbos, foi descartada.
 
-- Capa e contracapa em azul de passaporte, com o dourado da KS. A foto da capa entra recortada no formato da janela do avião.
-- O miolo imita uma página de visto: papel cinza-esverdeado claro com guilloché no topo.
-- Cada capítulo abre com um carimbo numa cor de tinta própria. A mesma cor aparece nos números dos temas, o que ajuda a achar o capítulo folheando.
-- Os quatro quadros do briefing têm cor fixa por função: Atenção, Faça isso, Guarde e Seus direitos.
-- No rodapé, uma linha no formato da faixa de leitura do passaporte, seguida do número da página.
-- Tipografia em Univers Next Pro, a fonte da marca, carregada do kit Adobe Fonts `cec7ccc`. A linha do rodapé usa Red Hat Mono (OFL, em `fonts/`).
+- Azul quase preto `#0B1119` na capa, na página de boas-vindas e na contracapa; miolo em branco, como as seções claras do site.
+- Dourado só em eyebrows (com o filete à esquerda), números, ícones e na palavra de destaque dos títulos.
+- Capítulos abrem com uma faixa escura com foto e a mesma máscara do topo das páginas internas do site.
+- Quadros como os cards do site: borda fina, raio, caixa de ícone dourada. "Atenção" é o card escuro, como o card de chamada do site.
+- Univers Next Pro nos títulos (kit Adobe Fonts `cec7ccc`) e Montserrat no texto (`fonts/montserrat.woff2`, a mesma do site).
 
 ## Numeração
 
@@ -62,3 +61,4 @@ Fotos reais do Freepik (sem IA), baixadas pela conta Premium via Magnific:
 | `cap4-imprevisto.jpg` | Frustrated woman lost baggage in airport (27782932) |
 | `cap6-provas.jpg` | High angle hand taking photos (28476669) |
 | `contracapa-asa.jpg` | Airplane wing and blue sky (4695509) |
+| `cap5-escritorio.webp`, `cap8-sala.webp` | As mesmas do site (`biblioteca-*` e `sala-reuniao-*`, ver `DESIGN.md`) |
