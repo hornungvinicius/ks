@@ -6,39 +6,42 @@
 <title>Guia do Viajante</title>
 <link rel="stylesheet" href="https://use.typekit.net/cec7ccc.css">
 <style>
-/* Guia do Viajante · A5 (148 × 210 mm), 16 páginas.
-   Mesma linguagem da landing page da KS (DESIGN.md na raiz): azul quase preto alternado com branco,
-   dourado só em eyebrows, números, ícones e palavra de destaque; cards com borda e caixa de ícone dourada;
-   fotos com máscara escura; Univers Next Pro nos títulos e Montserrat no texto. */
+/* Guia do Viajante · A5, 16 páginas, margens espelhadas para impressão em caderno.
+   Newsreader (serifada editorial com tamanho óptico) para títulos e leitura;
+   Univers Next Pro (fonte da marca KS) só para navegação: números, rótulos, fólio.
+   Papel branco, tinta azul-marinho; dourado reservado ao logo e a poucos números na página escura. */
 
-@font-face { font-family: "Montserrat"; src: url("fonts/montserrat.woff2") format("woff2"); font-weight: 100 900; font-style: normal; }
+@font-face { font-family: "Newsreader"; src: url("fonts/Newsreader.ttf") format("truetype"); font-weight: 200 800; font-style: normal; }
+@font-face { font-family: "Newsreader"; src: url("fonts/Newsreader-Italic.ttf") format("truetype"); font-weight: 200 800; font-style: italic; }
 
 :root {
-  --bg: #0B1119; --bg-2: #0F1722; --line-d: #1F2B3B;
-  --gold: #D6AA59; --gold-hi: #E8C27C; --gold-lo: #C8933F;
-  --text-d: #EEF2F7; --muted-d: #A3AFBF; --lede-d: #D3DBE6;
-  /* páginas claras (como as seções brancas do site) */
-  --paper: #FFFFFF; --card: #F7F8FA; --text: #0B1119; --muted: #424B59; --line: rgb(11 17 25 / .1);
-  --gold-ink: #8A5E22;  /* dourado legível sobre branco */
+  --ink: #15233F;        /* azul-marinho: títulos, números, filetes fortes */
+  --text: #1F2430;       /* texto corrido */
+  --soft: #5B6372;       /* texto secundário */
+  --rule: #CBD1D9;       /* filetes finos */
+  --sky: #E8EEF4;        /* área de consulta (uma por página, no máximo) */
+  --alert: #A33A27;      /* só para "Atenção" */
+  --gold: #B48B45;       /* acento, raro */
+  --night: #15233F;
 
-  --f-display: "univers-next-pro", "Helvetica Neue", Arial, sans-serif;
-  --f-sans: "Montserrat", "Helvetica Neue", Arial, sans-serif;
-  --m: 12mm;
-  --r: 3.2mm; --r-sm: 2mm;
+  --serif: "Newsreader", Georgia, serif;
+  --sans: "univers-next-pro", "Helvetica Neue", Arial, sans-serif;
+
+  --top: 14mm; --bottom: 18mm; --inner: 16mm; --outer: 12mm;
 }
 
 * { box-sizing: border-box; }
-html { background: #5B6470; }
-body { margin: 0; font: 400 7.9pt/1.55 var(--f-sans); color: var(--text); -webkit-font-smoothing: antialiased; font-synthesis: none; }
-h1, h2, p, ol, ul, dl, dd, figure { margin: 0; }
+html { background: #9AA1AA; }
+body { margin: 0; font: 400 9.6pt/1.45 var(--serif); color: var(--text); -webkit-font-smoothing: antialiased; font-synthesis: none; font-optical-sizing: auto; font-kerning: normal; hanging-punctuation: first; }
+h1, h2, p, ol, ul, dl, dd, dt, figure, blockquote { margin: 0; }
 ol, ul { padding: 0; list-style: none; }
 img { display: block; max-width: 100%; }
-.ic { width: 1em; height: 1em; fill: currentColor; flex: none; }
-em { font-style: normal; }
+b { font-weight: 600; }
 
-/* ---------- Livro na tela; na impressão, uma página por folha ---------- */
+/* ---------- Páginas ---------- */
 .book { display: grid; justify-content: center; gap: 10mm; padding: 12mm 0; }
-.page { position: relative; width: 148mm; height: 210mm; overflow: hidden; background: var(--paper); box-shadow: 0 2mm 8mm rgb(0 0 0 / .3); }
+.page { position: relative; width: 148mm; height: 210mm; overflow: hidden; background: #FFF; box-shadow: 0 1.5mm 6mm rgb(0 0 0 / .22); padding: var(--top) var(--outer) var(--bottom) var(--inner); }
+.page--even { padding-left: var(--outer); padding-right: var(--inner); }
 @page { size: 148mm 210mm; margin: 0; }
 @media print {
   html, body { background: none; }
@@ -48,427 +51,349 @@ em { font-style: normal; }
   * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
 }
 
-/* ---------- Tipografia da marca ---------- */
-.eyebrow { display: flex; align-items: center; gap: 2.6mm; font: 600 6.2pt/1.4 var(--f-sans); letter-spacing: .22em; text-transform: uppercase; color: var(--gold-ink); }
-.eyebrow::before { content: ""; width: 6.5mm; height: .25mm; background: currentColor; flex: none; }
-.eyebrow--center { justify-content: center; }
-.eyebrow--center::after { content: ""; width: 6.5mm; height: .25mm; background: currentColor; flex: none; }
-.h2 { margin-top: 3mm; font: 500 19pt/1.14 var(--f-display); color: var(--text); text-wrap: balance; }
-.h2 em { color: var(--gold-ink); }
-.lead { margin-top: 3.5mm; max-width: 104mm; font-size: 8.4pt; line-height: 1.6; color: var(--muted); }
+/* Fólio no canto externo, com o nome da seção */
+.folio { position: absolute; bottom: 9mm; display: flex; gap: 3mm; align-items: baseline; font: 400 6.8pt/1 var(--sans); color: var(--soft); }
+.page--odd .folio { right: var(--outer); flex-direction: row-reverse; }
+.page--even .folio { left: var(--outer); }
+.folio__n { font-weight: 700; color: var(--ink); font-variant-numeric: tabular-nums; }
 
-.page--dark { background: var(--bg); color: var(--text-d); }
-.page--dark .eyebrow { color: var(--gold); }
-.page--dark .h2 { color: var(--text-d); }
-.page--dark .h2 em { color: var(--gold); }
+/* ---------- Tipografia ---------- */
+.kicker { font: 400 7.4pt/1.3 var(--sans); color: var(--soft); letter-spacing: .01em; }
+.page__h { font: 400 25pt/1.05 var(--serif); color: var(--ink); letter-spacing: -.01em; }
+.ch__title { margin-top: 2mm; font: 400 25pt/1.04 var(--serif); color: var(--ink); letter-spacing: -.012em; text-wrap: balance; }
+.ch__title .sub { display: block; font-style: italic; font-weight: 300; }
+.idx__n { font: 700 7.4pt/1 var(--sans); color: var(--ink); font-variant-numeric: tabular-nums; }
 
-/* Rodapé discreto */
-.foot { position: absolute; left: var(--m); right: var(--m); bottom: 7mm; display: flex; justify-content: space-between; align-items: center; padding-top: 2.4mm; border-top: .25mm solid var(--line); font: 600 5.8pt/1 var(--f-sans); letter-spacing: .22em; text-transform: uppercase; color: #8A93A0; }
-.foot__n { font: 500 8pt/1 var(--f-display); letter-spacing: 0; color: var(--gold-ink); }
-.page--dark .foot { border-color: var(--line-d); color: #6F7C8E; }
-.page--dark .foot__n { color: var(--gold); }
+/* Lista de temas: o índice do capítulo */
+.idx { border-top: .35mm solid var(--ink); }
+.idx li { display: grid; grid-template-columns: 9mm 1fr; align-items: baseline; padding: 2.6mm 0 2.8mm; border-bottom: .2mm solid var(--rule); }
+.idx__t { font: 400 11pt/1.25 var(--serif); color: var(--text); }
+.idx--large li { padding: 3.6mm 0 3.8mm; }
+.idx--large .idx__t { font-size: 14pt; line-height: 1.2; }
 
-/* ---------- Corpo das páginas claras ---------- */
-.body { padding: 6mm var(--m) 0; }
-.body--top { padding-top: 16mm; }
+/* Marcações (avisos do DOCX): rótulo + filete, sem caixa */
+.note { padding-top: 2.2mm; border-top: .5mm solid var(--ink); }
+.note__label { font: 700 7.4pt/1.2 var(--sans); color: var(--ink); }
+.note__text { margin-top: 1mm; font: 400 10pt/1.38 var(--serif); }
+.note--atencao { border-color: var(--alert); }
+.note--atencao .note__label { color: var(--alert); }
+.note--direitos { border-color: var(--gold); }
+.note--direitos .note__label { color: #8C6A2E; }
 
-/* Faixa escura de capítulo: foto + máscara, título branco, eyebrow dourado */
-.band { position: relative; isolation: isolate; height: 66mm; display: flex; align-items: flex-end; padding: 0 var(--m) 7mm; background: var(--bg); color: var(--text-d); }
-.band--short { height: 50mm; }
-.band__img { position: absolute; inset: 0; z-index: -2; width: 100%; height: 100%; object-fit: cover; }
-.band::before { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(180deg, rgb(11 17 25 / .35) 0%, rgb(11 17 25 / .5) 40%, rgb(11 17 25 / .92) 100%); }
-.band--plain::before { background: radial-gradient(60% 90% at 85% 10%, rgb(214 170 89 / .16), transparent 70%), radial-gradient(50% 80% at 10% 100%, rgb(62 94 140 / .22), transparent 70%); }
-.band__content { display: grid; gap: 2.2mm; }
-.band .eyebrow { color: var(--gold); }
-.band__title { font: 500 21pt/1.08 var(--f-display); color: var(--text-d); text-wrap: balance; }
-.band__title span { color: var(--gold); }
-.band__lede { font-size: 8.4pt; line-height: 1.5; color: var(--lede-d); max-width: 100mm; }
+/* ---------- 1. Capa ---------- */
+.p-cover { padding: 0; }
+.cover__photo { position: absolute; inset: 0 0 auto; height: 131mm; }
+.cover__photo img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 62%; }
+.cover__type { position: absolute; left: var(--inner); right: var(--outer); top: 139mm; }
+.cover__title { font: 300 43pt/.94 var(--serif); letter-spacing: -.025em; color: var(--ink); }
+.cover__sub { margin-top: 4mm; font: italic 300 12.5pt/1.3 var(--serif); color: var(--text); }
+.logos { display: flex; align-items: center; gap: 6mm; }
+.logos__ks { height: 13mm; width: auto; }
+.logos__agency { padding-left: 6mm; border-left: .2mm solid var(--rule); font: italic 400 10.5pt/1.15 var(--serif); color: var(--ink); }
+.logos__agency span { display: block; margin-top: .8mm; font: 400 6.8pt/1.2 var(--sans); font-style: normal; color: var(--soft); }
+.p-cover .logos { position: absolute; left: var(--inner); right: var(--outer); bottom: 11mm; }
 
-/* Temas numerados (numeração do sumário), como as perguntas numeradas do site */
-.topics { border-top: .25mm solid var(--line); }
-.topics li { display: grid; grid-template-columns: 8mm 1fr; gap: 2mm; align-items: baseline; padding: 2.5mm 0; border-bottom: .25mm solid var(--line); }
-.topics__n { font: 500 8.6pt/1 var(--f-display); color: var(--gold-ink); font-variant-numeric: tabular-nums; }
-.topics h2 { font: 500 9.6pt/1.3 var(--f-display); color: var(--text); }
-.topics p { margin-top: .6mm; color: var(--muted); }
-.topics--two { display: grid; grid-template-columns: 1fr 1fr; column-gap: 6mm; border-top: 0; }
-.topics--two li { grid-template-columns: 7.5mm 1fr; }
-.topics--two li:nth-child(-n+2) { border-top: .25mm solid var(--line); }
-.page--dense .topics li { padding: 2mm 0; }
-.page--dense .topics h2 { font-size: 9pt; }
-.page--dense .topics p { font-size: 7.2pt; line-height: 1.45; }
+/* ---------- 2. Introdução ---------- */
+.p-intro { display: grid; grid-template-columns: 30mm 1fr; column-gap: 6mm; align-content: start; padding-top: 30mm; }
+.intro__h { grid-column: 1 / -1; font: 400 25pt/1 var(--serif); color: var(--ink); margin-bottom: 10mm; }
+.intro__text { grid-column: 2; display: grid; gap: 3.2mm; font-size: 10.6pt; line-height: 1.52; hyphens: manual; text-wrap: pretty; }
+.intro__text p:first-child::first-line { font-variant-caps: all-small-caps; letter-spacing: .03em; }
+.intro__bye { margin-top: 3mm; font: italic 400 15pt/1.2 var(--serif); color: var(--ink); }
+.intro__credit { position: absolute; left: calc(var(--outer) + 36mm); bottom: 18mm; font: 400 7.2pt/1.3 var(--sans); color: var(--soft); }
 
-/* ---------- Cards do site: borda, raio, caixa de ícone dourada ---------- */
-.cards { display: grid; gap: 2.6mm; margin-top: 4.5mm; }
-.cards--two { grid-template-columns: 1fr 1fr; }
-.card { display: grid; grid-template-columns: 8.5mm 1fr; gap: 3mm; align-items: start; padding: 3.4mm; border-radius: var(--r); background: var(--card); border: .25mm solid rgb(11 17 25 / .09); }
-.icon-box { display: grid; place-items: center; width: 8.5mm; height: 8.5mm; border-radius: var(--r-sm); border: .25mm solid rgb(214 170 89 / .45); background: rgb(214 170 89 / .08); color: var(--gold-ink); font-size: 4.4mm; }
-.card__label { font: 500 9.2pt/1.25 var(--f-display); color: var(--text); margin-bottom: .6mm; }
-.card p:not(.card__label) { color: var(--muted); }
-/* Atenção: o card escuro, como o card de chamada do site */
-.card--atencao { background: radial-gradient(120% 160% at 0% 0%, rgb(214 170 89 / .14) 0%, transparent 55%), var(--bg); border-color: rgb(214 170 89 / .35); }
-.card--atencao .card__label { color: var(--text-d); }
-.card--atencao p:not(.card__label) { color: var(--muted-d); }
-.card--atencao .icon-box { color: var(--gold); background: rgb(214 170 89 / .1); }
+/* ---------- 3. Sumário ---------- */
+.p-toc .page__h { margin-bottom: 5mm; }
+.p-toc { padding-top: 12mm; }
+.toc { columns: 2; column-gap: 7mm; }
+.toc__ch { break-inside: avoid; margin-bottom: 3.6mm; }
+.toc__head { display: grid; grid-template-columns: 6mm 1fr auto; align-items: baseline; gap: 1.5mm; padding-bottom: 1.4mm; border-bottom: .35mm solid var(--ink); }
+.toc__n { font: 300 15pt/1 var(--serif); color: var(--ink); }
+.toc__t { font: 400 10.4pt/1.2 var(--serif); color: var(--ink); }
+.toc__p { font: 700 7.4pt/1 var(--sans); color: var(--ink); }
+.toc__items { margin-top: 1.4mm; }
+.toc__items li { display: grid; grid-template-columns: 7.5mm 1fr; padding: .35mm 0; font: 400 7.1pt/1.28 var(--sans); color: var(--text); }
+.toc__items .idx__n { font-weight: 400; color: var(--soft); font-size: 7.1pt; line-height: 1.28; }
 
-/* Como usar */
-.howto { display: grid; gap: 3mm; margin-top: 8mm; }
-.howto .card { padding: 4mm; }
+/* ---------- 4. Como usar ---------- */
+.p-howto { padding-top: 30mm; }
+.howto__lead { margin-top: 4mm; font: italic 300 13pt/1.3 var(--serif); color: var(--text); }
+.howto__grid { display: grid; gap: 7mm; margin-top: 12mm; }
+.howto__block { display: grid; grid-template-columns: 30mm 1fr; column-gap: 6mm; }
+.howto__k { font: 700 7.6pt/1.3 var(--sans); color: var(--ink); padding-top: .8mm; }
+.howto__block > p, .howto__block > dl { grid-column: 2; }
+.howto__block > p { font-size: 10pt; line-height: 1.45; }
+.legend { display: grid; gap: 3.4mm; margin-top: 4mm; }
+.legend .note { display: grid; grid-template-columns: 19mm 1fr; align-items: baseline; padding-top: 1.8mm; }
+.legend .note__text { margin: 0; font-size: 9.6pt; }
 
-/* Sumário: lista numerada como o FAQ do site */
-.toc { margin-top: 8mm; border-top: .25mm solid var(--line); }
-.toc li { display: grid; grid-template-columns: 10mm 1fr auto; align-items: baseline; gap: 2mm; padding: 4.1mm 0; border-bottom: .25mm solid var(--line); }
-.toc__n { font: 500 10.6pt/1 var(--f-display); color: var(--gold-ink); }
-.toc__t { font: 500 11pt/1.25 var(--f-display); color: var(--text); }
-.toc__p { font: 600 7pt/1 var(--f-sans); letter-spacing: .08em; color: var(--muted); font-variant-numeric: tabular-nums; }
+/* ---------- 5. Capítulo 1 ---------- */
+.p-ch1 { display: flex; flex-direction: column; }
+.p-ch1 .idx { margin-top: auto; margin-bottom: 4mm; }
+.ch1__head { display: grid; grid-template-columns: auto 1fr; align-items: end; gap: 4mm; margin-top: 6mm; margin-bottom: 9mm; }
+.bignum { font: 200 150pt/.74 var(--serif); color: var(--ink); letter-spacing: -.04em; }
+.ch1__head .ch__title { font-size: 23pt; }
 
-/* Passo a passo: círculos dourados como os botões das áreas no site */
-.steps { counter-reset: s; margin-top: 6mm; border-top: .25mm solid var(--line); }
-.steps li { counter-increment: s; display: grid; grid-template-columns: 10mm 1fr; align-items: center; min-height: 11mm; border-bottom: .25mm solid var(--line); font: 500 9.8pt/1.3 var(--f-display); }
-.steps li::before { content: counter(s); display: grid; place-items: center; width: 6.6mm; height: 6.6mm; border-radius: 50%; background: linear-gradient(135deg, var(--gold-hi), var(--gold-lo)); color: var(--bg); font: 600 8pt/1 var(--f-display); }
-.page--steps .cards { margin-top: 2.6mm; }
-.page--steps .steps + .cards { margin-top: 6mm; }
+/* ---------- 6. Capítulo 2: foto em pé na metade externa ---------- */
+.p-ch2 { padding-left: var(--outer); }
+.ch2__photo { position: absolute; top: 0; bottom: 0; left: 0; width: 64mm; }
+.ch2__photo img { width: 100%; height: 100%; object-fit: cover; object-position: 14% 50%; }
+.ch2__text { margin-left: 64mm; padding-left: 7mm; padding-top: 52mm; }
+.ch2__text .ch__title { font-size: 22pt; margin-bottom: 8mm; }
+.p-ch2 .folio { left: auto; right: var(--inner); flex-direction: row-reverse; }
 
-/* Direitos: card de chamada escuro com o monograma */
-.page--rights .cards { margin-top: 5mm; }
-.cta-card { display: grid; grid-template-columns: 15mm 1fr; gap: 4mm; align-items: center; margin-top: 4mm; padding: 5mm; border-radius: var(--r); background: radial-gradient(120% 160% at 0% 0%, rgb(214 170 89 / .14) 0%, transparent 55%), var(--bg); border: .25mm solid rgb(214 170 89 / .35); color: var(--text-d); }
-.cta-card__mark { width: 15mm; padding: 2mm; border: .25mm solid rgb(214 170 89 / .35); border-radius: var(--r-sm); background: var(--bg); }
-.cta-card .eyebrow { color: var(--gold); }
-.cta-card__title { margin-top: 1.6mm; font: 500 11.4pt/1.25 var(--f-display); color: var(--text-d); }
-.cta-card__who { margin-top: 1.6mm; color: var(--muted-d); }
-.cta-card__contact { display: flex; align-items: center; gap: 1.6mm; margin-top: 1.4mm; font-weight: 600; color: var(--text-d); }
-.cta-card__contact .ic { color: var(--gold); width: 3.4mm; height: 3.4mm; }
+/* ---------- 7. Capítulo 3 ---------- */
+.p-ch3 { padding-top: 0; }
+.ch3__photo { margin: 0 calc(var(--outer) * -1) 0 calc(var(--inner) * -1); height: 104mm; }
+.ch3__photo img { width: 100%; height: 100%; object-fit: cover; object-position: 30% 50%; }
+.ch3__head { display: grid; grid-template-columns: 1fr 1fr; column-gap: 7mm; align-items: end; margin: 8mm 0 7mm; }
+.ch3__label { display: flex; align-items: baseline; gap: 3mm; font: 400 27pt/1 var(--serif); color: var(--ink); }
+.ch3__label span { font: 700 9pt/1 var(--sans); padding-right: 3mm; border-right: .35mm solid var(--ink); }
+.ch3__lede { font: italic 300 11.4pt/1.3 var(--serif); color: var(--text); }
+.idx--cols { display: grid; grid-template-columns: 1fr 1fr; column-gap: 7mm; border-top: 0; }
+.idx--cols li:nth-child(-n+2) { border-top: .35mm solid var(--ink); }
 
-/* Checklist */
-.checks { display: grid; gap: 4.4mm; }
-.page--checklist .body--top .checks { margin-top: 5mm; }
-.check h2 { display: flex; gap: 2mm; align-items: baseline; padding-bottom: 1.8mm; border-bottom: .3mm solid var(--text); font: 500 10.4pt/1.2 var(--f-display); }
-.check li { display: flex; align-items: center; gap: 3mm; min-height: 6.8mm; border-bottom: .25mm solid var(--line); font-size: 8pt; }
-.box { width: 3.4mm; height: 3.4mm; border: .3mm solid var(--gold-ink); border-radius: .7mm; flex: none; }
-.check__foot { margin-top: 7mm; color: var(--muted); max-width: 100mm; }
+/* ---------- 8. Bagagem extraviada ---------- */
+.p-steps { padding-top: 22mm; }
+.steps__h { margin-top: 2mm; font: 400 25pt/1.05 var(--serif); color: var(--ink); }
+.steps__h span { display: block; font-style: italic; font-weight: 300; }
+.steps { counter-reset: s; margin-top: 8mm; }
+.steps li { counter-increment: s; display: grid; grid-template-columns: 12mm 1fr; align-items: baseline; padding: 2.4mm 0; border-top: .2mm solid var(--rule); font: 400 12pt/1.3 var(--serif); }
+.steps li:first-child { border-top: .35mm solid var(--ink); }
+.steps li::before { content: counter(s); font: 200 22pt/.8 var(--serif); color: var(--ink); }
+.steps__notes { display: grid; grid-template-columns: 1fr 1fr; gap: 6mm 7mm; margin-top: 10mm; }
+.note--strong { grid-column: 1 / -1; padding: 3.4mm 4mm 3.8mm; border-top-width: .8mm; background: #F7E9E4; }
+.note--strong .note__text { font-size: 11.6pt; }
 
-/* Contatos */
-.contacts { display: grid; grid-template-columns: 1fr 1fr; column-gap: 6mm; border-top: .25mm solid var(--line); }
-.contact { padding: 2.4mm 0 2.6mm; border-bottom: .25mm solid var(--line); min-height: 14mm; }
-.contact dt { display: flex; gap: 2mm; align-items: baseline; font: 500 9.2pt/1.25 var(--f-display); }
-.contact dd { margin-top: .8mm; padding-left: 7.6mm; color: var(--muted); }
-.fill { display: block; height: 4.6mm; border-bottom: .25mm dashed #A7AFBA; }
-.todo { color: var(--gold-ink); font-style: italic; }
-.contact-ks { display: grid; grid-template-columns: 8.5mm 1fr; gap: 3mm; align-items: start; margin-top: 4mm; padding: 3.4mm; border-radius: var(--r); background: var(--card); border: .25mm solid rgb(11 17 25 / .09); }
-.contact-ks__k { font: 500 9.2pt/1.25 var(--f-display); margin-bottom: .6mm; }
-.contact-ks p:not(.contact-ks__k) { color: var(--muted); }
+/* ---------- 9. Capítulo 4: página escura ---------- */
+.p-dark { background: var(--night); color: #E7ECF3; }
+.p-dark .folio { color: #9DAAC0; }
+.p-dark .folio__n { color: #FFF; }
+.p-ch4 { padding-top: 0; }
+.ch4__photo { margin: 0 calc(var(--outer) * -1) 0 calc(var(--inner) * -1); height: 58mm; }
+.ch4__photo img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 40%; }
+.ch4__body { padding-top: 7mm; }
+.p-dark .kicker { color: #9DAAC0; }
+.p-dark .ch__title { color: #FFF; }
+.ch4__hint { margin-top: 2mm; font: italic 300 10.6pt/1.3 var(--serif); color: #C9D3E1; }
+.problems { display: grid; grid-template-columns: 1fr 1fr; column-gap: 7mm; margin-top: 6mm; }
+.problems li { display: grid; grid-template-columns: 8.5mm 1fr; align-items: baseline; padding: 2.3mm 0 2.5mm; border-top: .2mm solid rgb(255 255 255 / .22); }
+.problems .idx__n { color: var(--gold); }
+.problems__t { font: 400 10.4pt/1.28 var(--serif); color: #FFF; }
+.xref { display: block; margin-top: .8mm; font: 400 6.8pt/1.2 var(--sans); color: var(--gold); }
 
-/* Anotações */
-.notes__fields { display: grid; grid-template-columns: 1fr 1fr; gap: 3mm 6mm; margin-top: 7mm; }
-.notes__fields dt { font: 600 6.2pt/1.4 var(--f-sans); letter-spacing: .16em; text-transform: uppercase; color: var(--gold-ink); }
-.notes__fields .fill { height: 7mm; border-bottom-style: solid; border-color: var(--line); }
-.notes__lines { display: grid; margin-top: 6mm; }
-.notes__lines span { height: 7.6mm; border-bottom: .25mm solid var(--line); }
+/* ---------- 10. Capítulo 5 ---------- */
+.p-ch5 { padding-top: 26mm; }
+.statement { margin: 10mm 0 10mm; padding: 4mm 0 0; border-top: .5mm solid var(--gold); }
+.statement .note__label { color: #8C6A2E; }
+.statement p + p { margin-top: 2.6mm; font: italic 300 19.5pt/1.26 var(--serif); color: var(--ink); text-wrap: balance; }
+.ch5__sign { position: absolute; left: var(--outer); bottom: 22mm; display: flex; align-items: center; gap: 3.4mm; font: 700 7.4pt/1.3 var(--sans); color: var(--ink); }
+.page--odd .ch5__sign { left: var(--inner); }
+.ch5__sign img { width: 9mm; }
+.ch5__sign span { display: block; font-weight: 400; color: var(--soft); }
 
-/* ---------- Capa: como o hero do site ---------- */
-.cover__bg, .back__bg { position: absolute; inset: 0; z-index: 0; }
-.cover__bg img, .back__bg img { width: 100%; height: 100%; object-fit: cover; }
-.cover__bg img { object-position: 50% 40%; }
-.cover__bg::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgb(11 17 25 / .7) 0%, rgb(11 17 25 / .15) 26%, rgb(11 17 25 / .55) 52%, rgb(11 17 25 / .94) 74%, var(--bg) 100%); }
-.brand { position: absolute; z-index: 1; left: var(--m); top: 10mm; display: flex; align-items: center; gap: 2.6mm; }
-.brand__mark { width: 9mm; }
-.brand__text { display: grid; gap: .3mm; font: 500 5.2pt/1.4 var(--f-sans); letter-spacing: .24em; text-transform: uppercase; color: var(--gold); }
-.brand__text span:last-child { color: var(--muted-d); }
-.cover__content { position: absolute; z-index: 1; left: var(--m); right: var(--m); bottom: 42mm; display: grid; gap: 3.6mm; }
-.cover__title { font: 500 34pt/1.04 var(--f-display); color: var(--text-d); }
-.cover__title em { color: var(--gold); }
-.cover__lede { font-size: 9.6pt; color: var(--lede-d); }
+/* ---------- 11. Capítulo 6 ---------- */
+.p-ch6 { padding-top: 26mm; }
+.proofs { display: grid; grid-template-columns: 1fr 1fr; column-gap: 7mm; margin-top: 12mm; }
+.proofs__k { font: 700 7.6pt/1.3 var(--sans); color: var(--ink); padding-bottom: 2mm; border-bottom: .35mm solid var(--ink); }
+.proofs__list li { display: grid; grid-template-columns: 5.5mm 8mm 1fr; align-items: baseline; padding: 3mm 0 3.2mm; border-bottom: .2mm solid var(--rule); }
+.proofs__list .idx__t { font: 400 11pt/1.25 var(--serif); }
+.proofs__why { display: grid; grid-template-columns: 8.5mm 1fr; align-items: baseline; margin-top: 12mm; padding: 4mm; background: var(--sky); font: italic 300 13pt/1.3 var(--serif); color: var(--ink); }
+.box { width: 3.2mm; height: 3.2mm; border: .3mm solid var(--ink); align-self: center; }
 
-.logos { position: absolute; z-index: 1; left: var(--m); right: var(--m); bottom: 11mm; display: flex; align-items: center; gap: 5mm; padding-top: 5mm; border-top: .25mm solid rgb(214 170 89 / .3); }
-.logos__ks { height: 15mm; width: auto; }
-.logos__rule { width: .25mm; height: 10mm; background: rgb(214 170 89 / .45); }
-.logos__agency { font: 500 9pt/1.2 var(--f-display); color: var(--text-d); }
-.logos__agency span { display: block; margin-top: .6mm; font: 600 5.6pt/1.3 var(--f-sans); letter-spacing: .2em; text-transform: uppercase; color: var(--gold); }
+/* ---------- 12–13. Checklist ---------- */
+.p-check { padding-top: 26mm; }
+.p-check--cont { padding-top: 20mm; }
+.phases { display: grid; gap: 6mm; margin-top: 7mm; }
+.p-check--cont .phases { margin-top: 0; }
+.phase h2 { display: grid; grid-template-columns: 9mm 1fr; align-items: baseline; padding-bottom: 1.6mm; border-bottom: .35mm solid var(--ink); font: 400 13pt/1.2 var(--serif); color: var(--ink); }
+.phase li { display: grid; grid-template-columns: 9mm 1fr; align-items: end; height: 7mm; }
+.phase .box { align-self: center; margin-top: 1.5mm; }
+.phase .line { border-bottom: .2mm solid var(--rule); height: 100%; }
 
-/* ---------- Boas-vindas: faixa editorial ---------- */
-.page--intro { padding: 22mm var(--m) 0; }
-.glow { position: absolute; inset: -20% -30% auto auto; width: 120mm; height: 120mm; background: radial-gradient(50% 50% at 50% 50%, rgb(214 170 89 / .13), transparent); pointer-events: none; }
-.glow--bottom { inset: auto -20mm -50mm -20mm; width: auto; height: 120mm; z-index: 0; }
-.page--intro .h2 { max-width: 112mm; font-size: 22pt; }
-.intro__body { display: grid; gap: 3mm; margin-top: 9mm; max-width: 108mm; font-size: 8.4pt; line-height: 1.65; color: #DCE3EC; }
-.intro__sign { margin-top: 9mm; font: 500 14pt/1 var(--f-display); color: var(--gold); }
-.intro__credits { margin-top: 2.4mm; font: 600 6pt/1.4 var(--f-sans); letter-spacing: .22em; text-transform: uppercase; color: var(--muted-d); }
+/* ---------- 14. Contatos ---------- */
+.p-contacts { padding-top: 26mm; }
+.contacts { width: 100%; margin-top: 8mm; border-collapse: collapse; table-layout: fixed; }
+.contacts thead th { padding: 0 0 1.6mm 2mm; border-bottom: .35mm solid var(--ink); text-align: left; font: 700 7pt/1 var(--sans); color: var(--soft); }
+.contacts thead th:first-child { width: 47mm; padding-left: 0; }
+.contacts tbody th { padding: 0 2mm 0 0; height: 12.4mm; text-align: left; vertical-align: middle; font: 400 10pt/1.2 var(--serif); color: var(--text); border-bottom: .2mm solid var(--rule); }
+.contacts tbody th .idx__n { display: inline-block; width: 8.5mm; }
+.contacts td { border-bottom: .2mm solid var(--rule); border-left: .2mm solid var(--rule); }
 
-/* ---------- Contracapa: como a chamada final do site ---------- */
-.back__bg { bottom: 50%; }
-.back__bg img { object-position: 50% 75%; }
-.back__bg::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgb(11 17 25 / .2) 0%, rgb(11 17 25 / .55) 55%, var(--bg) 100%); }
-.back__content { position: absolute; z-index: 1; left: var(--m); right: var(--m); top: 86mm; display: grid; justify-items: center; text-align: center; gap: 3.6mm; }
-.back__mark { width: 15mm; padding: 2.2mm; border: .25mm solid rgb(214 170 89 / .4); border-radius: var(--r-sm); background: var(--bg); margin-bottom: 2mm; }
-.back__title { font: 500 19pt/1.15 var(--f-display); color: var(--text-d); max-width: 110mm; text-wrap: balance; }
-.back__title em { color: var(--gold); }
-.back__credits { color: var(--muted-d); font-size: 8pt; }
-.page--back .logos { justify-content: center; }
+/* ---------- 15. Anotações ---------- */
+.p-notes { padding-top: 26mm; }
+.fields { display: grid; grid-template-columns: 1fr 1fr; gap: 0 7mm; margin-top: 8mm; border-top: .35mm solid var(--ink); }
+.fields div { height: 13mm; padding-top: 1.6mm; border-bottom: .2mm solid var(--rule); }
+.fields dt { font: 400 7pt/1.2 var(--sans); color: var(--soft); }
+.lines { display: grid; margin-top: 8mm; }
+.lines span { height: 7.4mm; border-bottom: .2mm solid var(--rule); }
+
+/* ---------- 16. Encerramento ---------- */
+.p-back { padding: 0; background: var(--night); }
+.back__type { position: absolute; left: var(--outer); right: var(--inner); top: 26mm; }
+.back__quote { font: italic 300 23pt/1.16 var(--serif); color: #FFF; text-wrap: balance; max-width: 112mm; }
+.back__bye { margin-top: 6mm; font: 400 12pt/1 var(--serif); color: var(--gold); }
+.back__photo { position: absolute; left: 0; right: 0; top: 86mm; height: 84mm; }
+.back__photo img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 78%; }
+.back__foot { position: absolute; left: var(--outer); right: var(--inner); bottom: 11mm; display: flex; justify-content: space-between; align-items: flex-end; gap: 6mm; }
+.p-back .logos__agency { color: #FFF; border-color: rgb(255 255 255 / .3); }
+.p-back .logos__agency span { color: #AEB9CA; }
+.back__credit { font: 400 6.8pt/1.3 var(--sans); color: #AEB9CA; text-align: right; max-width: 40mm; }
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+.note--wide { grid-column: 1 / -1; }
 
 </style>
 </head>
 <body>
-<svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="i-file" viewBox="0 0 256 256"><path d="M213.66,82.34l-56-56A8,8,0,0,0,152,24H56A16,16,0,0,0,40,40V216a16,16,0,0,0,16,16H200a16,16,0,0,0,16-16V88A8,8,0,0,0,213.66,82.34ZM160,176H96a8,8,0,0,1,0-16h64a8,8,0,0,1,0,16Zm0-32H96a8,8,0,0,1,0-16h64a8,8,0,0,1,0,16Zm-8-56V44l44,44Z"/></symbol>
-<symbol id="i-scales" viewBox="0 0 256 256"><path d="M239.43,133l-32-80A8,8,0,0,0,200,48a8.27,8.27,0,0,0-1.73.21L136,62V40a8,8,0,0,0-16,0V65.58L54.27,80.21A8,8,0,0,0,48.57,85l-32,80a7.92,7.92,0,0,0-.57,3c0,23.31,24.54,32,40,32s40-8.69,40-32a7.92,7.92,0,0,0-.57-3L66.92,93.77,120,82V208H104a8,8,0,0,0,0,16h48a8,8,0,0,0,0-16H136V78.42L187,67.1,160.57,133a7.92,7.92,0,0,0-.57,3c0,23.31,24.54,32,40,32s40-8.69,40-32A7.92,7.92,0,0,0,239.43,133Zm-160,35H32.62L56,109.54Zm97.24-32L200,77.54,223.38,136Z"/></symbol>
-<symbol id="i-phone" viewBox="0 0 256 256"><path d="M231.88,175.08A56.26,56.26,0,0,1,176,224C96.6,224,32,159.4,32,80A56.26,56.26,0,0,1,80.92,24.12a16,16,0,0,1,16.62,9.52l21.12,47.15,0,.12A16,16,0,0,1,117.39,96c-.18.27-.37.52-.57.77L96,121.45c7.49,15.22,23.41,31,38.83,38.51l24.34-20.71a8.12,8.12,0,0,1,.75-.56,16,16,0,0,1,15.17-1.4l.13.06,47.11,21.11A16,16,0,0,1,231.88,175.08Z"/></symbol>
-<symbol id="i-mail" viewBox="0 0 256 256"><path d="M224,48H32a8,8,0,0,0-8,8V192a16,16,0,0,0,16,16H216a16,16,0,0,0,16-16V56A8,8,0,0,0,224,48Zm-8,144H40V74.19l82.59,75.71a8,8,0,0,0,10.82,0L216,74.19V192Z"/></symbol>
-<symbol id="i-whatsapp" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></symbol>
-<symbol id="i-check" viewBox="0 0 256 256"><path d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm45.66,85.66-56,56a8,8,0,0,1-11.32,0l-24-24a8,8,0,0,1,11.32-11.32L112,148.69l50.34-50.35a8,8,0,0,1,11.32,11.32Z"/></symbol>
-<symbol id="i-warning" viewBox="0 0 256 256"><path d="M236.8,188.09,149.35,36.22h0a24.76,24.76,0,0,0-42.7,0L19.2,188.09a23.51,23.51,0,0,0,0,23.72A24.35,24.35,0,0,0,40.55,224h174.9a24.35,24.35,0,0,0,21.33-12.19A23.51,23.51,0,0,0,236.8,188.09ZM120,104a8,8,0,0,1,16,0v40a8,8,0,0,1-16,0Zm8,88a12,12,0,1,1,12-12A12,12,0,0,1,128,192Z"/></symbol>
-<symbol id="i-check-circle" viewBox="0 0 256 256"><path d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm45.66,85.66-56,56a8,8,0,0,1-11.32,0l-24-24a8,8,0,0,1,11.32-11.32L112,148.69l50.34-50.35a8,8,0,0,1,11.32,11.32Z"/></symbol></svg>
 <main class="book">
-<section class="page page--dark page--cover" data-page="1">
-  <div class="cover__bg"><img src="img/capa-asa-litoral.jpg" alt="Vista da janela do avião: a asa sobre o litoral."></div>
-  <div class="brand"><img src="img/ks-monograma.png" alt="" class="brand__mark"><span class="brand__text"><span>Advocacia Empresarial</span><span>Dra. Karolem Silva</span></span></div>
-  <div class="cover__content">
-    <p class="eyebrow">Antes, durante e depois da viagem</p>
-    <h1 class="cover__title">Guia do <em>Viajante</em></h1>
-    <p class="cover__lede">Informação para viajar melhor.</p>
+<section class="page page--odd p-cover" data-page="1">
+  <figure class="cover__photo"><img src="img/capa-asa-litoral.jpg" alt="Asa do avião sobre o litoral, vista pela janela."></figure>
+  <div class="cover__type">
+    <h1 class="cover__title">Guia do<br>Viajante</h1>
+    <p class="cover__sub">Informação para viajar melhor.</p>
   </div>
-  <div class="logos">
-  <img src="img/ks-logo.png" alt="KS Advocacia Empresarial, Dra. Karolem Silva" class="logos__ks">
-  <span class="logos__rule" aria-hidden="true"></span>
+  <div class="logos logos--light">
+  <img class="logos__ks" src="img/ks-logo-azul.png" alt="KS Advocacia Empresarial, Dra. Karolem Silva">
   <p class="logos__agency">Laura Lamounier<span>Agência de viagens</span></p>
 </div></section>
-<section class="page page--dark page--intro" data-page="2">
-  <div class="glow" aria-hidden="true"></div>
-  <p class="eyebrow">Boas-vindas</p>
-  <h1 class="h2">Informação também faz parte da sua <em>bagagem</em></h1>
-  <div class="intro__body">
-    <p>Viajar exige planejamento, mas imprevistos podem acontecer. Este Guia do Viajante reúne informações e orientações práticas para ajudar você a se preparar antes, durante e depois da viagem, abordando temas como documentação, aeroporto, bagagem, conexões, viagens internacionais e direitos dos passageiros.</p>
-    <p>Além de apresentar seus principais direitos, o guia explica como agir diante de situações inesperadas, quais documentos guardar e quais providências adotar para proteger seus interesses.</p>
-    <p>Nosso objetivo é tornar sua viagem mais segura e tranquila, por meio da informação e da prevenção. Consulte o guia antes e durante a sua viagem.</p>
+<section class="page page--even p-intro" data-page="2">
+  <h1 class="intro__h">Introdução</h1>
+  <div class="intro__text"><p>Viajar exige planejamento, mas imprevistos podem acontecer. Este Guia do Viajante reúne informações e orientações práticas para ajudar você a se preparar antes, durante e depois da viagem, abordando temas como documentação, aeroporto, bagagem, conexões, viagens internacionais e direitos dos passageiros.</p><p>Além de apresentar seus principais direitos, o guia explica como agir diante de situações inesperadas, quais documentos guardar e quais providências adotar para proteger seus interesses.</p><p>Nosso objetivo é tornar sua viagem mais segura e tranquila, por meio da informação e da prevenção. Afinal, informação também faz parte da sua bagagem.</p><p>Consulte o guia antes e durante a sua viagem. Informação também faz parte da sua bagagem.</p>
+    <p class="intro__bye">Boa viagem!</p>
   </div>
-  <p class="intro__sign">Boa viagem!</p>
-  <p class="intro__credits">Karolem Silva e Laura Lamounier</p><footer class="foot" aria-hidden="true"><span>Guia do Viajante</span><span class="foot__n">02</span></footer></section>
-<section class="page page--light page--toc" data-page="3"><div class="body body--top">
-  <p class="eyebrow">Sumário</p>
-  <h1 class="h2">O que você vai <em>encontrar</em></h1>
-  <ol class="toc" role="list">
-    <li><span class="toc__n">01.</span><span class="toc__t">Antes de viajar: planejamento</span><span class="toc__p">05</span></li>
-    <li><span class="toc__n">02.</span><span class="toc__t">Aeroporto e embarque</span><span class="toc__p">06</span></li>
-    <li><span class="toc__n">03.</span><span class="toc__t">Bagagem</span><span class="toc__p">07</span></li>
-    <li><span class="toc__n">04.</span><span class="toc__t">Quando algo dá errado</span><span class="toc__p">08</span></li>
-    <li><span class="toc__n">05.</span><span class="toc__t">Direitos do viajante</span><span class="toc__p">10</span></li>
-    <li><span class="toc__n">06.</span><span class="toc__t">Como produzir provas durante uma viagem</span><span class="toc__p">11</span></li>
-    <li><span class="toc__n">07.</span><span class="toc__t">Checklist do viajante</span><span class="toc__p">12</span></li>
-    <li><span class="toc__n">08.</span><span class="toc__t">Canais e contatos úteis</span><span class="toc__p">14</span></li>
-  </ol></div><footer class="foot" aria-hidden="true"><span>Guia do Viajante</span><span class="foot__n">03</span></footer></section>
-<section class="page page--light page--howto" data-page="4"><div class="body body--top">
-  <p class="eyebrow">Como usar</p>
-  <h1 class="h2">Blocos curtos para consultar <em>rápido</em></h1>
-  <p class="lead">Cada capítulo traz os temas em poucas linhas. Os quadros abaixo aparecem ao longo do guia e destacam o que não pode ficar para depois.</p>
-  <div class="howto">
-    <aside class="card card--atencao"><span class="icon-box"><svg class="ic" aria-hidden="true"><use href="#i-warning"/></svg></span><div><p class="card__label">Atenção</p><p>Um cuidado que evita prejuízo. Leia antes de agir.</p></div></aside>
-    <aside class="card card--faca"><span class="icon-box"><svg class="ic" aria-hidden="true"><use href="#i-check-circle"/></svg></span><div><p class="card__label">Faça isso</p><p>Uma atitude simples que protege você e a sua bagagem.</p></div></aside>
-    <aside class="card card--guarde"><span class="icon-box"><svg class="ic" aria-hidden="true"><use href="#i-file"/></svg></span><div><p class="card__label">Guarde</p><p>Documentos e comprovantes que podem ser pedidos depois.</p></div></aside>
-    <aside class="card card--direitos"><span class="icon-box"><svg class="ic" aria-hidden="true"><use href="#i-scales"/></svg></span><div><p class="card__label">Seus direitos</p><p>O que o passageiro pode pedir em determinadas situações.</p></div></aside>
-  </div></div><footer class="foot" aria-hidden="true"><span>Guia do Viajante</span><span class="foot__n">04</span></footer></section>
-<section class="page page--light page--chapter" data-page="5">
-  <header class="band ">
-    <img class="band__img" src="img/cap1-mapa-passaporte.jpg" alt="" style="object-position: 50% 55%">
-    <div class="band__content">
-      <p class="eyebrow">Capítulo 01</p>
-      <h1 class="band__title">Antes de viajar: <span>planejamento</span></h1>
-      <p class="band__lede">Planejamento é o primeiro passo de uma viagem tranquila.</p>
-    </div>
-  </header><div class="body"><ol class="topics" role="list">
-    <li><span class="topics__n">1.1</span><div><h2>Documentos necessários</h2><p>Documento oficial com foto, dentro da validade e em bom estado.</p></div></li>
-    <li><span class="topics__n">1.2</span><div><h2>Passaporte, vistos e autorizações</h2><p>Confira a validade do passaporte e as exigências do destino e das escalas com antecedência.</p></div></li>
-    <li><span class="topics__n">1.3</span><div><h2>Seguro viagem</h2><p>Em alguns destinos ele é obrigatório. Leia o que a apólice cobre e salve os contatos de atendimento.</p></div></li>
-    <li><span class="topics__n">1.4</span><div><h2>Cuidados com documentos e informações pessoais</h2><p>Guarde cópias digitais em local seguro e não publique fotos de documentos ou do cartão de embarque.</p></div></li>
-    <li><span class="topics__n">1.5</span><div><h2>Organização da viagem</h2><p>Reúna reservas, horários e endereços em um só lugar, no celular e em papel.</p></div></li>
-    <li><span class="topics__n">1.6</span><div><h2>Checklist pré-viagem</h2><p>Use a lista do capítulo 7 para não esquecer nada.</p></div></li>
-  </ol><div class="cards"><aside class="card card--faca"><span class="icon-box"><svg class="ic" aria-hidden="true"><use href="#i-check-circle"/></svg></span><div><p class="card__label">Faça isso</p><p>Tire fotos dos documentos e guarde uma cópia longe dos originais.</p></div></aside></div></div><footer class="foot" aria-hidden="true"><span>Guia do Viajante</span><span class="foot__n">05</span></footer></section>
-<section class="page page--light page--chapter" data-page="6">
-  <header class="band ">
-    <img class="band__img" src="img/cap2-terminal.jpg" alt="" style="object-position: 50% 55%">
-    <div class="band__content">
-      <p class="eyebrow">Capítulo 02</p>
-      <h1 class="band__title">Aeroporto e embarque</h1>
-      <p class="band__lede">Chegue com antecedência e evite contratempos.</p>
-    </div>
-  </header><div class="body"><ol class="topics" role="list">
-    <li><span class="topics__n">2.1</span><div><h2>Quando chegar ao aeroporto</h2><p>Siga o horário indicado pela companhia aérea. Em voos internacionais, a antecedência costuma ser maior.</p></div></li>
-    <li><span class="topics__n">2.2</span><div><h2>Check-in</h2><p>Faça on-line quando possível e confira nome, voo e horário no cartão de embarque.</p></div></li>
-    <li><span class="topics__n">2.3</span><div><h2>Controle de segurança</h2><p>Deixe eletrônicos e líquidos fáceis de retirar para agilizar a inspeção.</p></div></li>
-    <li><span class="topics__n">2.4</span><div><h2>Objetos proibidos ou restritos</h2><p>Itens cortantes, inflamáveis e baterias têm regras próprias. Consulte a companhia antes de arrumar a mala.</p></div></li>
-    <li><span class="topics__n">2.5</span><div><h2>Transporte de líquidos</h2><p>Em voos internacionais, frascos de até 100 ml, em uma embalagem plástica transparente de até 1 litro.</p></div></li>
-  </ol><div class="cards"><aside class="card card--atencao"><span class="icon-box"><svg class="ic" aria-hidden="true"><use href="#i-warning"/></svg></span><div><p class="card__label">Atenção</p><p>O portão de embarque pode mudar. Acompanhe os painéis e os avisos da companhia até a hora de embarcar.</p></div></aside></div></div><footer class="foot" aria-hidden="true"><span>Guia do Viajante</span><span class="foot__n">06</span></footer></section>
-<section class="page page--light page--chapter" data-page="7">
-  <header class="band ">
-    <img class="band__img" src="img/cap3-esteira.jpg" alt="" style="object-position: 50% 45%">
-    <div class="band__content">
-      <p class="eyebrow">Capítulo 03</p>
-      <h1 class="band__title">Bagagem</h1>
-      <p class="band__lede">O que você precisa saber antes de despachar sua mala.</p>
-    </div>
-  </header><div class="body"><ol class="topics" role="list">
-    <li><span class="topics__n">3.1</span><div><h2>Bagagem de mão</h2><p>Confira o peso e as medidas da sua tarifa. Leve nela remédios, documentos e objetos de valor.</p></div></li>
-    <li><span class="topics__n">3.2</span><div><h2>Bagagem despachada</h2><p>Identifique a mala por dentro e por fora e guarde o comprovante de despacho.</p></div></li>
-    <li><span class="topics__n">3.3</span><div><h2>Excesso de bagagem</h2><p>Pesar a mala em casa evita cobranças inesperadas no balcão.</p></div></li>
-    <li><span class="topics__n">3.4</span><div><h2>Bagagens especiais</h2><p>Instrumentos, equipamentos esportivos e cadeiras de rodas pedem aviso prévio à companhia.</p></div></li>
-    <li><span class="topics__n">3.5</span><div><h2>Objetos de valor</h2><p>Não despache joias, eletrônicos e dinheiro. Mantenha esses itens com você.</p></div></li>
-  </ol><div class="cards cards--two"><aside class="card card--faca"><span class="icon-box"><svg class="ic" aria-hidden="true"><use href="#i-check-circle"/></svg></span><div><p class="card__label">Faça isso</p><p>Fotografe sua mala antes do despacho.</p></div></aside><aside class="card card--guarde"><span class="icon-box"><svg class="ic" aria-hidden="true"><use href="#i-file"/></svg></span><div><p class="card__label">Guarde</p><p>Cartão de embarque, comprovante de despacho e protocolo de atendimento.</p></div></aside></div></div><footer class="foot" aria-hidden="true"><span>Guia do Viajante</span><span class="foot__n">07</span></footer></section>
-<section class="page page--light page--chapter page--dense" data-page="8">
-  <header class="band band--short">
-    <img class="band__img" src="img/cap4-imprevisto.jpg" alt="" style="object-position: 50% 60%">
-    <div class="band__content">
-      <p class="eyebrow">Capítulo 04</p>
-      <h1 class="band__title">Quando algo dá errado</h1>
-      <p class="band__lede">Saber o que fazer evita dor de cabeça.</p>
-    </div>
-  </header><div class="body"><ol class="topics topics--two" role="list">
-    <li><span class="topics__n">4.1</span><div><h2>Perdi meu voo. E agora?</h2><p>Procure a companhia o quanto antes e pergunte sobre remarcação e as regras da sua tarifa.</p></div></li>
-    <li><span class="topics__n">4.2</span><div><h2>Meu voo foi atrasado ou cancelado. O que faço?</h2><p>Peça a informação por escrito e pergunte sobre assistência, reacomodação ou reembolso.</p></div></li>
-    <li><span class="topics__n">4.3</span><div><h2>Minha bagagem não chegou.</h2><p>Registre a ocorrência antes de sair do desembarque. O passo a passo está na próxima página.</p></div></li>
-    <li><span class="topics__n">4.4</span><div><h2>Minha bagagem foi danificada.</h2><p>Fotografe o dano ainda no aeroporto e registre a reclamação na companhia.</p></div></li>
-    <li><span class="topics__n">4.5</span><div><h2>Perdi uma conexão.</h2><p>Procure o balcão da companhia na escala e peça a reacomodação.</p></div></li>
-    <li><span class="topics__n">4.6</span><div><h2>Fui impedido de embarcar (overbooking).</h2><p>Não saia do balcão sem uma solução registrada: novo voo, assistência ou reembolso.</p></div></li>
-    <li><span class="topics__n">4.7</span><div><h2>Tive um problema durante a viagem.</h2><p>Anote data, hora e nomes, e guarde tudo o que comprove o que aconteceu.</p></div></li>
-    <li><span class="topics__n">4.8</span><div><h2>Perdi meus documentos.</h2><p>Registre a ocorrência na polícia. No exterior, procure o consulado brasileiro.</p></div></li>
-    <li><span class="topics__n">4.9</span><div><h2>Fui vítima de furto ou golpe.</h2><p>Bloqueie cartões e contas, registre a ocorrência e avise a agência.</p></div></li>
-    <li><span class="topics__n">4.10</span><div><h2>Tive uma emergência durante a viagem.</h2><p>Acione primeiro o seguro viagem: ele indica onde você será atendido.</p></div></li>
-  </ol></div><footer class="foot" aria-hidden="true"><span>Guia do Viajante</span><span class="foot__n">08</span></footer></section>
-<section class="page page--light page--steps" data-page="9">
-      <div class="body body--top">
-        <p class="eyebrow">4.3 Minha bagagem não chegou</p>
-        <h1 class="h2">Bagagem extraviada: <em>o que fazer?</em></h1>
-        <ol class="steps" role="list">
-          <li>Procure imediatamente o atendimento da companhia aérea.</li>
-          <li>Registre a ocorrência.</li>
-          <li>Guarde o comprovante.</li>
-          <li>Informe seus dados de contato.</li>
-          <li>Guarde os comprovantes das despesas realizadas.</li>
-        </ol>
-        <div class="cards"><aside class="card card--atencao"><span class="icon-box"><svg class="ic" aria-hidden="true"><use href="#i-warning"/></svg></span><div><p class="card__label">Atenção</p><p>Não deixe o aeroporto sem registrar formalmente o problema com sua bagagem.</p></div></aside></div>
-        <div class="cards cards--two">
-          <aside class="card card--faca"><span class="icon-box"><svg class="ic" aria-hidden="true"><use href="#i-check-circle"/></svg></span><div><p class="card__label">Faça isso</p><p>Fotografe sua mala antes do despacho.</p></div></aside>
-          <aside class="card card--guarde"><span class="icon-box"><svg class="ic" aria-hidden="true"><use href="#i-file"/></svg></span><div><p class="card__label">Guarde</p><p>Cartão de embarque, comprovante de despacho e protocolo de atendimento.</p></div></aside>
-        </div>
-        <div class="cards"><aside class="card card--direitos"><span class="icon-box"><svg class="ic" aria-hidden="true"><use href="#i-scales"/></svg></span><div><p class="card__label">Seus direitos</p><p>Em determinadas situações, o passageiro pode ter direito à assistência, reacomodação ou reembolso.</p></div></aside></div>
-      </div><footer class="foot" aria-hidden="true"><span>Guia do Viajante</span><span class="foot__n">09</span></footer></section>
-<section class="page page--light page--chapter page--rights" data-page="10">
-  <header class="band ">
-    <img class="band__img" src="img/cap5-escritorio.webp" alt="" style="object-position: 50% 50%">
-    <div class="band__content">
-      <p class="eyebrow">Capítulo 05</p>
-      <h1 class="band__title">Direitos do viajante</h1>
-      <p class="band__lede">Você tem direitos e pode exercê-los.</p>
-    </div>
-  </header><div class="body">
-      <ol class="topics" role="list">
-    <li><span class="topics__n">5.1</span><div><h2>Quando procurar orientação jurídica</h2><p>Quando a companhia não resolve o problema, o prejuízo é relevante ou você não sabe se um direito foi desrespeitado.</p></div></li>
-    <li><span class="topics__n">5.2</span><div><h2>Como preservar seus direitos</h2><p>Registre tudo por escrito, guarde os comprovantes e não aceite soluções apenas verbais.</p></div></li>
-  </ol>
-      <div class="cards"><aside class="card card--direitos"><span class="icon-box"><svg class="ic" aria-hidden="true"><use href="#i-scales"/></svg></span><div><p class="card__label">Seus direitos</p><p>Em determinadas situações, o passageiro pode ter direito à assistência, reacomodação ou reembolso.</p></div></aside></div>
-      <div class="cta-card">
-        <img src="img/ks-monograma.png" alt="" class="cta-card__mark">
-        <div>
-          <p class="eyebrow">Orientação jurídica</p>
-          <p class="cta-card__title">Uma dúvida sobre a sua viagem não precisa virar prejuízo.</p>
-          <p class="cta-card__who">KS Advocacia Empresarial<br>Dra. Karolem Silva, OAB/PR 132.409</p>
-          <p class="cta-card__contact"><svg class="ic" aria-hidden="true"><use href="#i-whatsapp"/></svg>(42) 99960-1379</p>
-        </div>
-      </div></div><footer class="foot" aria-hidden="true"><span>Guia do Viajante</span><span class="foot__n">10</span></footer></section>
-<section class="page page--light page--chapter page--dense" data-page="11">
-  <header class="band ">
-    <img class="band__img" src="img/cap6-provas.jpg" alt="" style="object-position: 50% 40%">
-    <div class="band__content">
-      <p class="eyebrow">Capítulo 06</p>
-      <h1 class="band__title">Como produzir provas <span>durante uma viagem</span></h1>
-      <p class="band__lede">Registros simples fazem diferença se algo der errado.</p>
-    </div>
-  </header><div class="body"><ol class="topics topics--two" role="list">
-    <li><span class="topics__n">6.1</span><div><h2>Fotografias e vídeos</h2><p>Registre a mala antes do despacho e qualquer dano assim que perceber.</p></div></li>
-    <li><span class="topics__n">6.2</span><div><h2>E-mails e mensagens</h2><p>Prefira canais escritos e não apague conversas com a companhia ou a agência.</p></div></li>
-    <li><span class="topics__n">6.3</span><div><h2>Protocolos de atendimento</h2><p>Anote o número, a data e o nome de quem atendeu.</p></div></li>
-    <li><span class="topics__n">6.4</span><div><h2>Comprovantes de despesas</h2><p>Alimentação, transporte e hospedagem extras podem ser cobrados depois.</p></div></li>
-    <li><span class="topics__n">6.5</span><div><h2>Bilhetes e cartões de embarque</h2><p>Guarde até o fim de qualquer reclamação, inclusive os digitais.</p></div></li>
-    <li><span class="topics__n">6.6</span><div><h2>Notas fiscais e recibos</h2><p>Peça a nota no nome do passageiro sempre que possível.</p></div></li>
-    <li><span class="topics__n">6.7</span><div><h2>Testemunhas</h2><p>Anote o nome e o contato de quem presenciou o problema.</p></div></li>
-    <li><span class="topics__n">6.8</span><div><h2>Por que guardar todos os documentos</h2><p>Sem prova, fica mais difícil pedir reembolso ou indenização.</p></div></li>
-  </ol></div><footer class="foot" aria-hidden="true"><span>Guia do Viajante</span><span class="foot__n">11</span></footer></section>
-<section class="page page--light page--chapter page--checklist" data-page="12">
-  <header class="band  band--plain">
-    
-    <div class="band__content">
-      <p class="eyebrow">Capítulo 07</p>
-      <h1 class="band__title">Checklist do viajante</h1>
-      <p class="band__lede">Imprima ou salve no celular.</p>
-    </div>
-  </header><div class="body"><div class="checks">
-      <div class="check">
-        <h2><span class="topics__n">7.1</span>Antes da viagem</h2>
-        <ul role="list"><li><span class="box" aria-hidden="true"></span>Documentos válidos e conferidos</li><li><span class="box" aria-hidden="true"></span>Vistos e autorizações, se exigidos</li><li><span class="box" aria-hidden="true"></span>Seguro viagem contratado</li><li><span class="box" aria-hidden="true"></span>Reservas salvas no celular e impressas</li><li><span class="box" aria-hidden="true"></span>Cópias digitais dos documentos</li></ul>
-      </div>
-      <div class="check">
-        <h2><span class="topics__n">7.2</span>No dia da viagem</h2>
-        <ul role="list"><li><span class="box" aria-hidden="true"></span>Documento com foto na bolsa</li><li><span class="box" aria-hidden="true"></span>Cartão de embarque</li><li><span class="box" aria-hidden="true"></span>Remédios na bagagem de mão</li><li><span class="box" aria-hidden="true"></span>Carregador e bateria externa</li><li><span class="box" aria-hidden="true"></span>Mala pesada e identificada</li></ul>
-      </div>
-      <div class="check">
-        <h2><span class="topics__n">7.3</span>No aeroporto</h2>
-        <ul role="list"><li><span class="box" aria-hidden="true"></span>Chegar com a antecedência indicada</li><li><span class="box" aria-hidden="true"></span>Fotografar a mala antes do despacho</li><li><span class="box" aria-hidden="true"></span>Guardar o comprovante de despacho</li><li><span class="box" aria-hidden="true"></span>Conferir portão e horário no painel</li></ul>
-      </div></div></div><footer class="foot" aria-hidden="true"><span>Guia do Viajante</span><span class="foot__n">12</span></footer></section>
-<section class="page page--light page--checklist" data-page="13"><div class="body body--top">
-      <p class="eyebrow">Checklist do viajante</p>
-      <div class="checks">
-      <div class="check">
-        <h2><span class="topics__n">7.4</span>Durante a viagem</h2>
-        <ul role="list"><li><span class="box" aria-hidden="true"></span>Guardar notas e recibos</li><li><span class="box" aria-hidden="true"></span>Documentos em local seguro</li><li><span class="box" aria-hidden="true"></span>Contatos de emergência à mão</li></ul>
-      </div>
-      <div class="check">
-        <h2><span class="topics__n">7.5</span>Antes do retorno</h2>
-        <ul role="list"><li><span class="box" aria-hidden="true"></span>Confirmar o horário do voo</li><li><span class="box" aria-hidden="true"></span>Conferir as regras de bagagem da volta</li><li><span class="box" aria-hidden="true"></span>Guardar compras e notas fiscais juntas</li></ul>
-      </div>
-      <div class="check">
-        <h2><span class="topics__n">7.6</span>Depois da viagem</h2>
-        <ul role="list"><li><span class="box" aria-hidden="true"></span>Conferir a mala ao desembarcar</li><li><span class="box" aria-hidden="true"></span>Registrar qualquer problema na hora</li><li><span class="box" aria-hidden="true"></span>Guardar os comprovantes até tudo se resolver</li></ul>
-      </div></div>
-      <p class="check__foot">Marque cada item à medida que resolver. Leve esta página impressa ou salve uma foto no celular.</p></div><footer class="foot" aria-hidden="true"><span>Guia do Viajante</span><span class="foot__n">13</span></footer></section>
-<section class="page page--light page--chapter page--contacts" data-page="14">
-  <header class="band ">
-    <img class="band__img" src="img/cap8-sala.webp" alt="" style="object-position: 50% 50%">
-    <div class="band__content">
-      <p class="eyebrow">Capítulo 08</p>
-      <h1 class="band__title">Canais e contatos úteis</h1>
-      <p class="band__lede">Para ter à mão quando precisar.</p>
-    </div>
-  </header><div class="body">
-      <dl class="contacts">
-        <div class="contact"><dt><span class="topics__n">8.1</span>Companhia aérea</dt><dd><span class="fill"></span><span class="fill"></span></dd></div>
-        <div class="contact"><dt><span class="topics__n">8.2</span>Aeroporto</dt><dd><span class="fill"></span><span class="fill"></span></dd></div>
-        <div class="contact"><dt><span class="topics__n">8.3</span>ANAC</dt><dd>Telefone 163<br>anac.gov.br</dd></div>
-        <div class="contact"><dt><span class="topics__n">8.4</span>Consumidor.gov.br</dt><dd>consumidor.gov.br</dd></div>
-        <div class="contact"><dt><span class="topics__n">8.5</span>Autoridades policiais</dt><dd>No Brasil, 190</dd></div>
-        <div class="contact"><dt><span class="topics__n">8.6</span>Consulado ou embaixada</dt><dd><span class="fill"></span><span class="fill"></span></dd></div>
-        <div class="contact"><dt><span class="topics__n">8.7</span>Seguro viagem</dt><dd><span class="fill"></span><span class="fill"></span></dd></div>
-        <div class="contact"><dt><span class="topics__n">8.8</span>Agência de viagens</dt><dd>Laura Lamounier<br><span class="todo">telefone e e-mail da agência</span></dd></div>
+  <p class="intro__credit">Produto criado por Karolem Silva e Laura Lamounier</p><footer class="folio"><span class="folio__n">2</span><span class="folio__t">Introdução</span></footer></section>
+<section class="page page--odd p-toc" data-page="3"><h1 class="page__h">Sumário</h1><ol class="toc" role="list">
+  <li class="toc__ch">
+    <p class="toc__head"><span class="toc__n">1</span><span class="toc__t">Antes de viajar: planejamento</span><span class="toc__p">5</span></p>
+    <ol class="toc__items" role="list"><li><span class="idx__n">1.1</span>Documentos necessários</li><li><span class="idx__n">1.2</span>Passaporte, vistos e autorizações</li><li><span class="idx__n">1.3</span>Seguro viagem</li><li><span class="idx__n">1.4</span>Cuidados com documentos e informações pessoais</li><li><span class="idx__n">1.5</span>Organização da viagem</li><li><span class="idx__n">1.6</span>Checklist pré-viagem</li></ol>
+  </li>
+  <li class="toc__ch">
+    <p class="toc__head"><span class="toc__n">2</span><span class="toc__t">Aeroporto e embarque</span><span class="toc__p">6</span></p>
+    <ol class="toc__items" role="list"><li><span class="idx__n">2.1</span>Quando chegar ao aeroporto</li><li><span class="idx__n">2.2</span>Check-in</li><li><span class="idx__n">2.3</span>Controle de segurança</li><li><span class="idx__n">2.4</span>Objetos proibidos ou restritos</li><li><span class="idx__n">2.5</span>Transporte de líquidos</li></ol>
+  </li>
+  <li class="toc__ch">
+    <p class="toc__head"><span class="toc__n">3</span><span class="toc__t">Bagagem</span><span class="toc__p">7</span></p>
+    <ol class="toc__items" role="list"><li><span class="idx__n">3.1</span>Bagagem de mão</li><li><span class="idx__n">3.2</span>Bagagem despachada</li><li><span class="idx__n">3.3</span>Excesso de bagagem</li><li><span class="idx__n">3.4</span>Bagagens especiais</li><li><span class="idx__n">3.5</span>Objetos de valor</li></ol>
+  </li>
+  <li class="toc__ch">
+    <p class="toc__head"><span class="toc__n">4</span><span class="toc__t">Quando algo dá errado</span><span class="toc__p">9</span></p>
+    <ol class="toc__items" role="list"><li><span class="idx__n">4.1</span>Perdi meu voo. E agora?</li><li><span class="idx__n">4.2</span>Meu voo foi atrasado/cancelado. O que faço?</li><li><span class="idx__n">4.3</span>Minha bagagem não chegou.</li><li><span class="idx__n">4.4</span>Minha bagagem foi danificada.</li><li><span class="idx__n">4.5</span>Perdi uma conexão.</li><li><span class="idx__n">4.6</span>Fui impedido de embarcar/overbooking</li><li><span class="idx__n">4.7</span>Tive um problema durante a viagem.</li><li><span class="idx__n">4.8</span>Perdi meus documentos.</li><li><span class="idx__n">4.9</span>Fui vítima de furto ou golpe.</li><li><span class="idx__n">4.10</span>Tive uma emergência durante a viagem.</li></ol>
+  </li>
+  <li class="toc__ch">
+    <p class="toc__head"><span class="toc__n">5</span><span class="toc__t">Direitos do viajante</span><span class="toc__p">10</span></p>
+    <ol class="toc__items" role="list"><li><span class="idx__n">5.1</span>Quando procurar orientação jurídica</li><li><span class="idx__n">5.2</span>Como preservar seus direitos</li></ol>
+  </li>
+  <li class="toc__ch">
+    <p class="toc__head"><span class="toc__n">6</span><span class="toc__t">Como produzir provas durante uma viagem</span><span class="toc__p">11</span></p>
+    <ol class="toc__items" role="list"><li><span class="idx__n">6.1</span>Fotografias e vídeos</li><li><span class="idx__n">6.2</span>E-mails e mensagens</li><li><span class="idx__n">6.3</span>Protocolos de atendimento</li><li><span class="idx__n">6.4</span>Comprovantes de despesas</li><li><span class="idx__n">6.5</span>Bilhetes e cartões de embarque</li><li><span class="idx__n">6.6</span>Notas fiscais e recibos</li><li><span class="idx__n">6.7</span>Testemunhas</li><li><span class="idx__n">6.8</span>Por que guardar todos os documentos</li></ol>
+  </li>
+  <li class="toc__ch">
+    <p class="toc__head"><span class="toc__n">7</span><span class="toc__t">Checklist do viajante</span><span class="toc__p">12</span></p>
+    <ol class="toc__items" role="list"><li><span class="idx__n">7.1</span>Antes da viagem</li><li><span class="idx__n">7.2</span>No dia da viagem</li><li><span class="idx__n">7.3</span>No aeroporto</li><li><span class="idx__n">7.4</span>Durante a viagem</li><li><span class="idx__n">7.5</span>Antes do retorno</li><li><span class="idx__n">7.6</span>Depois da viagem</li></ol>
+  </li>
+  <li class="toc__ch">
+    <p class="toc__head"><span class="toc__n">8</span><span class="toc__t">Canais e contatos úteis</span><span class="toc__p">14</span></p>
+    <ol class="toc__items" role="list"><li><span class="idx__n">8.1</span>Companhia aérea</li><li><span class="idx__n">8.2</span>Aeroporto</li><li><span class="idx__n">8.3</span>ANAC</li><li><span class="idx__n">8.4</span>Consumidor.gov.br</li><li><span class="idx__n">8.5</span>Autoridades policiais</li><li><span class="idx__n">8.6</span>Consulado ou embaixada</li><li><span class="idx__n">8.7</span>Seguro viagem</li><li><span class="idx__n">8.8</span>Contatos da agência de viagens</li><li><span class="idx__n">8.9</span>Contatos para orientação jurídica</li></ol>
+  </li></ol><footer class="folio"><span class="folio__n">3</span><span class="folio__t">Sumário</span></footer></section>
+<section class="page page--even p-howto" data-page="4">
+  <h1 class="page__h">Como usar este guia</h1>
+  <p class="howto__lead">Consulte o guia antes e durante a sua viagem.</p>
+  <div class="howto__grid">
+    <section class="howto__block">
+      <h2 class="howto__k">Numeração</h2>
+      <p>Os temas seguem a numeração do sumário: o item <b>3.2</b> é o segundo tema do capítulo 3.</p>
+    </section>
+    <section class="howto__block">
+      <h2 class="howto__k">Destaques</h2>
+      <p>Ao longo do guia, quatro marcações indicam o tipo de informação.</p>
+      <dl class="legend">
+        <div class="note note--atencao"><dt class="note__label">Atenção</dt><dd class="note__text">o que não pode deixar de ser feito.</dd></div>
+        <div class="note note--faca"><dt class="note__label">Faça isso</dt><dd class="note__text">uma providência prática.</dd></div>
+        <div class="note note--guarde"><dt class="note__label">Guarde</dt><dd class="note__text">documentos e comprovantes a manter com você.</dd></div>
+        <div class="note note--direitos"><dt class="note__label">Seus direitos</dt><dd class="note__text">o que o passageiro pode solicitar.</dd></div>
       </dl>
-      <div class="contact-ks">
-        <span class="icon-box"><svg class="ic" aria-hidden="true"><use href="#i-scales"/></svg></span>
-        <div><p class="contact-ks__k">8.9 Orientação jurídica</p><p>KS Advocacia Empresarial, Dra. Karolem Silva</p><p>(42) 99960-1379<br>karolemssadv@gmail.com</p></div>
-      </div></div><footer class="foot" aria-hidden="true"><span>Guia do Viajante</span><span class="foot__n">14</span></footer></section>
-<section class="page page--light page--notes" data-page="15"><div class="body body--top">
-  <p class="eyebrow">Anotações</p>
-  <h1 class="h2">Anotações da <em>viagem</em></h1>
-  <dl class="notes__fields">
-    <div><dt>Voo e localizador</dt><dd><span class="fill"></span></dd></div><div><dt>Hotel</dt><dd><span class="fill"></span></dd></div><div><dt>Apólice do seguro</dt><dd><span class="fill"></span></dd></div><div><dt>Protocolos</dt><dd><span class="fill"></span></dd></div>
-  </dl>
-  <div class="notes__lines" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div></div><footer class="foot" aria-hidden="true"><span>Guia do Viajante</span><span class="foot__n">15</span></footer></section>
-<section class="page page--dark page--back" data-page="16">
-  <div class="back__bg"><img src="img/contracapa-asa.jpg" alt=""></div>
-  <div class="glow glow--bottom" aria-hidden="true"></div>
-  <div class="back__content">
-    <img src="img/ks-monograma.png" alt="" class="back__mark">
-    <p class="eyebrow eyebrow--center">Boa viagem</p>
-    <p class="back__title">Mais segurança para cada etapa da sua <em>viagem</em></p>
-    <p class="back__credits">Um guia criado por Karolem Silva e Laura Lamounier.</p>
+    </section>
+    <section class="howto__block">
+      <h2 class="howto__k">Páginas para preencher</h2>
+      <p>O checklist, os contatos úteis e as anotações foram feitos para escrever à mão, no papel impresso.</p>
+    </section>
+  </div><footer class="folio"><span class="folio__n">4</span><span class="folio__t">Como usar</span></footer></section>
+<section class="page page--odd p-ch p-ch1" data-page="5">
+  <header class="ch1__head"><span class="bignum" aria-hidden="true">1</span>
+    <div><p class="kicker">Capítulo 1</p><h1 class="ch__title">Antes de viajar<span class="sub">planejamento</span></h1></div>
+  </header>
+  <ol class="idx idx--large" role="list"><li><span class="idx__n">1.1</span><span class="idx__t">Documentos necessários</span></li><li><span class="idx__n">1.2</span><span class="idx__t">Passaporte, vistos e autorizações</span></li><li><span class="idx__n">1.3</span><span class="idx__t">Seguro viagem</span></li><li><span class="idx__n">1.4</span><span class="idx__t">Cuidados com documentos e informações pessoais</span></li><li><span class="idx__n">1.5</span><span class="idx__t">Organização da viagem</span></li><li><span class="idx__n">1.6</span><span class="idx__t">Checklist pré-viagem</span></li></ol><footer class="folio"><span class="folio__n">5</span><span class="folio__t">Antes de viajar</span></footer></section>
+<section class="page page--even p-ch p-ch2" data-page="6">
+  <figure class="ch2__photo"><img src="img/cap2-portoes.jpg" alt="Placas dos portões de embarque H18 e H16 no terminal."></figure>
+  <div class="ch2__text">
+    <p class="kicker">Capítulo 2</p>
+    <h1 class="ch__title">Aeroporto e embarque</h1>
+    <ol class="idx " role="list"><li><span class="idx__n">2.1</span><span class="idx__t">Quando chegar ao aeroporto</span></li><li><span class="idx__n">2.2</span><span class="idx__t">Check-in</span></li><li><span class="idx__n">2.3</span><span class="idx__t">Controle de segurança</span></li><li><span class="idx__n">2.4</span><span class="idx__t">Objetos proibidos ou restritos</span></li><li><span class="idx__n">2.5</span><span class="idx__t">Transporte de líquidos</span></li></ol>
+  </div><footer class="folio"><span class="folio__n">6</span><span class="folio__t">Aeroporto e embarque</span></footer></section>
+<section class="page page--odd p-ch p-ch3" data-page="7">
+  <figure class="ch3__photo"><img src="img/cap3-esteira-3.jpg" alt="Esteira de bagagens vazia, com a placa amarela de número 3."></figure>
+  <header class="ch3__head">
+    <h1 class="ch3__label"><span>03</span>Bagagem</h1>
+    <p class="ch3__lede">O que você precisa saber antes de despachar sua mala.</p>
+  </header>
+  <ol class="idx idx--cols" role="list"><li><span class="idx__n">3.1</span><span class="idx__t">Bagagem de mão</span></li><li><span class="idx__n">3.2</span><span class="idx__t">Bagagem despachada</span></li><li><span class="idx__n">3.3</span><span class="idx__t">Excesso de bagagem</span></li><li><span class="idx__n">3.4</span><span class="idx__t">Bagagens especiais</span></li><li><span class="idx__n">3.5</span><span class="idx__t">Objetos de valor</span></li></ol><footer class="folio"><span class="folio__n">7</span><span class="folio__t">Bagagem</span></footer></section>
+<section class="page page--even p-steps" data-page="8">
+  <p class="kicker">Capítulo 3, Bagagem</p>
+  <h1 class="steps__h">Bagagem extraviada<span>O que fazer?</span></h1>
+  <ol class="steps" role="list"><li>Procure imediatamente o atendimento da companhia aérea.</li><li>Registre a ocorrência.</li><li>Guarde o comprovante.</li><li>Informe seus dados de contato.</li><li>Guarde os comprovantes das despesas realizadas.</li></ol>
+  <div class="steps__notes">
+    <div class="note note--atencao note--strong"><p class="note__label">Atenção</p><p class="note__text">Não deixe o aeroporto sem registrar formalmente o problema com sua bagagem.</p></div>
+    <div class="note note--faca "><p class="note__label">Faça isso</p><p class="note__text">Fotografe sua mala antes do despacho.</p></div>
+    <div class="note note--guarde "><p class="note__label">Guarde</p><p class="note__text">Cartão de embarque, comprovante de despacho e protocolo de atendimento.</p></div>
+    <div class="note note--direitos note--wide"><p class="note__label">Seus direitos</p><p class="note__text">Em determinadas situações, o passageiro pode ter direito à assistência, reacomodação ou reembolso.</p></div>
+  </div><footer class="folio"><span class="folio__n">8</span><span class="folio__t">Bagagem</span></footer></section>
+<section class="page page--odd p-ch p-ch4 p-dark" data-page="9">
+  <figure class="ch4__photo"><img src="img/cap4-painel.jpg" alt="Painel de partidas no saguão do aeroporto."></figure>
+  <div class="ch4__body">
+    <p class="kicker">Capítulo 4</p>
+    <h1 class="ch__title">Quando algo dá errado</h1>
+    <ol class="problems" role="list"><li><span class="idx__n">4.1</span><span class="problems__t">Perdi meu voo. E agora?</span></li><li><span class="idx__n">4.2</span><span class="problems__t">Meu voo foi atrasado/cancelado. O que faço?</span></li><li><span class="idx__n">4.3</span><span class="problems__t">Minha bagagem não chegou.<span class="xref">Bagagem extraviada, página 8</span></span></li><li><span class="idx__n">4.4</span><span class="problems__t">Minha bagagem foi danificada.</span></li><li><span class="idx__n">4.5</span><span class="problems__t">Perdi uma conexão.</span></li><li><span class="idx__n">4.6</span><span class="problems__t">Fui impedido de embarcar/overbooking</span></li><li><span class="idx__n">4.7</span><span class="problems__t">Tive um problema durante a viagem.</span></li><li><span class="idx__n">4.8</span><span class="problems__t">Perdi meus documentos.</span></li><li><span class="idx__n">4.9</span><span class="problems__t">Fui vítima de furto ou golpe.</span></li><li><span class="idx__n">4.10</span><span class="problems__t">Tive uma emergência durante a viagem.</span></li></ol>
+  </div><footer class="folio"><span class="folio__n">9</span><span class="folio__t">Quando algo dá errado</span></footer></section>
+<section class="page page--even p-ch p-ch5" data-page="10">
+  <p class="kicker">Capítulo 5</p>
+  <h1 class="ch__title">Direitos do viajante</h1>
+  <blockquote class="statement"><p class="note__label">Seus direitos</p><p>Em determinadas situações, o passageiro pode ter direito à assistência, reacomodação ou reembolso.</p></blockquote>
+  <ol class="idx idx--large" role="list"><li><span class="idx__n">5.1</span><span class="idx__t">Quando procurar orientação jurídica</span></li><li><span class="idx__n">5.2</span><span class="idx__t">Como preservar seus direitos</span></li></ol>
+  <div class="ch5__sign"><img src="img/ks-monograma-azul.png" alt=""><p>KS Advocacia Empresarial<span>Dra. Karolem Silva</span></p></div><footer class="folio"><span class="folio__n">10</span><span class="folio__t">Direitos do viajante</span></footer></section>
+<section class="page page--odd p-ch p-ch6" data-page="11">
+  <p class="kicker">Capítulo 6</p>
+  <h1 class="ch__title">Como produzir provas<span class="sub">durante uma viagem</span></h1>
+  <div class="proofs">
+    <section><h2 class="proofs__k">Registros que você produz</h2><ol class="proofs__list" role="list"><li><span class="box" aria-hidden="true"></span><span class="idx__n">6.1</span><span class="idx__t">Fotografias e vídeos</span></li><li><span class="box" aria-hidden="true"></span><span class="idx__n">6.2</span><span class="idx__t">E-mails e mensagens</span></li><li><span class="box" aria-hidden="true"></span><span class="idx__n">6.7</span><span class="idx__t">Testemunhas</span></li></ol></section>
+    <section><h2 class="proofs__k">Documentos que você guarda</h2><ol class="proofs__list" role="list"><li><span class="box" aria-hidden="true"></span><span class="idx__n">6.3</span><span class="idx__t">Protocolos de atendimento</span></li><li><span class="box" aria-hidden="true"></span><span class="idx__n">6.4</span><span class="idx__t">Comprovantes de despesas</span></li><li><span class="box" aria-hidden="true"></span><span class="idx__n">6.5</span><span class="idx__t">Bilhetes e cartões de embarque</span></li><li><span class="box" aria-hidden="true"></span><span class="idx__n">6.6</span><span class="idx__t">Notas fiscais e recibos</span></li></ol></section>
   </div>
-  <div class="logos">
-  <img src="img/ks-logo.png" alt="KS Advocacia Empresarial, Dra. Karolem Silva" class="logos__ks">
-  <span class="logos__rule" aria-hidden="true"></span>
+  <p class="proofs__why"><span class="idx__n">6.8</span><span>Por que guardar todos os documentos</span></p><footer class="folio"><span class="folio__n">11</span><span class="folio__t">Como produzir provas</span></footer></section>
+<section class="page page--even p-ch p-check" data-page="12">
+  <p class="kicker">Capítulo 7</p>
+  <h1 class="ch__title">Checklist do viajante</h1>
+  <div class="phases"><section class="phase"><h2><span class="idx__n">7.1</span>Antes da viagem</h2><ul role="list"><li><span class="box" aria-hidden="true"></span><span class="line"></span></li><li><span class="box" aria-hidden="true"></span><span class="line"></span></li><li><span class="box" aria-hidden="true"></span><span class="line"></span></li><li><span class="box" aria-hidden="true"></span><span class="line"></span></li><li><span class="box" aria-hidden="true"></span><span class="line"></span></li></ul></section><section class="phase"><h2><span class="idx__n">7.2</span>No dia da viagem</h2><ul role="list"><li><span class="box" aria-hidden="true"></span><span class="line"></span></li><li><span class="box" aria-hidden="true"></span><span class="line"></span></li><li><span class="box" aria-hidden="true"></span><span class="line"></span></li><li><span class="box" aria-hidden="true"></span><span class="line"></span></li><li><span class="box" aria-hidden="true"></span><span class="line"></span></li></ul></section><section class="phase"><h2><span class="idx__n">7.3</span>No aeroporto</h2><ul role="list"><li><span class="box" aria-hidden="true"></span><span class="line"></span></li><li><span class="box" aria-hidden="true"></span><span class="line"></span></li><li><span class="box" aria-hidden="true"></span><span class="line"></span></li><li><span class="box" aria-hidden="true"></span><span class="line"></span></li><li><span class="box" aria-hidden="true"></span><span class="line"></span></li></ul></section></div><footer class="folio"><span class="folio__n">12</span><span class="folio__t">Checklist do viajante</span></footer></section>
+<section class="page page--odd p-check p-check--cont" data-page="13">
+  <div class="phases"><section class="phase"><h2><span class="idx__n">7.4</span>Durante a viagem</h2><ul role="list"><li><span class="box" aria-hidden="true"></span><span class="line"></span></li><li><span class="box" aria-hidden="true"></span><span class="line"></span></li><li><span class="box" aria-hidden="true"></span><span class="line"></span></li><li><span class="box" aria-hidden="true"></span><span class="line"></span></li><li><span class="box" aria-hidden="true"></span><span class="line"></span></li><li><span class="box" aria-hidden="true"></span><span class="line"></span></li></ul></section><section class="phase"><h2><span class="idx__n">7.5</span>Antes do retorno</h2><ul role="list"><li><span class="box" aria-hidden="true"></span><span class="line"></span></li><li><span class="box" aria-hidden="true"></span><span class="line"></span></li><li><span class="box" aria-hidden="true"></span><span class="line"></span></li><li><span class="box" aria-hidden="true"></span><span class="line"></span></li><li><span class="box" aria-hidden="true"></span><span class="line"></span></li><li><span class="box" aria-hidden="true"></span><span class="line"></span></li></ul></section><section class="phase"><h2><span class="idx__n">7.6</span>Depois da viagem</h2><ul role="list"><li><span class="box" aria-hidden="true"></span><span class="line"></span></li><li><span class="box" aria-hidden="true"></span><span class="line"></span></li><li><span class="box" aria-hidden="true"></span><span class="line"></span></li><li><span class="box" aria-hidden="true"></span><span class="line"></span></li><li><span class="box" aria-hidden="true"></span><span class="line"></span></li><li><span class="box" aria-hidden="true"></span><span class="line"></span></li></ul></section></div><footer class="folio"><span class="folio__n">13</span><span class="folio__t">Checklist do viajante</span></footer></section>
+<section class="page page--even p-ch p-contacts" data-page="14">
+  <p class="kicker">Capítulo 8</p>
+  <h1 class="ch__title">Canais e contatos úteis</h1>
+  <table class="contacts">
+    <thead><tr><th scope="col"><span class="sr">Canal</span></th><th scope="col">Telefone</th><th scope="col">E-mail ou site</th></tr></thead>
+    <tbody><tr><th scope="row"><span class="idx__n">8.1</span><span>Companhia aérea</span></th><td></td><td></td></tr><tr><th scope="row"><span class="idx__n">8.2</span><span>Aeroporto</span></th><td></td><td></td></tr><tr><th scope="row"><span class="idx__n">8.3</span><span>ANAC</span></th><td></td><td></td></tr><tr><th scope="row"><span class="idx__n">8.4</span><span>Consumidor.gov.br</span></th><td></td><td></td></tr><tr><th scope="row"><span class="idx__n">8.5</span><span>Autoridades policiais</span></th><td></td><td></td></tr><tr><th scope="row"><span class="idx__n">8.6</span><span>Consulado ou embaixada</span></th><td></td><td></td></tr><tr><th scope="row"><span class="idx__n">8.7</span><span>Seguro viagem</span></th><td></td><td></td></tr><tr><th scope="row"><span class="idx__n">8.8</span><span>Contatos da agência de viagens</span></th><td></td><td></td></tr><tr><th scope="row"><span class="idx__n">8.9</span><span>Contatos para orientação jurídica</span></th><td></td><td></td></tr></tbody>
+  </table><footer class="folio"><span class="folio__n">14</span><span class="folio__t">Canais e contatos úteis</span></footer></section>
+<section class="page page--odd p-notes" data-page="15">
+  <h1 class="page__h">Anotações</h1>
+  <dl class="fields"><div><dt>Destino</dt><dd></dd></div><div><dt>Datas</dt><dd></dd></div><div><dt>Voo e localizador</dt><dd></dd></div><div><dt>Hospedagem</dt><dd></dd></div><div><dt>Seguro viagem</dt><dd></dd></div><div><dt>Contato de emergência</dt><dd></dd></div></dl>
+  <div class="lines" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div><footer class="folio"><span class="folio__n">15</span><span class="folio__t">Anotações</span></footer></section>
+<section class="page page--even p-back" data-page="16">
+  <div class="back__type">
+    <p class="back__quote">Informação também faz parte da sua bagagem.</p>
+    <p class="back__bye">Boa viagem!</p>
+  </div>
+  <figure class="back__photo"><img src="img/contracapa-asa.jpg" alt="Asa do avião sobre um céu azul."></figure>
+  <div class="back__foot"><div class="logos logos--dark">
+  <img class="logos__ks" src="img/ks-logo.png" alt="KS Advocacia Empresarial, Dra. Karolem Silva">
   <p class="logos__agency">Laura Lamounier<span>Agência de viagens</span></p>
-</div></section>
+</div><p class="back__credit">Produto criado por Karolem Silva e Laura Lamounier</p></div></section>
 </main>
 </body>
 </html>

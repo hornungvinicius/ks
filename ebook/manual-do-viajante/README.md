@@ -1,8 +1,8 @@
 # Guia do Viajante
 
-Ebook da Dra. Karolem Silva (KS Advocacia Empresarial) com Laura Lamounier (agência de viagens). A5 (148 × 210 mm), 16 páginas, para impressão e PDF.
+Ebook da Dra. Karolem Silva (KS Advocacia Empresarial) com Laura Lamounier (agência de viagens). A5 (148 × 210 mm), 16 páginas, para impressão em caderno e PDF.
 
-Material de origem (Drive): `MANUAL DO VIAJANTE.docx`, com o conceito visual, a introdução e o índice; uma imagem de referência; e o áudio do briefing.
+A fonte oficial do conteúdo é o `MANUAL DO VIAJANTE.docx`, que está no Drive.
 
 ## Gerar
 
@@ -10,55 +10,86 @@ Material de origem (Drive): `MANUAL DO VIAJANTE.docx`, com o conceito visual, a 
 node ebook/manual-do-viajante/build.mjs
 ```
 
-Gera `index.html`. Para ver no navegador, sirva a pasta (`python3 -m http.server -d ebook/manual-do-viajante`). O PDF `guia-do-viajante.pdf` sai do mesmo HTML pelo Chromium, com `page.pdf({ preferCSSPageSize: true, printBackground: true })`.
+O comando gera `index.html`. Para ver no navegador, sirva a pasta com `python3 -m http.server -d ebook/manual-do-viajante`. O arquivo `guia-do-viajante.pdf` sai do mesmo HTML pelo Chromium, com `page.pdf({ preferCSSPageSize: true, printBackground: true })`.
 
-Os textos ficam no início de `build.mjs` e o visual em `ebook.css`.
+Todo o texto fica no objeto `DOC`, no início de `build.mjs`. O visual fica em `ebook.css`.
 
-## Visual
+## Fidelidade ao DOCX
 
-Segue a landing page da KS (`DESIGN.md` na raiz do repositório). A primeira versão, com textura de passaporte e carimbos, foi descartada.
+O texto informativo é o do DOCX, sem resumo e sem acréscimo. Foram conferidos por script 78 trechos: a introdução completa, todos os títulos do índice, o subtítulo de Bagagem, os cinco passos de "Bagagem extraviada", os quatro avisos e os créditos. Todos aparecem no PDF.
 
-- Azul quase preto `#0B1119` na capa, na página de boas-vindas e na contracapa; miolo em branco, como as seções claras do site.
-- Dourado só em eyebrows (com o filete à esquerda), números, ícones e na palavra de destaque dos títulos.
-- Capítulos abrem com uma faixa escura com foto e a mesma máscara do topo das páginas internas do site.
-- Quadros como os cards do site: borda fina, raio, caixa de ícone dourada. "Atenção" é o card escuro, como o card de chamada do site.
-- Univers Next Pro nos títulos (kit Adobe Fonts `cec7ccc`) e Montserrat no texto (`fonts/montserrat.woff2`, a mesma do site).
+A versão anterior trazia textos que não estão no DOCX. Todos foram retirados:
+
+- uma frase explicativa por tema;
+- os subtítulos dos capítulos;
+- os itens do checklist;
+- telefones e sites de contato;
+- quadros extras;
+- os textos de capa e de contracapa.
+
+Ela também omitia duas frases da introdução e alterava quatro títulos do índice, que voltaram ao original.
+
+**Textos que não vêm do DOCX.** São só de navegação e de formulário:
+
+- "Sumário", "Como usar este guia" e "Anotações";
+- "Capítulo N" e os nomes de seção no rodapé;
+- a página "Como usar este guia" inteira: numeração, legenda das quatro marcações e a explicação das páginas para preencher. A frase de abertura dessa página, "Consulte o guia antes e durante a sua viagem.", é do DOCX;
+- os grupos "Registros que você produz" e "Documentos que você guarda" do capítulo 6, que só agrupam os itens do DOCX;
+- as colunas "Telefone" e "E-mail ou site" dos contatos;
+- os campos das anotações: Destino, Datas, Voo e localizador, Hospedagem, Seguro viagem e Contato de emergência;
+- a remissão "Bagagem extraviada, página 8" no item 4.3.
 
 ## Numeração
 
-O índice do Word pulava números, porque a cliente retirou alguns itens. A numeração foi refeita em sequência:
+A nota da cliente pedia para "ver a questão da numeração". O índice do DOCX pulava números, e a numeração foi refeita em sequência:
 
-| Word | Guia |
+| DOCX | Guia |
 |---|---|
-| 1. Antes de viajar (1.1, 1.3, 1.5–1.8) | 1 (1.1–1.6) |
+| 1. Antes de viajar: planejamento (1.1, 1.3, 1.5–1.8) | 1 (1.1–1.6) |
 | 2. Aeroporto e embarque (2.1–2.3, 2.6, 2.7) | 2 (2.1–2.5) |
 | 3. Bagagem | 3 |
 | 11. Quando algo dá errado | 4 |
-| 12.9 e 12.10 (capítulo sem título) | 5. Direitos do viajante (5.1, 5.2) |
-| 13. Como produzir provas | 6 |
+| 12.9 e 12.10 (sem título de capítulo) | 5. Direitos do viajante |
+| 13. Como produzir provas durante uma viagem | 6 |
 | 15. Checklist do viajante | 7 |
 | 16. Canais e contatos úteis | 8 |
 
-## Pendências antes de imprimir
+## Direção de arte
 
-1. **Textos para revisão da Dra. Karolem.** O Word traz só os títulos dos temas. A frase curta de cada tema, os quadros (exceto os que vieram no Word), os itens do checklist e os textos de "Como usar este guia" foram escritos para a diagramação. Todos são orientações gerais, sem prazos nem valores, e precisam de revisão jurídica.
-2. **Título do capítulo 5.** O Word não traz título para os itens 12.9 e 12.10. "Direitos do viajante" veio da imagem de referência.
-3. **Nome do material.** O arquivo se chama "Manual do Viajante", mas o conceito e a introdução usam "Guia do Viajante", que é o nome adotado na capa.
-4. **Agência.** Faltam o logo de Laura Lamounier (hoje composto em texto) e o telefone e o e-mail da agência. Na página de contatos, o espaço está marcado em vermelho.
-5. **Gráfica.** O PDF atual é digital: A5 exato, sem sangria, cores em RGB e fontes como Type 3. Para a gráfica, gerar uma versão com 3 mm de sangria e marcas de corte, conferir a conversão para CMYK e combinar com a gráfica o tipo de PDF.
-6. **Figma.** Para que o texto continue editável, a Univers Next Pro precisa estar ativa no Figma de quem for editar.
+- **Tipografia.** Duas famílias com funções distintas:
+  - Newsreader (OFL, em `fonts/`) para títulos e leitura. É uma serifada editorial com tamanho óptico, então o desenho muda entre o texto e os títulos grandes.
+  - Univers Next Pro, a fonte da marca, carregada do kit Adobe Fonts `cec7ccc`, só para navegação: números, rótulos e fólio.
+- **Grade.** Margens espelhadas, com 16 mm na lombada e 12 mm do lado de fora. O fólio fica no canto externo, junto ao nome da seção.
+- **Cor.** Papel branco e tinta azul-marinho `#15233F`. O vermelho aparece só no aviso "Atenção", e o dourado só no logo, na página escura e em "Seus direitos".
+- **Avisos.** Os quatro avisos do DOCX viram marcações de texto: um rótulo e um filete em cima. Não há caixas nem ícones. Só o "Atenção" tem fundo, porque é o mais importante.
+- **Ritmo.** Cada página tem uma composição própria:
+  - capítulo 1, só tipografia, com o numeral grande;
+  - capítulo 2, foto em pé na metade externa;
+  - capítulo 3, abertura no formato pedido no DOCX ("03 | Bagagem");
+  - capítulo 4, página escura de consulta, com os problemas numerados;
+  - capítulo 5, só tipografia, com o aviso de direitos em destaque;
+  - capítulo 6, os itens em dois grupos;
+  - capítulos 7 e 8 e anotações, páginas para preencher.
+- **Fotografia.** Cinco fotos reais de aeroporto, sem gente posando e sem máscara escura por cima. Cada uma tem relação direta com o capítulo; na de Bagagem, a placa da esteira traz o número 3.
+
+## Pendências
+
+1. **Textos dos temas.** O DOCX traz só os títulos dos 46 temas. O guia está completo em relação ao DOCX, mas os temas ainda não têm explicação. Para o guia orientar o leitor, a cliente precisa enviar esses textos ou autorizar uma redação que passe pela revisão jurídica.
+2. **Título do capítulo 5.** "Direitos do viajante" vem da imagem de referência do Drive. Os itens 12.9 e 12.10 do DOCX não trazem título.
+3. **Nome do material.** O arquivo se chama "Manual do Viajante". O DOCX propõe "Guia do Viajante" para a capa e usa esse nome na introdução, por isso ele foi mantido.
+4. **Agência.** Falta o logo de Laura Lamounier, que hoje aparece composto em texto.
+5. **Contatos.** Os campos estão em branco, porque o DOCX não traz dados. Se a cliente quiser, é possível preencher os da agência e os da KS.
+6. **Gráfica.** O PDF atual é digital: A5 exato, sem sangria e com cores em RGB. Para imprimir, falta uma versão com 3 mm de sangria e marcas de corte, e conferir a cor com a gráfica.
+7. **Figma.** Para o texto continuar editável, Newsreader (gratuita) e Univers Next Pro precisam estar ativas no Figma.
 
 ## Fotos
 
-Fotos reais do Freepik (sem IA), baixadas pela conta Premium via Magnific:
+As fotos são reais (não geradas por IA), do Freepik, licenciadas pela conta Premium por meio do Magnific:
 
 | Arquivo | Foto |
 |---|---|
 | `capa-asa-litoral.jpg` | Wing through the window of airplane in amazing sky at sunset (28006517) |
-| `cap1-mapa-passaporte.jpg` | View of world travel map with passport (28478767) |
-| `cap2-terminal.jpg` | Airport terminal with people moving silhouettes and sunray (28576568) |
-| `cap3-esteira.jpg` | Woman waiting at a conveyor luggage airport (28576642) |
-| `cap4-imprevisto.jpg` | Frustrated woman lost baggage in airport (27782932) |
-| `cap6-provas.jpg` | High angle hand taking photos (28476669) |
+| `cap2-portoes.jpg` | Airport terminal gate number (28576624) |
+| `cap3-esteira-3.jpg` | Baggage carousel at a airport terminal (28006080) |
+| `cap4-painel.jpg` | Airport timetable display (27783093) |
 | `contracapa-asa.jpg` | Airplane wing and blue sky (4695509) |
-| `cap5-escritorio.webp`, `cap8-sala.webp` | As mesmas do site (`biblioteca-*` e `sala-reuniao-*`, ver `DESIGN.md`) |
