@@ -1,0 +1,234 @@
+/* Guia do Viajante · A5, 16 páginas, margens espelhadas para impressão em caderno.
+   Newsreader (serifada editorial com tamanho óptico) para títulos e leitura;
+   Univers Next Pro (fonte da marca KS) só para navegação: números, rótulos, fólio.
+   Papel branco, tinta azul-marinho; dourado reservado ao logo e a poucos números na página escura. */
+
+@font-face { font-family: "Newsreader"; src: url("fonts/Newsreader.ttf") format("truetype"); font-weight: 200 800; font-style: normal; }
+@font-face { font-family: "Newsreader"; src: url("fonts/Newsreader-Italic.ttf") format("truetype"); font-weight: 200 800; font-style: italic; }
+
+:root {
+  --ink: #15233F;        /* azul-marinho: títulos, números, filetes fortes */
+  --text: #1F2430;       /* texto corrido */
+  --soft: #5B6372;       /* texto secundário */
+  --rule: #CBD1D9;       /* filetes finos */
+  --sky: #E8EEF4;        /* área de consulta (uma por página, no máximo) */
+  --alert: #A33A27;      /* só para "Atenção" */
+  --gold: #B48B45;       /* acento, raro */
+  --night: #15233F;
+
+  --serif: "Newsreader", Georgia, serif;
+  --sans: "univers-next-pro", "Helvetica Neue", Arial, sans-serif;
+
+  --top: 14mm; --bottom: 18mm; --inner: 16mm; --outer: 12mm;
+}
+
+* { box-sizing: border-box; }
+html { background: #9AA1AA; }
+body { margin: 0; font: 400 9.6pt/1.45 var(--serif); color: var(--text); -webkit-font-smoothing: antialiased; font-synthesis: none; font-optical-sizing: auto; font-kerning: normal; hanging-punctuation: first; }
+h1, h2, p, ol, ul, dl, dd, dt, figure, blockquote { margin: 0; }
+ol, ul { padding: 0; list-style: none; }
+img { display: block; max-width: 100%; }
+b { font-weight: 600; }
+
+/* ---------- Páginas ---------- */
+.book { display: grid; justify-content: center; gap: 10mm; padding: 12mm 0; }
+.page { position: relative; width: 148mm; height: 210mm; overflow: hidden; background: #FFF; box-shadow: 0 1.5mm 6mm rgb(0 0 0 / .22); padding: var(--top) var(--outer) var(--bottom) var(--inner); }
+.page--even { padding-left: var(--outer); padding-right: var(--inner); }
+@page { size: 148mm 210mm; margin: 0; }
+@media print {
+  html, body { background: none; }
+  .book { display: block; padding: 0; }
+  .page { box-shadow: none; break-after: page; }
+  .page:last-child { break-after: auto; }
+  * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+}
+
+/* Fólio no canto externo, com o nome da seção */
+.folio { position: absolute; bottom: 9mm; display: flex; gap: 3mm; align-items: baseline; font: 400 6.8pt/1 var(--sans); color: var(--soft); }
+.page--odd .folio { right: var(--outer); flex-direction: row-reverse; }
+.page--even .folio { left: var(--outer); }
+.folio__n { font-weight: 700; color: var(--ink); font-variant-numeric: tabular-nums; }
+
+/* ---------- Tipografia ---------- */
+.kicker { font: 400 7.4pt/1.3 var(--sans); color: var(--soft); letter-spacing: .01em; }
+.page__h { font: 400 25pt/1.05 var(--serif); color: var(--ink); letter-spacing: -.01em; }
+.ch__title { margin-top: 2mm; font: 400 25pt/1.04 var(--serif); color: var(--ink); letter-spacing: -.012em; text-wrap: balance; }
+.ch__title .sub { display: block; font-style: italic; font-weight: 300; }
+.idx__n { font: 700 7.4pt/1 var(--sans); color: var(--ink); font-variant-numeric: tabular-nums; }
+
+/* Lista de temas: o índice do capítulo */
+.idx { border-top: .35mm solid var(--ink); }
+.idx li { display: grid; grid-template-columns: 9mm 1fr; align-items: baseline; padding: 2.6mm 0 2.8mm; border-bottom: .2mm solid var(--rule); }
+.idx__t { font: 400 11pt/1.25 var(--serif); color: var(--text); }
+.idx--large li { padding: 3.6mm 0 3.8mm; }
+.idx--large .idx__t { font-size: 14pt; line-height: 1.2; }
+
+/* Marcações (avisos do DOCX): rótulo + filete, sem caixa */
+.note { padding-top: 2.2mm; border-top: .5mm solid var(--ink); }
+.note__label { font: 700 7.4pt/1.2 var(--sans); color: var(--ink); }
+.note__text { margin-top: 1mm; font: 400 10pt/1.38 var(--serif); }
+.note--atencao { border-color: var(--alert); }
+.note--atencao .note__label { color: var(--alert); }
+.note--direitos { border-color: var(--gold); }
+.note--direitos .note__label { color: #8C6A2E; }
+
+/* ---------- 1. Capa ---------- */
+.p-cover { padding: 0; }
+.cover__photo { position: absolute; inset: 0 0 auto; height: 131mm; }
+.cover__photo img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 62%; }
+.cover__type { position: absolute; left: var(--inner); right: var(--outer); top: 139mm; }
+.cover__title { font: 300 43pt/.94 var(--serif); letter-spacing: -.025em; color: var(--ink); }
+.cover__sub { margin-top: 4mm; font: italic 300 12.5pt/1.3 var(--serif); color: var(--text); }
+.logos { display: flex; align-items: center; gap: 6mm; }
+.logos__ks { height: 13mm; width: auto; }
+.logos__agency { padding-left: 6mm; border-left: .2mm solid var(--rule); font: italic 400 10.5pt/1.15 var(--serif); color: var(--ink); }
+.logos__agency span { display: block; margin-top: .8mm; font: 400 6.8pt/1.2 var(--sans); font-style: normal; color: var(--soft); }
+.p-cover .logos { position: absolute; left: var(--inner); right: var(--outer); bottom: 11mm; }
+
+/* ---------- 2. Introdução ---------- */
+.p-intro { display: grid; grid-template-columns: 30mm 1fr; column-gap: 6mm; align-content: start; padding-top: 30mm; }
+.intro__h { grid-column: 1 / -1; font: 400 25pt/1 var(--serif); color: var(--ink); margin-bottom: 10mm; }
+.intro__text { grid-column: 2; display: grid; gap: 3.2mm; font-size: 10.6pt; line-height: 1.52; hyphens: manual; text-wrap: pretty; }
+.intro__text p:first-child::first-line { font-variant-caps: all-small-caps; letter-spacing: .03em; }
+.intro__bye { margin-top: 3mm; font: italic 400 15pt/1.2 var(--serif); color: var(--ink); }
+.intro__credit { position: absolute; left: calc(var(--outer) + 36mm); bottom: 18mm; font: 400 7.2pt/1.3 var(--sans); color: var(--soft); }
+
+/* ---------- 3. Sumário ---------- */
+.p-toc .page__h { margin-bottom: 5mm; }
+.p-toc { padding-top: 12mm; }
+.toc { columns: 2; column-gap: 7mm; }
+.toc__ch { break-inside: avoid; margin-bottom: 3.6mm; }
+.toc__head { display: grid; grid-template-columns: 6mm 1fr auto; align-items: baseline; gap: 1.5mm; padding-bottom: 1.4mm; border-bottom: .35mm solid var(--ink); }
+.toc__n { font: 300 15pt/1 var(--serif); color: var(--ink); }
+.toc__t { font: 400 10.4pt/1.2 var(--serif); color: var(--ink); }
+.toc__p { font: 700 7.4pt/1 var(--sans); color: var(--ink); }
+.toc__items { margin-top: 1.4mm; }
+.toc__items li { display: grid; grid-template-columns: 7.5mm 1fr; padding: .35mm 0; font: 400 7.1pt/1.28 var(--sans); color: var(--text); }
+.toc__items .idx__n { font-weight: 400; color: var(--soft); font-size: 7.1pt; line-height: 1.28; }
+
+/* ---------- 4. Como usar ---------- */
+.p-howto { padding-top: 30mm; }
+.howto__lead { margin-top: 4mm; font: italic 300 13pt/1.3 var(--serif); color: var(--text); }
+.howto__grid { display: grid; gap: 7mm; margin-top: 12mm; }
+.howto__block { display: grid; grid-template-columns: 30mm 1fr; column-gap: 6mm; }
+.howto__k { font: 700 7.6pt/1.3 var(--sans); color: var(--ink); padding-top: .8mm; }
+.howto__block > p, .howto__block > dl { grid-column: 2; }
+.howto__block > p { font-size: 10pt; line-height: 1.45; }
+.legend { display: grid; gap: 3.4mm; margin-top: 4mm; }
+.legend .note { display: grid; grid-template-columns: 19mm 1fr; align-items: baseline; padding-top: 1.8mm; }
+.legend .note__text { margin: 0; font-size: 9.6pt; }
+
+/* ---------- 5. Capítulo 1 ---------- */
+.p-ch1 { display: flex; flex-direction: column; }
+.p-ch1 .idx { margin-top: auto; margin-bottom: 4mm; }
+.ch1__head { display: grid; grid-template-columns: auto 1fr; align-items: end; gap: 4mm; margin-top: 6mm; margin-bottom: 9mm; }
+.bignum { font: 200 150pt/.74 var(--serif); color: var(--ink); letter-spacing: -.04em; }
+.ch1__head .ch__title { font-size: 23pt; }
+
+/* ---------- 6. Capítulo 2: foto em pé na metade externa ---------- */
+.p-ch2 { padding-left: var(--outer); }
+.ch2__photo { position: absolute; top: 0; bottom: 0; left: 0; width: 64mm; }
+.ch2__photo img { width: 100%; height: 100%; object-fit: cover; object-position: 14% 50%; }
+.ch2__text { margin-left: 64mm; padding-left: 7mm; padding-top: 52mm; }
+.ch2__text .ch__title { font-size: 22pt; margin-bottom: 8mm; }
+.p-ch2 .folio { left: auto; right: var(--inner); flex-direction: row-reverse; }
+
+/* ---------- 7. Capítulo 3 ---------- */
+.p-ch3 { padding-top: 0; }
+.ch3__photo { margin: 0 calc(var(--outer) * -1) 0 calc(var(--inner) * -1); height: 104mm; }
+.ch3__photo img { width: 100%; height: 100%; object-fit: cover; object-position: 30% 50%; }
+.ch3__head { display: grid; grid-template-columns: 1fr 1fr; column-gap: 7mm; align-items: end; margin: 8mm 0 7mm; }
+.ch3__label { display: flex; align-items: baseline; gap: 3mm; font: 400 27pt/1 var(--serif); color: var(--ink); }
+.ch3__label span { font: 700 9pt/1 var(--sans); padding-right: 3mm; border-right: .35mm solid var(--ink); }
+.ch3__lede { font: italic 300 11.4pt/1.3 var(--serif); color: var(--text); }
+.idx--cols { display: grid; grid-template-columns: 1fr 1fr; column-gap: 7mm; border-top: 0; }
+.idx--cols li:nth-child(-n+2) { border-top: .35mm solid var(--ink); }
+
+/* ---------- 8. Bagagem extraviada ---------- */
+.p-steps { padding-top: 22mm; }
+.steps__h { margin-top: 2mm; font: 400 25pt/1.05 var(--serif); color: var(--ink); }
+.steps__h span { display: block; font-style: italic; font-weight: 300; }
+.steps { counter-reset: s; margin-top: 8mm; }
+.steps li { counter-increment: s; display: grid; grid-template-columns: 12mm 1fr; align-items: baseline; padding: 2.4mm 0; border-top: .2mm solid var(--rule); font: 400 12pt/1.3 var(--serif); }
+.steps li:first-child { border-top: .35mm solid var(--ink); }
+.steps li::before { content: counter(s); font: 200 22pt/.8 var(--serif); color: var(--ink); }
+.steps__notes { display: grid; grid-template-columns: 1fr 1fr; gap: 6mm 7mm; margin-top: 10mm; }
+.note--strong { grid-column: 1 / -1; padding: 3.4mm 4mm 3.8mm; border-top-width: .8mm; background: #F7E9E4; }
+.note--strong .note__text { font-size: 11.6pt; }
+
+/* ---------- 9. Capítulo 4: página escura ---------- */
+.p-dark { background: var(--night); color: #E7ECF3; }
+.p-dark .folio { color: #9DAAC0; }
+.p-dark .folio__n { color: #FFF; }
+.p-ch4 { padding-top: 0; }
+.ch4__photo { margin: 0 calc(var(--outer) * -1) 0 calc(var(--inner) * -1); height: 58mm; }
+.ch4__photo img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 40%; }
+.ch4__body { padding-top: 7mm; }
+.p-dark .kicker { color: #9DAAC0; }
+.p-dark .ch__title { color: #FFF; }
+.ch4__hint { margin-top: 2mm; font: italic 300 10.6pt/1.3 var(--serif); color: #C9D3E1; }
+.problems { display: grid; grid-template-columns: 1fr 1fr; column-gap: 7mm; margin-top: 6mm; }
+.problems li { display: grid; grid-template-columns: 8.5mm 1fr; align-items: baseline; padding: 2.3mm 0 2.5mm; border-top: .2mm solid rgb(255 255 255 / .22); }
+.problems .idx__n { color: var(--gold); }
+.problems__t { font: 400 10.4pt/1.28 var(--serif); color: #FFF; }
+.xref { display: block; margin-top: .8mm; font: 400 6.8pt/1.2 var(--sans); color: var(--gold); }
+
+/* ---------- 10. Capítulo 5 ---------- */
+.p-ch5 { padding-top: 26mm; }
+.statement { margin: 10mm 0 10mm; padding: 4mm 0 0; border-top: .5mm solid var(--gold); }
+.statement .note__label { color: #8C6A2E; }
+.statement p + p { margin-top: 2.6mm; font: italic 300 19.5pt/1.26 var(--serif); color: var(--ink); text-wrap: balance; }
+.ch5__sign { position: absolute; left: var(--outer); bottom: 22mm; display: flex; align-items: center; gap: 3.4mm; font: 700 7.4pt/1.3 var(--sans); color: var(--ink); }
+.page--odd .ch5__sign { left: var(--inner); }
+.ch5__sign img { width: 9mm; }
+.ch5__sign span { display: block; font-weight: 400; color: var(--soft); }
+
+/* ---------- 11. Capítulo 6 ---------- */
+.p-ch6 { padding-top: 26mm; }
+.proofs { display: grid; grid-template-columns: 1fr 1fr; column-gap: 7mm; margin-top: 12mm; }
+.proofs__k { font: 700 7.6pt/1.3 var(--sans); color: var(--ink); padding-bottom: 2mm; border-bottom: .35mm solid var(--ink); }
+.proofs__list li { display: grid; grid-template-columns: 5.5mm 8mm 1fr; align-items: baseline; padding: 3mm 0 3.2mm; border-bottom: .2mm solid var(--rule); }
+.proofs__list .idx__t { font: 400 11pt/1.25 var(--serif); }
+.proofs__why { display: grid; grid-template-columns: 8.5mm 1fr; align-items: baseline; margin-top: 12mm; padding: 4mm; background: var(--sky); font: italic 300 13pt/1.3 var(--serif); color: var(--ink); }
+.box { width: 3.2mm; height: 3.2mm; border: .3mm solid var(--ink); align-self: center; }
+
+/* ---------- 12–13. Checklist ---------- */
+.p-check { padding-top: 26mm; }
+.p-check--cont { padding-top: 20mm; }
+.phases { display: grid; gap: 6mm; margin-top: 7mm; }
+.p-check--cont .phases { margin-top: 0; }
+.phase h2 { display: grid; grid-template-columns: 9mm 1fr; align-items: baseline; padding-bottom: 1.6mm; border-bottom: .35mm solid var(--ink); font: 400 13pt/1.2 var(--serif); color: var(--ink); }
+.phase li { display: grid; grid-template-columns: 9mm 1fr; align-items: end; height: 7mm; }
+.phase .box { align-self: center; margin-top: 1.5mm; }
+.phase .line { border-bottom: .2mm solid var(--rule); height: 100%; }
+
+/* ---------- 14. Contatos ---------- */
+.p-contacts { padding-top: 26mm; }
+.contacts { width: 100%; margin-top: 8mm; border-collapse: collapse; table-layout: fixed; }
+.contacts thead th { padding: 0 0 1.6mm 2mm; border-bottom: .35mm solid var(--ink); text-align: left; font: 700 7pt/1 var(--sans); color: var(--soft); }
+.contacts thead th:first-child { width: 47mm; padding-left: 0; }
+.contacts tbody th { padding: 0 2mm 0 0; height: 12.4mm; text-align: left; vertical-align: middle; font: 400 10pt/1.2 var(--serif); color: var(--text); border-bottom: .2mm solid var(--rule); }
+.contacts tbody th .idx__n { display: inline-block; width: 8.5mm; }
+.contacts td { border-bottom: .2mm solid var(--rule); border-left: .2mm solid var(--rule); }
+
+/* ---------- 15. Anotações ---------- */
+.p-notes { padding-top: 26mm; }
+.fields { display: grid; grid-template-columns: 1fr 1fr; gap: 0 7mm; margin-top: 8mm; border-top: .35mm solid var(--ink); }
+.fields div { height: 13mm; padding-top: 1.6mm; border-bottom: .2mm solid var(--rule); }
+.fields dt { font: 400 7pt/1.2 var(--sans); color: var(--soft); }
+.lines { display: grid; margin-top: 8mm; }
+.lines span { height: 7.4mm; border-bottom: .2mm solid var(--rule); }
+
+/* ---------- 16. Encerramento ---------- */
+.p-back { padding: 0; background: var(--night); }
+.back__type { position: absolute; left: var(--outer); right: var(--inner); top: 26mm; }
+.back__quote { font: italic 300 23pt/1.16 var(--serif); color: #FFF; text-wrap: balance; max-width: 112mm; }
+.back__bye { margin-top: 6mm; font: 400 12pt/1 var(--serif); color: var(--gold); }
+.back__photo { position: absolute; left: 0; right: 0; top: 86mm; height: 84mm; }
+.back__photo img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 78%; }
+.back__foot { position: absolute; left: var(--outer); right: var(--inner); bottom: 11mm; display: flex; justify-content: space-between; align-items: flex-end; gap: 6mm; }
+.p-back .logos__agency { color: #FFF; border-color: rgb(255 255 255 / .3); }
+.p-back .logos__agency span { color: #AEB9CA; }
+.back__credit { font: 400 6.8pt/1.3 var(--sans); color: #AEB9CA; text-align: right; max-width: 40mm; }
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+.note--wide { grid-column: 1 / -1; }
