@@ -54,7 +54,7 @@ O script verifica:
 
 ## Pendências da cliente
 
-1. **Retrato**: desde 05/11/2026 a seção da advogada usa uma foto da captação no BNI (`karolem-palestra-*`). As outras opções estão no Drive em "Karolem - KS Advocacia/Captações/BNI". O retrato antigo (`karolem-*.webp`) continua no repositório.
+1. **Retrato**: desde 24/11/2026 o hero (`hero-karolem-*`) e a seção da advogada (`karolem-sobre-*`) usam as fotos enviadas pela cliente. O retrato antigo (`karolem-*.webp`) continua no repositório.
 2. **Biografia**: formação, comissões da OAB e texto de apresentação entraram com o material de 15/10/2026. Ainda faltam o capítulo do BNI e outras referências que a cliente disse que enviará.
 3. **Domínio** de produção (`SITE_URL`).
 4. **Link oficial do perfil no Google** (`GOOGLE_PROFILE_URL`). Hoje o botão abre a busca do Google Maps pelo escritório.

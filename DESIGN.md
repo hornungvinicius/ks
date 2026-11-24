@@ -27,7 +27,7 @@ radius: { card: 16px, button: 6px, small: 10px, pill: 999px }
 
 Referência principal: a página da Brenda Prinsk (pasta REFERENCIAS), com hero fotográfico escuro, seções em cards, eyebrow dourado acima de cada título, FAQ numerado, chamada final e rodapé com marca d'água. Ajustes da cliente (PDF "KS ADVOCACIA"):
 
-- Hero com o texto à direita, como na referência da Moirū.
+- Hero com o texto à esquerda: desde 24/11/2026 o fundo é o retrato da advogada no escritório, com ela à direita (antes, texto à direita, como na referência da Moirū).
 - Antes e depois com cortina na rolagem, como na referência da Hocta.
 - Etapas em cards empilhados no celular, como na referência da Sidesc; no desktop os cinco ficam à vista numa linha (retorno de 05/11/2026).
 - Áreas de atuação em cards, todas à vista (retorno de 05/11/2026: "é o que o escritório oferece, precisa de mais visibilidade").
@@ -99,12 +99,12 @@ Regras: no celular a linha do tempo global do GSAP roda a 60% da velocidade; ima
 
 ## 7. Imagens
 
-Fotos reais do banco de imagens Freepik (licença Premium da conta, sem exigência de atribuição), escolhidas com o filtro que exclui imagens geradas por IA. Cada uma foi recortada na proporção do arquivo que substitui e convertida para WebP em duas larguras, mantendo os nomes de arquivo. O retrato da advogada é a foto enviada pela cliente, tratada com Nano Banana 2.1 apenas para remover textos e logos e aumentar a resolução, sem alterar a pessoa. O hero usa um close de martelo a pedido da cliente.
+Fotos reais do banco de imagens Freepik (licença Premium da conta, sem exigência de atribuição), escolhidas com o filtro que exclui imagens geradas por IA. Cada uma foi recortada na proporção do arquivo que substitui e convertida para WebP em duas larguras, mantendo os nomes de arquivo. O retrato da advogada é a foto enviada pela cliente, tratada com Nano Banana 2.1 apenas para remover textos e logos e aumentar a resolução, sem alterar a pessoa. O hero e o retrato da seção "Quem é a advogada?" são fotos enviadas pela cliente em 24/11/2026.
 
 | Arquivo | Foto no Freepik (ID) |
 |---|---|
-| `hero-martelo-*` | Judge gavel on a black background (386766013) |
-| `karolem-palestra-*` | Captação no BNI, DSC09407 (tratada pela equipe e recortada em 4:5, escolha de 06/11/2026). Retrato da seção "Quem é a advogada?" desde 05/11/2026 |
+| `hero-karolem-*` | Enviada pela cliente em 24/11/2026 (`bg desk.png` 1920×1080 e `bg mob.png` 1142×2121, a versão de celular) |
+| `karolem-sobre-*` | Enviada pela cliente em 24/11/2026 (`KAROLEM.png`). Retrato da seção "Quem é a advogada?" |
 | `antes-*` | View of messy office workspace with laptop (40166565) |
 | `depois-*` | Empty modern corporate high end office space (413435157) |
 | `servico-contratos-*` | Female and male business partners signing contract (4013234) |
