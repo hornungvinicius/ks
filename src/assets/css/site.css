@@ -22,7 +22,7 @@
   --glass-border: rgb(255 255 255 / .09);
   --glass-shadow: inset 0 1px 0 rgb(255 255 255 / .07), 0 24px 48px -28px rgb(0 0 0 / .7);
 
-  --f-display: "univers-next-pro", "Montserrat", system-ui, sans-serif; /* Adobe Fonts, kit cec7ccc (layout.html) */
+  --f-display: "Montserrat", system-ui, sans-serif; /* troca para a Univers (Adobe Fonts, kit cec7ccc) quando a fonte chega: ver :root.tk e layout.html */
   --f-sans: "Montserrat", system-ui, -apple-system, "Segoe UI", sans-serif;
   --t-hero: clamp(2.3rem, 1.5rem + 3.1vw, 3.85rem);
   --t-h1: clamp(2.3rem, 1.7rem + 2.8vw, 3.8rem);
@@ -41,6 +41,7 @@
   --ease: cubic-bezier(.16, 1, .3, 1);
   --dur: .5s;
 }
+:root.tk { --f-display: "univers-next-pro", "Montserrat", system-ui, sans-serif; }
 
 
 /* ---------- Base ---------- */

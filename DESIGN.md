@@ -16,7 +16,7 @@ colors:
   error:    "#F08A8A"
   success:  "#7FC8A0"
 typography:
-  display: "Univers Next Pro variável (latin, peso 300–700), 600 nos títulos. Escolha da cliente em 15/10/2026."
+  display: "Univers Next Pro variável (latin, peso 300–700), 600 nos títulos. Escolha da cliente em 15/10/2026. Carregada do Adobe Fonts sem bloquear a página: os títulos aparecem em Montserrat e trocam para a Univers quando os pesos 400 e 500 chegam (classe .tk no html)."
   sans: "Montserrat variável (latin, peso 100–900), textos, menus e botões. Escolha da cliente em 15/10/2026."
 radius: { card: 16px, button: 6px, small: 10px, pill: 999px }
 ---
