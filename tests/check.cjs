@@ -15,11 +15,15 @@ const TYPES = { '.html': 'text/html; charset=utf-8', '.css': 'text/css', '.js': 
 const failures = [];
 const fail = (msg) => { failures.push(msg); console.log('  FALHA', msg); };
 
+// A mesma CSP do .htaccess de produção: uma violação vira erro de console e reprova o teste.
+// upgrade-insecure-requests sai porque o servidor de teste é http.
+const CSP = (fs.readFileSync(path.join(DIST, '.htaccess'), 'utf8').match(/Content-Security-Policy "([^"]+)"/) || [])[1];
+if (!CSP) { console.log('FALHA: dist/.htaccess sem Content-Security-Policy'); process.exit(1); }
 const server = http.createServer((req, res) => {
   let p = path.join(DIST, decodeURIComponent(new URL(req.url, 'http://x').pathname));
   if (fs.existsSync(p) && fs.statSync(p).isDirectory()) p = path.join(p, 'index.html');
   const ok = fs.existsSync(p);
-  res.writeHead(ok ? 200 : 404, { 'content-type': TYPES[path.extname(ok ? p : '.html')] || 'application/octet-stream' });
+  res.writeHead(ok ? 200 : 404, { 'content-type': TYPES[path.extname(ok ? p : '.html')] || 'application/octet-stream', 'content-security-policy': CSP.replace(/;\s*upgrade-insecure-requests/, '') });
   res.end(fs.readFileSync(ok ? p : path.join(DIST, '404.html')));
 });
 
@@ -134,6 +138,40 @@ const server = http.createServer((req, res) => {
     await page.keyboard.press('ArrowRight');
     if ((await visible()).join() !== 'treinamentos' || (await page.evaluate(() => document.activeElement.id)) !== 'tab-treinamentos') fail('seta não moveu para a próxima aba');
     await page.close();
+  }
+
+  // 4c. Mapa: nada do Google antes do clique; depois, o iframe carrega sem violar a CSP
+  {
+    const page = await open('/contato/', { viewport: { width: 390, height: 844 } });
+    const google = [];
+    page.on('request', (r) => /google\./.test(r.url()) && google.push(r.url()));
+    if (await page.$('[data-map] iframe')) fail('mapa carregou antes do clique');
+    await page.click('[data-map-load]');
+    await page.waitForTimeout(800);
+    const src = await page.$eval('[data-map] iframe', (f) => f.src).catch(() => '');
+    if (!src.startsWith('https://www.google.com/maps')) fail('mapa não abriu após o clique');
+    await page.close();
+  }
+
+  // 4d. Publicação: CSP cobre os scripts inline, links externos isolados, nenhum segredo nos arquivos públicos
+  {
+    const ht = fs.readFileSync(path.join(DIST, '.htaccess'), 'utf8');
+    const files = [];
+    const walk = (d) => fs.readdirSync(d, { withFileTypes: true }).forEach((e) => (e.isDirectory() ? walk(path.join(d, e.name)) : files.push(path.join(d, e.name))));
+    walk(DIST);
+    for (const f of files.filter((f) => f.endsWith('.html'))) {
+      const html = fs.readFileSync(f, 'utf8');
+      for (const [, a, code] of html.matchAll(/<script(\s[^>]*)?>([\s\S]*?)<\/script>/g)) {
+        if (/\bsrc=|ld\+json/.test(a || '')) continue;
+        const h = require('node:crypto').createHash('sha256').update(code).digest('base64');
+        if (!ht.includes(`'sha256-${h}'`)) fail(`${path.relative(DIST, f)}: script inline fora da CSP`);
+      }
+      for (const [tag] of html.matchAll(/<a\b[^>]*target="_blank"[^>]*>/g)) if (!/rel="[^"]*noopener/.test(tag)) fail(`${path.relative(DIST, f)}: link _blank sem noopener: ${tag.slice(0, 80)}`);
+      if (/\son[a-z]+="/.test(html)) fail(`${path.relative(DIST, f)}: atributo de evento inline (bloqueado pela CSP)`);
+    }
+    const secret = /(api[_-]?key|secret|passw(or)?d|token|BEGIN [A-Z ]*PRIVATE KEY)\s*[:=]/i;
+    for (const f of files.filter((f) => /\.(html|js|css|txt|xml|json)$/.test(f) && !f.includes('/vendor/'))) if (secret.test(fs.readFileSync(f, 'utf8'))) fail(`possível segredo em ${path.relative(DIST, f)}`);
+    if (!fs.readFileSync(path.join(DIST, '404.html'), 'utf8').includes('name="robots" content="noindex"')) fail('404 sem noindex');
   }
 
   // 5. Movimento reduzido: conteúdo visível sem animação

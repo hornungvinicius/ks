@@ -77,7 +77,7 @@ if (form) {
 // Mapa: o iframe do Google Maps só entra quando a pessoa pede (nada de terceiros carrega antes do clique).
 $$('[data-map]').forEach((box) => {
   $('[data-map-load]', box)?.addEventListener('click', () => {
-    const frame = Object.assign(document.createElement('iframe'), { src: box.dataset.mapSrc, title: 'Mapa do escritório no Google Maps', loading: 'lazy', referrerPolicy: 'no-referrer-when-downgrade' });
+    const frame = Object.assign(document.createElement('iframe'), { src: box.dataset.mapSrc, title: 'Mapa do escritório no Google Maps', loading: 'lazy', referrerPolicy: 'strict-origin-when-cross-origin' });
     box.replaceChildren(frame);
   });
 });

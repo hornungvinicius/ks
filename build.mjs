@@ -36,9 +36,10 @@ const fill = (s) => s.replace(/\{\{(\w+)(?::([^}]*))?\}\}/g, (m, k, arg) => {
   return TOKENS[k](arg);
 });
 
-// As imagens têm cache de 30 dias (vercel.json): o ?v= com o hash do arquivo faz o navegador baixar de novo quando a imagem muda.
+// Imagens, CSS e JS têm cache longo (.htaccess / vercel.json): o ?v= com o hash do arquivo faz o navegador baixar de novo quando ele muda.
+// As fontes ficam de fora porque o CSS as referencia por caminho relativo.
 const hashes = new Map();
-const bust = (html) => html.replace(/\/assets\/img\/[\w.-]+/g, (url) => {
+const bust = (html) => html.replace(/\/assets\/(?:img|css|js(?:\/vendor)?)\/[\w.-]+\.(?:webp|png|jpg|css|js)/g, (url) => {
   if (!hashes.has(url)) hashes.set(url, createHash('sha1').update(readFileSync(join('src', url))).digest('hex').slice(0, 8));
   return `${url}?v=${hashes.get(url)}`;
 });
@@ -46,8 +47,12 @@ const bust = (html) => html.replace(/\/assets\/img\/[\w.-]+/g, (url) => {
 const SRC = 'src', OUT = 'dist';
 await rm(OUT, { recursive: true, force: true });
 await cp(join(SRC, 'assets'), join(OUT, 'assets'), { recursive: true, filter: (p) => !p.endsWith('desktop.ini') });
-// Regras do Apache para a hospedagem na HostGator (a Vercel ignora o arquivo).
-await cp(join(SRC, '.htaccess'), join(OUT, '.htaccess'));
+// CSS publicado sem comentários nem indentação (o fonte em src continua legível).
+const css = await readFile(join(SRC, 'assets/css/site.css'), 'utf8');
+await writeFile(join(OUT, 'assets/css/site.css'), css.replace(/\/\*[\s\S]*?\*\//g, '').split('\n').map((l) => l.trim()).filter(Boolean).join('\n') + '\n');
+// Verificação do Google Search Console (opcional): GOOGLE_SITE_VERIFICATION com o código da meta tag.
+const GSV = process.env.GOOGLE_SITE_VERIFICATION ? `\n  <meta name="google-site-verification" content="${attr(process.env.GOOGLE_SITE_VERIFICATION)}">` : '';
+const inlineScripts = new Set();
 
 const layout = (await readFile(join(SRC, 'layout.html'), 'utf8')).replace('%ICONS%', await readFile(join(SRC, 'icons.svg'), 'utf8'));
 const pages = [];
@@ -65,11 +70,15 @@ for (const file of (await readdir(join(SRC, 'pages'))).filter((f) => f.endsWith(
   let html = layout
     .replace('%TITLE%', meta.title)
     .replaceAll('%DESC%', meta.description)
-    .replace('%HEAD%', head + (meta.noindex ? '\n  <meta name="robots" content="noindex">' : ''))
+    .replace('%HEAD%', head + GSV + (meta.noindex ? '\n  <meta name="robots" content="noindex">' : '') + (meta.preload ? '\n  ' + meta.preload : ''))
     .replace('%JSONLD%', meta.jsonld ? `<script type="application/ld+json">${JSON.stringify(jsonld(body))}</script>` : '')
     .replace('%CONTENT%', body)
     .replaceAll(`data-nav href="${meta.path}"`, `aria-current="page" href="${meta.path}"`);
   html = bust(fill(html));
+  // Scripts inline executáveis (não o JSON-LD) entram na CSP por hash.
+  for (const [, a, code] of html.matchAll(/<script(\s[^>]*)?>([\s\S]*?)<\/script>/g)) {
+    if (!/\bsrc=|application\/ld\+json/.test(a || '')) inlineScripts.add(`'sha256-${createHash('sha256').update(code).digest('base64')}'`);
+  }
   const dest = meta.path.endsWith('/') ? join(OUT, meta.path, 'index.html') : join(OUT, meta.path);
   await mkdir(join(dest, '..'), { recursive: true });
   await writeFile(dest, html);
@@ -101,5 +110,9 @@ if (SITE_URL) {
 } else {
   console.warn('SITE_URL não definido: canonical, og:url e sitemap.xml foram omitidos.');
 }
+// Regras do Apache para a HostGator (a Vercel ignora o arquivo), com a CSP montada a partir dos scripts inline reais.
+const htaccess = (await readFile(join(SRC, '.htaccess'), 'utf8')).replace('%SCRIPT_HASHES%', [...inlineScripts].join(' '));
+if (/%[A-Z_]+%/.test(htaccess)) throw new Error('.htaccess: marcador sem substituir');
+await writeFile(join(OUT, '.htaccess'), htaccess);
 await writeFile(join(OUT, 'robots.txt'), `User-agent: *\nAllow: /\n${SITE_URL ? `Sitemap: ${SITE_URL}/sitemap.xml\n` : ''}`);
 console.log(`ok: ${pages.length} páginas em ./${OUT}`);

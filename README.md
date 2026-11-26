@@ -26,6 +26,42 @@ Configuração, feita uma vez em **Settings → Secrets and variables → Action
 
 O `src/.htaccess` vai junto no build e faz no Apache o que o `vercel.json` faz na Vercel: HTTPS e domínio sem "www", página 404, cabeçalhos de segurança e cache de imagens e fontes.
 
+## Segurança e privacidade
+
+O site é estático: não tem backend, banco de dados, login, cookies nem rastreamento. O formulário de contato não envia nada a servidor; ele só monta a mensagem no navegador e abre o WhatsApp ou o e-mail da pessoa. Com isso, injeção de SQL, CSRF, CORS, sessões e rate limiting não se aplicam.
+
+O que está em vigor (regras em `src/.htaccess`, gerado em `dist/` pelo build):
+
+- **CSP**: só aceita scripts do próprio site. O único script inline entra por hash, calculado no build. Também libera a fonte dos títulos (Adobe Fonts) e o iframe do Google Maps, que só carrega depois do clique.
+  - `style-src-attr 'unsafe-inline'` é aceito porque o HTML usa variáveis CSS em `style` e o GSAP ScrollTrigger grava `style` no pin.
+- **Cabeçalhos**:
+  - HSTS de 1 ano, sem `includeSubDomains` e sem `preload`, porque `mail`, `ftp` e `cpanel` também apontam para o domínio;
+  - `X-Content-Type-Options`, `X-Frame-Options` e `frame-ancestors 'none'`;
+  - `Referrer-Policy`, `Permissions-Policy` e `Cross-Origin-Opener-Policy`.
+- **Acesso a arquivos**:
+  - HTTPS obrigatório e domínio sem "www";
+  - listagem de pastas desligada;
+  - arquivos ocultos (como o estado do deploy por FTP) devolvem 404.
+- **Formulário**: `method="post"`, para que, sem JavaScript, os dados não apareçam na URL nem nos logs do servidor.
+- **Deploy**:
+  - actions do GitHub fixadas por hash de commit e token com permissão só de leitura;
+  - Playwright instalado sem scripts de instalação;
+  - credenciais só em secrets do GitHub.
+- **Testes** (`tests/check.cjs`):
+  - rodam com a mesma CSP de produção, então qualquer violação reprova o deploy;
+  - conferem que todo script inline está na CSP, que todo link `_blank` tem `noopener` e que não há atributos de evento inline nem padrões de segredo nos arquivos públicos;
+  - conferem que o mapa não carrega antes do clique.
+
+A Vercel serve só prévias, com `X-Robots-Tag: noindex` para não concorrer com o domínio no Google.
+
+## Google (indexação)
+
+O site já publica `robots.txt`, `sitemap.xml`, canonical, Open Graph e dados estruturados (`LegalService` e `FAQPage`). Para indexar:
+
+1. No Google Search Console, adicione a propriedade **Prefixo do URL** `https://ksadvocaciaempresarial.com.br/` e escolha a verificação por **Tag HTML**.
+2. Copie só o código do `content` e salve na variável `GOOGLE_SITE_VERIFICATION` em **Settings → Secrets and variables → Actions → Variables**. Depois rode **Actions → Deploy HostGator → Run workflow**.
+3. Clique em **Verificar**. Em **Sitemaps**, envie `sitemap.xml`. Em **Inspeção de URL**, peça a indexação da página inicial.
+
 ## Deploy na Vercel (prévias)
 
 1. Em vercel.com, **Add New → Project** e importe o repositório `hornungvinicius/ks`.
