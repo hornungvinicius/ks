@@ -1,0 +1,47 @@
+# Publica o site na HostGator a cada push na main.
+# Gera ./dist, roda os testes e envia por FTP só o que mudou.
+# Secrets: FTP_SERVER, FTP_USERNAME, FTP_PASSWORD. Variables: SITE_URL (e, opcional, GOOGLE_PROFILE_URL, FTP_DIR).
+name: Deploy HostGator
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-hostgator
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Build
+        run: node build.mjs
+        env:
+          SITE_URL: ${{ vars.SITE_URL }}
+          GOOGLE_PROFILE_URL: ${{ vars.GOOGLE_PROFILE_URL }}
+
+      - name: Testes
+        run: |
+          npm install --no-save --no-package-lock playwright@1.63.0
+          npx playwright install --with-deps chromium
+          node tests/check.cjs
+
+      - name: Enviar por FTP
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          protocol: ftps
+          security: loose
+          local-dir: ./dist/
+          server-dir: ${{ vars.FTP_DIR || './public_html/' }}
