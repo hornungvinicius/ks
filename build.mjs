@@ -46,6 +46,8 @@ const bust = (html) => html.replace(/\/assets\/img\/[\w.-]+/g, (url) => {
 const SRC = 'src', OUT = 'dist';
 await rm(OUT, { recursive: true, force: true });
 await cp(join(SRC, 'assets'), join(OUT, 'assets'), { recursive: true, filter: (p) => !p.endsWith('desktop.ini') });
+// Regras do Apache para a hospedagem na HostGator (a Vercel ignora o arquivo).
+await cp(join(SRC, '.htaccess'), join(OUT, '.htaccess'));
 
 const layout = (await readFile(join(SRC, 'layout.html'), 'utf8')).replace('%ICONS%', await readFile(join(SRC, 'icons.svg'), 'utf8'));
 const pages = [];

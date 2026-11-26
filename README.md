@@ -15,7 +15,18 @@ Para publicar, defina o domínio (gera canonical, og:url e sitemap.xml) e, quand
 SITE_URL=https://dominio-da-ks.com.br GOOGLE_PROFILE_URL=https://g.page/... node build.mjs
 ```
 
-## Deploy na Vercel
+## Deploy na HostGator (produção)
+
+O site oficial (`https://ksadvocaciaempresarial.com.br`) fica na hospedagem da HostGator. A publicação é automática: cada push na `main` roda o workflow `.github/workflows/deploy.yml`, que gera o `dist/`, roda os testes e envia por FTP (FTPS) só os arquivos alterados para a `public_html`. Se os testes falharem, nada é publicado. Também dá para publicar à mão em **Actions → Deploy HostGator → Run workflow**.
+
+Configuração, feita uma vez em **Settings → Secrets and variables → Actions** do repositório:
+
+- Secrets: `FTP_SERVER` (`192.185.176.127`), `FTP_USERNAME` e `FTP_PASSWORD` (os dados de FTP do painel da HostGator).
+- Variables: `SITE_URL` (`https://ksadvocaciaempresarial.com.br`); opcionais `GOOGLE_PROFILE_URL` e `FTP_DIR` (pasta de destino, padrão `./public_html/`; use `./` se o usuário de FTP já abrir dentro da `public_html`).
+
+O `src/.htaccess` vai junto no build e faz no Apache o que o `vercel.json` faz na Vercel: HTTPS e domínio sem "www", página 404, cabeçalhos de segurança e cache de imagens e fontes.
+
+## Deploy na Vercel (prévias)
 
 1. Em vercel.com, **Add New → Project** e importe o repositório `hornungvinicius/ks`.
 2. Preset **Other**. Build, saída e headers já vêm do `vercel.json` (`node build.mjs` → `dist`).
@@ -56,7 +67,7 @@ O script verifica:
 
 1. **Retrato**: desde 24/11/2026 o hero (`hero-karolem-*`) e a seção da advogada (`karolem-sobre-*`) usam as fotos enviadas pela cliente. O retrato antigo (`karolem-*.webp`) continua no repositório.
 2. **Biografia**: formação, comissões da OAB e texto de apresentação entraram com o material de 15/10/2026. Ainda faltam o capítulo do BNI e outras referências que a cliente disse que enviará.
-3. **Domínio** de produção (`SITE_URL`).
+3. **Domínio** de produção: `ksadvocaciaempresarial.com.br`, na HostGator. Falta cadastrar `SITE_URL` e os dados de FTP no GitHub (seção "Deploy na HostGator").
 4. **Link oficial do perfil no Google** (`GOOGLE_PROFILE_URL`). Hoje o botão abre a busca do Google Maps pelo escritório.
 5. **Avaliações**:
    - autor da primeira ("Ótima profissional!…"), que não aparece no PDF e foi exibido como "Cliente no Google";
