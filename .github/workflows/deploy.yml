@@ -1,6 +1,6 @@
 # Publica o site na HostGator a cada push na main.
 # Gera ./dist, roda os testes e envia por FTP só o que mudou.
-# Secrets: FTP_SERVER, FTP_USERNAME, FTP_PASSWORD. Variables: SITE_URL (e, opcional, GOOGLE_PROFILE_URL, FTP_DIR).
+# Secrets: FTP_SERVER, FTP_USERNAME, FTP_PASSWORD (conta FTP com diretório public_html). Variables: SITE_URL (opcionais GOOGLE_PROFILE_URL, FTP_DIR).
 name: Deploy HostGator
 
 on:
@@ -44,4 +44,4 @@ jobs:
           protocol: ftps
           security: loose
           local-dir: ./dist/
-          server-dir: ${{ vars.FTP_DIR || './public_html/' }}
+          server-dir: ${{ vars.FTP_DIR || './' }}

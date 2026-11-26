@@ -21,8 +21,8 @@ O site oficial (`https://ksadvocaciaempresarial.com.br`) fica na hospedagem da H
 
 Configuração, feita uma vez em **Settings → Secrets and variables → Actions** do repositório:
 
-- Secrets: `FTP_SERVER` (`192.185.176.127`), `FTP_USERNAME` e `FTP_PASSWORD` (os dados de FTP do painel da HostGator).
-- Variables: `SITE_URL` (`https://ksadvocaciaempresarial.com.br`); opcionais `GOOGLE_PROFILE_URL` e `FTP_DIR` (pasta de destino, padrão `./public_html/`; use `./` se o usuário de FTP já abrir dentro da `public_html`).
+- Secrets: `FTP_SERVER` (`192.185.176.127`), `FTP_USERNAME` (`deploy@ksadvocaciaempresarial.com.br`) e `FTP_PASSWORD`. A conta FTP `deploy` é criada no cPanel com o diretório `public_html` (`/home1/karole74/public_html`), que é a raiz do domínio primário.
+- Variables: `SITE_URL` (`https://ksadvocaciaempresarial.com.br`); opcionais `GOOGLE_PROFILE_URL` e `FTP_DIR` (pasta de destino dentro da conta FTP; padrão `./`).
 
 O `src/.htaccess` vai junto no build e faz no Apache o que o `vercel.json` faz na Vercel: HTTPS e domínio sem "www", página 404, cabeçalhos de segurança e cache de imagens e fontes.
 
